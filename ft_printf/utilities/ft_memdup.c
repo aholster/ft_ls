@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_ls.h                                            :+:    :+:            */
+/*   ft_memdup.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/09 21:10:49 by aholster      ########   odam.nl         */
+/*   Created: 2019/02/18 16:02:34 by aholster       #+#    #+#                */
+/*   Updated: 2019/10/04 21:33:32 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#include "./../incl/ft_utilities.h"
 
-// # include <unistd.h>
-# include <stdlib.h>
-# include "./ft_printf/ft_printf.h"
+void	*ft_memdup(const void *const restrict src, const size_t len)
+{
+	size_t						index;
+	char						*ret;
 
-# include <dirent.h>
-# include <sys/stat.h>
-
-// # include <sys/types.h>
-// # include <pwd.h>
-// # include <uuid/uuid.h>
-
-// # include <grp.h>
-
-// # include <sys/xattr.h>
-
-// # include <time.h>
-
-# include <stdio.h>
-
-#endif
+	index = 0;
+	ret = (char *)malloc(sizeof(char) * len);
+	if (ret == NULL)
+		return (NULL);
+	ft_memcpy(ret, src, len);
+	return ((void *)ret);
+}

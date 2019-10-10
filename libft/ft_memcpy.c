@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_ls.h                                            :+:    :+:            */
+/*   ft_memcpy.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/09 21:10:49 by aholster      ########   odam.nl         */
+/*   Created: 2019/01/17 15:42:31 by aholster       #+#    #+#                */
+/*   Updated: 2019/05/18 16:00:23 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#include "libft.h"
 
-// # include <unistd.h>
-# include <stdlib.h>
-# include "./ft_printf/ft_printf.h"
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	size_t	index;
 
-# include <dirent.h>
-# include <sys/stat.h>
-
-// # include <sys/types.h>
-// # include <pwd.h>
-// # include <uuid/uuid.h>
-
-// # include <grp.h>
-
-// # include <sys/xattr.h>
-
-// # include <time.h>
-
-# include <stdio.h>
-
-#endif
+	index = 0;
+	while (n - index >= 8)
+	{
+		*((long long *)(dst + index)) = *((const long long *)(src + index));
+		index += 8;
+	}
+	while (index < n)
+	{
+		((char *)dst)[index] = ((const char *)src)[index];
+		index++;
+	}
+	return (dst);
+}

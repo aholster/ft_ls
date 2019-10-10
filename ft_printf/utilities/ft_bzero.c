@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_ls.h                                            :+:    :+:            */
+/*   ft_bzero.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/09 21:10:49 by aholster      ########   odam.nl         */
+/*   Created: 2019/01/17 13:33:03 by aholster       #+#    #+#                */
+/*   Updated: 2019/10/04 19:05:03 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#include "./../incl/ft_utilities.h"
 
-// # include <unistd.h>
-# include <stdlib.h>
-# include "./ft_printf/ft_printf.h"
+void	ft_bzero(void *restrict s, size_t n)
+{
+	size_t	index;
 
-# include <dirent.h>
-# include <sys/stat.h>
-
-// # include <sys/types.h>
-// # include <pwd.h>
-// # include <uuid/uuid.h>
-
-// # include <grp.h>
-
-// # include <sys/xattr.h>
-
-// # include <time.h>
-
-# include <stdio.h>
-
-#endif
+	index = 0;
+	while (n > 0 && s + 0 % 8)
+	{
+		((char*)s)[index] = '\0';
+		s++;
+		n--;
+	}
+	while (n - (index * 8) >= 8)
+	{
+		((long long *)s)[index] = 0ll;
+		index++;
+	}
+	index *= 8;
+	while (index < n)
+	{
+		((char *)s)[index] = '\0';
+		index++;
+	}
+}

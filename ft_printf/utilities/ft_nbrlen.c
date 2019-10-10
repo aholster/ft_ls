@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_ls.h                                            :+:    :+:            */
+/*   ft_nbrlen.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/09 21:10:49 by aholster      ########   odam.nl         */
+/*   Created: 2019/01/14 13:36:17 by aholster       #+#    #+#                */
+/*   Updated: 2019/02/01 21:14:08 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+unsigned int	ft_nbrlen(long long n, unsigned int base)
+{
+	unsigned int length;
 
-// # include <unistd.h>
-# include <stdlib.h>
-# include "./ft_printf/ft_printf.h"
-
-# include <dirent.h>
-# include <sys/stat.h>
-
-// # include <sys/types.h>
-// # include <pwd.h>
-// # include <uuid/uuid.h>
-
-// # include <grp.h>
-
-// # include <sys/xattr.h>
-
-// # include <time.h>
-
-# include <stdio.h>
-
-#endif
+	length = 0;
+	if (n == 0)
+		return (1);
+	if (n < 0)
+		length++;
+	while (n != 0)
+	{
+		n = n / base;
+		length++;
+	}
+	return (length);
+}

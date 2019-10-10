@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_ls.h                                            :+:    :+:            */
+/*   ft_striteri.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/09 21:10:49 by aholster      ########   odam.nl         */
+/*   Created: 2019/01/16 21:06:41 by aholster       #+#    #+#                */
+/*   Updated: 2019/02/01 21:20:27 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+{
+	unsigned int	index;
 
-// # include <unistd.h>
-# include <stdlib.h>
-# include "./ft_printf/ft_printf.h"
-
-# include <dirent.h>
-# include <sys/stat.h>
-
-// # include <sys/types.h>
-// # include <pwd.h>
-// # include <uuid/uuid.h>
-
-// # include <grp.h>
-
-// # include <sys/xattr.h>
-
-// # include <time.h>
-
-# include <stdio.h>
-
-#endif
+	index = 0;
+	while (s[index] != '\0')
+	{
+		((*f)(index, &s[index]));
+		index++;
+	}
+}

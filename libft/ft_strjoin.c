@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_ls.h                                            :+:    :+:            */
+/*   ft_strjoin.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/09 21:10:49 by aholster      ########   odam.nl         */
+/*   Created: 2019/01/16 18:31:48 by aholster       #+#    #+#                */
+/*   Updated: 2019/05/01 17:36:36 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#include "libft.h"
 
-// # include <unistd.h>
-# include <stdlib.h>
-# include "./ft_printf/ft_printf.h"
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	size_t	size1;
+	size_t	size2;
+	char	*str;
 
-# include <dirent.h>
-# include <sys/stat.h>
-
-// # include <sys/types.h>
-// # include <pwd.h>
-// # include <uuid/uuid.h>
-
-// # include <grp.h>
-
-// # include <sys/xattr.h>
-
-// # include <time.h>
-
-# include <stdio.h>
-
-#endif
+	size1 = ft_strlen(s1);
+	size2 = ft_strlen(s2);
+	str = (char *)malloc(sizeof(char) * (size1 + size2 + 1));
+	if (str == NULL)
+		return (NULL);
+	ft_memcpy(str, s1, size1);
+	ft_memcpy(&str[size1], s2, size2);
+	str[size1 + size2] = '\0';
+	return (str);
+}

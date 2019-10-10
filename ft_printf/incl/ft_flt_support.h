@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_ls.h                                            :+:    :+:            */
+/*   ft_flt_support.h                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/09 21:10:49 by aholster      ########   odam.nl         */
+/*   Created: 2019/10/04 18:57:11 by aholster       #+#    #+#                */
+/*   Updated: 2019/10/04 21:36:07 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#ifndef FT_FLT_SUPPORT_H
+# define FT_FLT_SUPPORT_H
 
-// # include <unistd.h>
-# include <stdlib.h>
-# include "./ft_printf/ft_printf.h"
+# include <stddef.h>
 
-# include <dirent.h>
-# include <sys/stat.h>
+typedef union		u_float
+{
+	long double		ld;
+	unsigned short	byte[5];
+	unsigned\
+	long long		llu;
+}					t_float;
 
-// # include <sys/types.h>
-// # include <pwd.h>
-// # include <uuid/uuid.h>
-
-// # include <grp.h>
-
-// # include <sys/xattr.h>
-
-// # include <time.h>
-
-# include <stdio.h>
+int					ft_custom_ld_to_text(const long double input,\
+						const unsigned int precision,\
+						char **const amem,\
+						size_t *asize);
 
 #endif
