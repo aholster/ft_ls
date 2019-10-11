@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/11 03:33:44 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/11 13:35:17 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,36 @@
 
 # include "./incl/ft_flag.h"
 
-# include "./ft_printf/ft_printf.h"
-# include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h> //currently used for erroring
 
-# include <dirent.h>
-# include <sys/stat.h>
+# include "./ft_printf/ft_printf.h"//subheader?
+# include <unistd.h>//subheader?
+
+# include <dirent.h> //move to subheader
+//# include <sys/stat.h>//subheader?
 
 // # include <sys/types.h>
-// # include <pwd.h>
-// # include <uuid/uuid.h>
+// # include <pwd.h> //subheader
+// # include <uuid/uuid.h>//subheader
 
-// # include <grp.h>
+// # include <grp.h>//subheader
 
-// # include <sys/xattr.h>
+// # include <sys/xattr.h>//subheader?
 
-// # include <time.h>
+// # include <time.h>//subheader
 
-# include <stdio.h>
+# define USAGE "usage: ft_ls [-Ralrt] [file ...]"
+
+/*
+**# define USAGE "usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]"
+*/
+
+#include "./libft/libft.h"
+
+void	ft_sort_params(t_argstruct *const restrict args,\
+			t_list **const restrict andir_list,\
+			t_list **const restrict adir_list,\
+			t_flags *const restrict aflags);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/10/11 04:41:12 by aholster      ########   odam.nl          #
+#    Updated: 2019/10/11 15:08:56 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,20 +15,21 @@ DATE := $(shell date)
 PARDIR := ./flag_parser/
 PARSRC := ft_flag_parser flg_cap_r flg_low_a flg_low_l flg_low_r flg_low_t
 
-SOURCE := main
+SOURCE := main sort_params
 
 FILEC := $(SOURCE:%=./ft_%.c) $(PARSRC:%=$(PARDIR)%.c)
 
 OBJ :=	$(FILEC:%.c=%.o)
 
-HEAD := ft_ls.h $(PARDIR)/ft_flag_parser.h ./incl/ft_flag.h
+HEAD := ft_ls.h $(PARDIR)/ft_flag_parser.h ./incl/ft_flag.h\
+ ./incl/ft_arg_struct.h
 
 NAME := ft_ls
 
 NORM := norminette $(FILEC) $(HEAD) | grep -e "Error"  -e "Warning" -B 1
 
 GCCC = ${CC} -c
-CC = gcc -Wall -Werror -Wextra
+CC = gcc -g -Wall -Werror -Wextra
 AR = ar rcs
 
 all: $(NAME)
