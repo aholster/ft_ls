@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 02:14:33 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/11 03:41:13 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/11 04:38:04 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef	enum	e_flags
 }				t_flags;
 
 void	ft_flag_parser(int *const restrict aargc,\
-			char const *const restrict *restrict *const restrict aargv,\
+			char **restrict *const restrict aargv,\
 			t_flags *const restrict aflags);
 
 #endif

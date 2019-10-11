@@ -6,20 +6,20 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/10/11 03:45:56 by aholster      ########   odam.nl          #
+#    Updated: 2019/10/11 04:41:12 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 DATE := $(shell date)
 
 PARDIR := ./flag_parser/
-PARSRC := ft_flg_parser flg_cap_r flg_low_a flg_low_l flg_low_r flg_low_t
+PARSRC := ft_flag_parser flg_cap_r flg_low_a flg_low_l flg_low_r flg_low_t
 
-SOURCE :=
+SOURCE := main
 
 FILEC := $(SOURCE:%=./ft_%.c) $(PARSRC:%=$(PARDIR)%.c)
 
-OBJ :=	$(FILEC:.c%=%.o)
+OBJ :=	$(FILEC:%.c=%.o)
 
 HEAD := ft_ls.h $(PARDIR)/ft_flag_parser.h ./incl/ft_flag.h
 
@@ -34,7 +34,7 @@ AR = ar rcs
 all: $(NAME)
 
 assemble: $(OBJ)
-	@$(CC) -o $(NAME) $(FILEC) -L ./ft_printf/ -lftprintf
+	@$(CC) -o $(NAME) $(FILEC) -L ./ft_printf/ -lftprintf -L ./libft/ -lft
 
 $(NAME):
 	@make -C ./ft_printf -j
@@ -51,8 +51,8 @@ clean:
 	@make clean -C ./libft
 	@echo "\033[0;33mInitializing Summary Deletions...\033[0;00m"
 	@rm -rf $(OBJ)
-	@find "./" -type f \( -name '*~' -o -name '\#*\#' -o -name '.DS_Store' \)\
-	 -exec rm -rfv {} \;
+#	@find "./" -type f \( -name '*~' -o -name '\#*\#' -o -name '.DS_Store' \)\
+#	 -exec rm -rfv {} \;
 	@echo "\033[0;31m	Executed!\033[0;00m\n"
 
 fclean: clean
