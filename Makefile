@@ -6,23 +6,26 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/10/10 02:05:08 by aholster      ########   odam.nl          #
+#    Updated: 2019/10/11 03:45:56 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 DATE := $(shell date)
 
+PARDIR := ./flag_parser/
+PARSRC := ft_flg_parser flg_cap_r flg_low_a flg_low_l flg_low_r flg_low_t
+
 SOURCE :=
 
-FILEC = $(SOURCE:%=./ft_%.c)
+FILEC := $(SOURCE:%=./ft_%.c) $(PARSRC:%=$(PARDIR)%.c)
 
-OBJ =	$(FILEC:.c%=%.o)
+OBJ :=	$(FILEC:.c%=%.o)
 
-HEAD = ft_ls.h
+HEAD := ft_ls.h $(PARDIR)/ft_flag_parser.h ./incl/ft_flag.h
 
-NAME = ft_ls
+NAME := ft_ls
 
-NORM = norminette $(FILEC) $(HEAD) | grep -e "Error"  -e "Warning" -B 1
+NORM := norminette $(FILEC) $(HEAD) | grep -e "Error"  -e "Warning" -B 1
 
 GCCC = ${CC} -c
 CC = gcc -Wall -Werror -Wextra
@@ -31,10 +34,11 @@ AR = ar rcs
 all: $(NAME)
 
 assemble: $(OBJ)
-	@$(CC) -o $(NAME) $(OBJ) -L ./ft_printf/ -lftprintf
+	@$(CC) -o $(NAME) $(FILEC) -L ./ft_printf/ -lftprintf
 
 $(NAME):
 	@make -C ./ft_printf -j
+	@make -C ./libft -j
 	@echo "\033[0;33mStarting assembly of $(NAME)…\033[0;00m"
 	@time make assemble
 	@echo "\033[0;32m$(NAME) successfully assembled!\033[0;00m\n"
@@ -43,7 +47,8 @@ $(NAME):
 	@$(GCCC) -o $@ $<
 
 clean:
-	@make clean -C ./ft_printf -j
+	@make clean -C ./ft_printf
+	@make clean -C ./libft
 	@echo "\033[0;33mInitializing Summary Deletions...\033[0;00m"
 	@rm -rf $(OBJ)
 	@find "./" -type f \( -name '*~' -o -name '\#*\#' -o -name '.DS_Store' \)\
@@ -51,7 +56,8 @@ clean:
 	@echo "\033[0;31m	Executed!\033[0;00m\n"
 
 fclean: clean
-	@make fclean -C ./ft_printf -j
+	@make fclean -C ./ft_printf
+	@make fclean -C ./libft
 	@rm -rf $(NAME)
 	@echo "\033[0;31mObituary of $(NAME): Deceased on $(shell date).\
 	\033[0;00m\n"
@@ -59,7 +65,6 @@ fclean: clean
 re: fclean all
 
 norm:
-	@make norm -C ./ft_printf -j
 	@echo "**+++=====*=====*=====*=====*{\033[0;31mOUT\033[0;00m}\
 	*=====*=====*=====*=====+++**\033[0;33m"
 	@$(NORM) || TRUE 

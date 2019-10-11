@@ -6,16 +6,16 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:11:26 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/10 03:36:20 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/11 03:31:56 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_flag_parser.h"
-#include "libft.h"
+#include "./../libft/libft.h"
 
 static void	flag_trans_tbl(const char flag_chr, t_flags *const restrict aflags)
 {
-	static const flg_handler	trans_tbl[128] = {
+	static const t_flg_handler	trans_tbl[128] = {
 		['R'] = &flg_cap_r,
 		['a'] = &flg_low_a,
 		['l'] = &flg_low_l,
@@ -27,17 +27,17 @@ static void	flag_trans_tbl(const char flag_chr, t_flags *const restrict aflags)
 		trans_tbl[flag_chr](aflags);
 }
 
-int			ft_flag_parser(char const *restrict *const restrict aargv,\
-				int *const restrict argc,\
+void		ft_flag_parser(int *const restrict aargc,\
+				char const *const restrict *restrict *const restrict aargv,\
 				t_flags *const restrict aflags)
 {
 	size_t					index;
 	size_t					len;
 	const char *restrict	flag_block;
 
-	while ((*aargv)[0] == '-')
+	while ((*aargc) != 0 && (**aargv)[0] == '-')
 	{
-		flag_block = *aargv;
+		flag_block = (**aargv);
 		index = 1;
 		len = ft_strlen(flag_block);
 		while (index < len)
@@ -47,7 +47,6 @@ int			ft_flag_parser(char const *restrict *const restrict aargv,\
 			index++;
 		}
 		(*aargv)++;
-		(*argc)--;
+		(*aargc)--;
 	}
-	return (1);
 }

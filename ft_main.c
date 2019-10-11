@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_ls.h                                            :+:    :+:            */
+/*   ft_main.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/11 03:33:44 by aholster      ########   odam.nl         */
+/*   Created: 2019/10/11 01:15:48 by aholster       #+#    #+#                */
+/*   Updated: 2019/10/11 03:31:58 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#include "ft_ls.h"
+#include "./libft/libft.h"
 
-# include "./incl/ft_flag.h"
+int		main(int argc, char **argv)
+{
+	t_flags		flag_stock;
 
-# include "./ft_printf/ft_printf.h"
-# include <unistd.h>
-# include <stdlib.h>
-
-# include <dirent.h>
-# include <sys/stat.h>
-
-// # include <sys/types.h>
-// # include <pwd.h>
-// # include <uuid/uuid.h>
-
-// # include <grp.h>
-
-// # include <sys/xattr.h>
-
-// # include <time.h>
-
-# include <stdio.h>
-
-#endif
+	if (argc > 0 && ft_strequ(argv[0], "ft_ls") == 1)
+	{
+		argc--;
+		argv++;
+	}
+	if (argc != 0)
+		ft_flag_parser(&argc, &argv, &flag_stock);
+	return (1);
+}
