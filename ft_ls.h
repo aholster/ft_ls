@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/12 12:24:16 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/12 13:30:02 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 # include "./incl/ft_flag.h"
 
-# include <stdlib.h>
-# include <stdio.h> //currently used for erroring
+//# include <stdlib.h>
+# include <stdio.h>
 
 # include "./ft_printf/ft_printf.h"//subheader?
-# include <unistd.h>//subheader?
+//# include <unistd.h>//subheader?
 
 # include <dirent.h> //move to subheader
 //# include <sys/stat.h>//subheader?
@@ -45,6 +45,10 @@
 void	ft_sort_params(char **restrict argv,\
 			t_list **const restrict andir_stack,\
 			t_list **const restrict adir_stack,\
-			t_flags *const restrict aflags);
+			const t_flags *const restrict aflags);
+
+void	ft_run_stacks(t_list **const restrict andir_stack,\
+			t_list **const restrict adir_stack,\
+			const t_flags *const restrict aflags);
 
 #endif

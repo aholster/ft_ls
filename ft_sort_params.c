@@ -6,13 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 09:43:25 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/12 12:25:17 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/12 13:53:39 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-#include <errno.h>
 #include <sys/stat.h>
 
 static void	add_to_stack(const char *const restrict entry_name,\
@@ -43,7 +42,7 @@ static void	add_to_stack(const char *const restrict entry_name,\
 void		ft_sort_params(char **restrict argv,\
 				t_list **const restrict andir_stack,\
 				t_list **const restrict adir_stack,\
-				t_flags *const restrict aflags)
+				const t_flags *const restrict aflags)
 {
 	struct stat	stat_info;
 	int			ret;

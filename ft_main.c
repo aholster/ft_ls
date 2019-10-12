@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 01:15:48 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/12 12:23:45 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/12 13:29:13 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ int			main(int argc, char **argv)
 		}
 		else
 			add_base_dir(&dir_stack);
-		ft_lstdel(&ndir_stack, &ft_del);
-		ft_lstdel(&dir_stack, &ft_del);
+		ft_run_stacks(&ndir_stack, &dir_stack, &flag_stock);
 	}
 	return (1);
 }
