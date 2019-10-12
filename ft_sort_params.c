@@ -6,48 +6,69 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 09:43:25 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/11 15:08:26 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/12 12:25:17 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-//#include "./libft/libft.h"
-#include "./incl/ft_arg_struct.h"
 
-#include <sys/stat.h>
 #include <errno.h>
-void	ft_sort_params(t_argstruct *const restrict args,\
-			t_list **const restrict andir_list,\
-			t_list **const restrict adir_list,\
-			t_flags *const restrict aflags)
+#include <sys/stat.h>
+
+static void	add_to_stack(const char *const restrict entry_name,\
+				const struct stat *const restrict astat_info,\
+				t_list **const restrict andir_stack,\
+				t_list **const restrict adir_stack)
+{
+	t_list	*new_node;
+
+	new_node = ft_lstnew(entry_name, ft_strlen(entry_name));
+	if (new_node == NULL)
+	{
+		perror("ft_ls");
+		ft_lstdel(andir_stack, &ft_del);
+		ft_lstdel(adir_stack, &ft_del);
+		exit(-1);
+	}
+	if (S_ISDIR(astat_info->st_mode) == 1)
+	{
+		ft_lstadd(adir_stack, new_node);
+	}
+	else
+	{
+		ft_lstadd(andir_stack, new_node);
+	}
+}
+
+void		ft_sort_params(char **restrict argv,\
+				t_list **const restrict andir_stack,\
+				t_list **const restrict adir_stack,\
+				t_flags *const restrict aflags)
 {
 	struct stat	stat_info;
+	int			ret;
 
-	while (args->argc != 0)
+	while (argv[0] != NULL)
 	{
-		printf("entry: %s\n", args->argv[0]);
-		if (lstat(args->argv[0], &stat_info) == 0)
+		ret = lstat(argv[0], &stat_info);
+		if (ret == 0)
 		{
-			printf("inode: %lld, mode %x\n", stat_info.st_ino, stat_info.st_mode);
-			if (S_ISDIR(stat_info.st_mode) == 1)
-				printf("is dir!\n");
-			else if (S_ISREG(stat_info.st_mode) == 1)
-				printf("is regular file!\n");
-			else if (S_ISLNK(stat_info.st_mode) == 1)
-				printf("is symlink!\n");
-			else
-				printf("is something else?!\n");
+			add_to_stack(argv[0], &stat_info, andir_stack, adir_stack);
 		}
 		else
 		{
-			const char *holder = strerror(ENOENT);
-			
-			dprintf(2, "ft_ls: %s: %s\n", args->argv[0], holder);
+			dprintf(2, "ft_ls: %s: ", argv[0]);
+			perror(NULL);
 		}
-		args->argv++;
-		args->argc--;
+		argv++;
 	}
-	(void)andir_list;
-	(void)adir_list;
-	(void)aflags;
+	(void)aflags;//remove later
 }
+
+/*
+**		(void)aflags;//present for future -H, -L or -P
+**		if ()//some flag if thingy?
+**			ret = stat(argv[0], &stat_info);
+**		else
+**			ret = lstat(argv[0], &stat_info);
+*/

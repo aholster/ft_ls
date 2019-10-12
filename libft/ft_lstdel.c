@@ -6,13 +6,14 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/22 17:40:24 by aholster       #+#    #+#                */
-/*   Updated: 2019/05/18 15:24:45 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/12 09:27:42 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+void	ft_lstdel(t_list **const alst,\
+			void (*const del)(void *, size_t))
 {
 	t_list	*holder;
 	t_list	*current;

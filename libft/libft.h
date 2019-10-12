@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/12 18:16:38 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/08 20:11:32 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/12 09:41:30 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ int					ft_isascii(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
 char				*ft_itoa(int n);
-void				ft_lstadd(t_list **alst, t_list *new);
-void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
-void				ft_lstdelone(t_list **alst, void(*del)(void*, size_t));
+void				ft_lstadd(t_list **const alst, t_list *const new);
+void				ft_lstdel(t_list **const alst,\
+						void (*const del)(void *, size_t));
+void				ft_lstdelone(t_list **const alst,\
+						void(*const del)(void*, size_t));
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list				*ft_lstnew(void const *content, size_t content_size);
@@ -106,7 +108,7 @@ int					*ft_range(int min, int max);
 # pragma mark lst handling
 
 void				ft_del(void *data, size_t size);
-t_list				*ft_lstaddend(t_list **lst, t_list *new);
+t_list				*ft_lstaddend(t_list **const lst, t_list *const new);
 unsigned int		ft_lstlen(t_list *lst);
 void				ft_lsttardest(t_list **lst, t_list **target,\
 					void (*del)(void *, size_t));

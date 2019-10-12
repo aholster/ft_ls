@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/11 13:35:17 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/12 12:24:16 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@
 
 // # include <time.h>//subheader
 
-# define USAGE "usage: ft_ls [-Ralrt] [file ...]"
+# define USAGE "usage: ft_ls [-Ralrt] [file ...]\n"
 
 /*
 **# define USAGE "usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]"
 */
 
-#include "./libft/libft.h"
+# include "./libft/libft.h"
 
-void	ft_sort_params(t_argstruct *const restrict args,\
-			t_list **const restrict andir_list,\
-			t_list **const restrict adir_list,\
+void	ft_sort_params(char **restrict argv,\
+			t_list **const restrict andir_stack,\
+			t_list **const restrict adir_stack,\
 			t_flags *const restrict aflags);
 
 #endif

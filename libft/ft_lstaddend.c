@@ -6,13 +6,13 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/25 13:07:44 by aholster       #+#    #+#                */
-/*   Updated: 2019/04/06 17:58:34 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/12 09:40:58 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstaddend(t_list **lst, t_list *new)
+t_list	*ft_lstaddend(t_list **const lst, t_list *const new)
 {
 	t_list *internal;
 

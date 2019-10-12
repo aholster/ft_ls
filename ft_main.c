@@ -6,18 +6,16 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 01:15:48 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/11 13:35:40 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/12 12:23:45 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-//#include "./libft/libft.h"
-#include "./incl/ft_arg_struct.h"
 
-static void	add_base_dir(t_list *restrict *const restrict adir_list)
+static void	add_base_dir(t_list *restrict *const restrict adir_stack)
 {
-	*adir_list = ft_lstnew(".", 2);
-	if (*adir_list == NULL)
+	*adir_stack = ft_lstnew(".", 2);
+	if (*adir_stack == NULL)
 	{
 		perror("ft_ls");
 		exit(-1);
@@ -27,33 +25,28 @@ static void	add_base_dir(t_list *restrict *const restrict adir_list)
 int			main(int argc, char **argv)
 {
 	t_flags		flag_stock;
-	t_list		*ndir_list = NULL;
-	t_list		*dir_list = NULL;
-	t_argstruct	args;
+	t_list		*ndir_stack;
+	t_list		*dir_stack;
 
 	if (argc == 0)
 	{
-		dprintf(2, "%s\n", USAGE);
+		dprintf(2, USAGE);
 		exit(-1);
 	}
 	else
 	{
-		args.argc = argc - 1;
-		args.argv = argv + 1;
+		argc--;
+		argv++;
 		if (argc != 0)
 		{
-			ft_flag_parser(&args, &flag_stock);
+			ft_flag_parser(&argc, &argv, &flag_stock);
 			if (argc != 0)
-				ft_sort_params(&args, &ndir_list, &dir_list, &flag_stock);
+				ft_sort_params(argv, &ndir_stack, &dir_stack, &flag_stock);
 		}
 		else
-			add_base_dir(&dir_list);
-		//
-		//
-		//runqueue
-		//	linelimit
-		ft_lstdel(&ndir_list, &ft_del);
-		ft_lstdel(&dir_list, &ft_del);
+			add_base_dir(&dir_stack);
+		ft_lstdel(&ndir_stack, &ft_del);
+		ft_lstdel(&dir_stack, &ft_del);
 	}
 	return (1);
 }

@@ -6,14 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 02:14:33 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/11 13:30:23 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/12 10:31:58 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_FLAG_H
 # define FT_FLAG_H
-
-# include "ft_arg_struct.h"
 
 typedef	enum	e_flags
 {
@@ -24,8 +22,9 @@ typedef	enum	e_flags
 	flg_t = 1LU << 4,
 }				t_flags;
 
-void	ft_flag_parser(t_argstruct *const restrict args,\
-			t_flags *const restrict aflags);
+void		ft_flag_parser(int *const restrict aargc,\
+				char **restrict *const restrict aargv,\
+				t_flags *const restrict aflags);
 
 #endif
 

@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/10/11 15:08:56 by aholster      ########   odam.nl          #
+#    Updated: 2019/10/12 10:25:52 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,9 @@ SOURCE := main sort_params
 
 FILEC := $(SOURCE:%=./ft_%.c) $(PARSRC:%=$(PARDIR)%.c)
 
-OBJ :=	$(FILEC:%.c=%.o)
+OBJ := $(FILEC:%.c=%.o)
 
-HEAD := ft_ls.h $(PARDIR)/ft_flag_parser.h ./incl/ft_flag.h\
- ./incl/ft_arg_struct.h
+HEAD := ft_ls.h $(PARDIR)/ft_flag_parser.h ./incl/ft_flag.h
 
 NAME := ft_ls
 
@@ -52,8 +51,8 @@ clean:
 	@make clean -C ./libft
 	@echo "\033[0;33mInitializing Summary Deletions...\033[0;00m"
 	@rm -rf $(OBJ)
-#	@find "./" -type f \( -name '*~' -o -name '\#*\#' -o -name '.DS_Store' \)\
-#	 -exec rm -rfv {} \;
+	@find "./" -type f \( -name '*~' -o -name '\#*\#' -o -name '.DS_Store' \)\
+	 -exec rm -rfv {} \;
 	@echo "\033[0;31m	Executed!\033[0;00m\n"
 
 fclean: clean

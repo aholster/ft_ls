@@ -6,19 +6,17 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:11:26 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/11 13:30:37 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/12 12:24:46 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../ft_ls.h"
 #include "./../libft/libft.h"
-#include "./../incl/ft_arg_struct.h"
 #include "ft_flag_parser.h"
 
 static void	bad_flag(const unsigned char flag_chr)
 {
-	dprintf(2, "ft_ls: illegal option -- %c\n", flag_chr);
-	dprintf(2, "%s\n", USAGE);
+	dprintf(2, "ft_ls: illegal option -- %c\n%s", flag_chr, USAGE);
 	exit(-1);
 }
 
@@ -39,16 +37,17 @@ static void	flag_trans_tbl(const unsigned char flag_chr,\
 		bad_flag(flag_chr);
 }
 
-void		ft_flag_parser(t_argstruct *const restrict args,\
+void		ft_flag_parser(int *const restrict aargc,\
+				char **restrict *const restrict aargv,\
 				t_flags *const restrict aflags)
 {
 	size_t					index;
 	size_t					len;
 	const char *restrict	flag_block;
 
-	while (args->argc != 0 && (*(args->argv))[0] == '-')
+	while ((*aargc) != 0 && (**aargv)[0] == '-')
 	{
-		flag_block = (*(args->argv));
+		flag_block = (**aargv);
 		index = 1;
 		len = ft_strlen(flag_block);
 		while (index < len)
@@ -57,7 +56,7 @@ void		ft_flag_parser(t_argstruct *const restrict args,\
 				flag_trans_tbl(flag_block[index], aflags);
 			index++;
 		}
-		args->argv++;
-		args->argc--;
+		(*aargv)++;
+		(*aargc)--;
 	}
 }
