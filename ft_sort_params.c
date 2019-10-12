@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 09:43:25 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/12 13:53:39 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/12 19:09:12 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,35 @@
 
 #include <sys/stat.h>
 
+//#include "./incl/ft_finfo.h"
 static void	add_to_stack(const char *const restrict entry_name,\
 				const struct stat *const restrict astat_info,\
-				t_list **const restrict andir_stack,\
-				t_list **const restrict adir_stack)
+				t_finfo *restrict *const restrict andir_stack,\
+				t_finfo *restrict *const restrict adir_stack)
 {
-	t_list	*new_node;
+	t_finfo	*new_node;
 
-	new_node = ft_lstnew(entry_name, ft_strlen(entry_name));
+	new_node = finfo_lstnew(entry_name);
 	if (new_node == NULL)
 	{
 		perror("ft_ls");
-		ft_lstdel(andir_stack, &ft_del);
-		ft_lstdel(adir_stack, &ft_del);
+		finfo_lstdel(andir_stack);
+		finfo_lstdel(adir_stack);
 		exit(-1);
 	}
 	if (S_ISDIR(astat_info->st_mode) == 1)
 	{
-		ft_lstadd(adir_stack, new_node);
+		finfo_lstadd(adir_stack, new_node);
 	}
 	else
 	{
-		ft_lstadd(andir_stack, new_node);
+		finfo_lstadd(andir_stack, new_node);
 	}
 }
 
 void		ft_sort_params(char **restrict argv,\
-				t_list **const restrict andir_stack,\
-				t_list **const restrict adir_stack,\
+				t_finfo *restrict *const restrict andir_stack,\
+				t_finfo *restrict *const restrict adir_stack,\
 				const t_flags *const restrict aflags)
 {
 	struct stat	stat_info;

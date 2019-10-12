@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/12 13:30:02 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/12 19:08:32 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@
 
 # include "./libft/libft.h"
 
+#include "./incl/ft_finfo.h"
 void	ft_sort_params(char **restrict argv,\
-			t_list **const restrict andir_stack,\
-			t_list **const restrict adir_stack,\
+			t_finfo *restrict *const restrict andir_stack,\
+			t_finfo *restrict *const restrict adir_stack,\
 			const t_flags *const restrict aflags);
 
-void	ft_run_stacks(t_list **const restrict andir_stack,\
-			t_list **const restrict adir_stack,\
+void	ft_run_stacks(t_finfo *restrict *const restrict andir_stack,\
+			t_finfo *restrict *const restrict adir_stack,\
 			const t_flags *const restrict aflags);
 
 #endif
