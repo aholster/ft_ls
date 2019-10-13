@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/22 17:40:24 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/12 19:14:41 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/13 13:22:14 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../incl/ft_finfo.h"
+#include "./../incl/finfo"
 
 void	finfo_lstdel(t_finfo *restrict *const restrict alst)
 {

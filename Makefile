@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/10/13 13:21:18 by aholster      ########   odam.nl          #
+#    Updated: 2019/10/13 13:22:47 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ FILEC := $(SOURCE:%=./ft_%.c) $(PARSRC:%=$(PARDIR)%.c) $(FINFOSRC:%=$(FINFODIR)%
 
 OBJ := $(FILEC:%.c=%.o)
 
-HEAD := ft_ls.h $(PARDIR)/ft_flag_parser.h ./incl/ft_flag.h
+HEAD := ft_ls.h $(PARDIR)/ft_flag_parser.h ./incl/ft_flag.h ./incl/finfo.h
 
 NAME := ft_ls
 

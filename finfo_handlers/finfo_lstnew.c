@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/21 19:28:30 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/13 07:29:47 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/13 13:22:16 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../incl/ft_finfo.h"
+#include "./../incl/finfo"
 #include "./../libft/libft.h"
 
 t_finfo	*finfo_lstnew(const char *const restrict s_name,

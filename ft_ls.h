@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/13 13:20:32 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/13 13:22:18 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct	s_fstack
 
 # include "./libft/libft.h"
 
-#include "./incl/ft_finfo.h"
+#include "./incl/finfo"
 void	ft_fstack_del(t_fstack *const restrict afstack);
 
 void	ft_sort_params(char **restrict argv,\
