@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 09:43:25 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/13 13:20:36 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/13 13:29:53 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,22 @@
 static void	ft_list_error(t_fstack *const restrict afstack)
 {
 	perror("ft_ls");
-	aft_fstack_del(afstack);
+	ft_fstack_del(afstack);
 	exit(-1);
 }
 
-static int	ft_pass_to_err(const char *const restrict name,\
-				t_list **const restrict aerr_list)
+static void	add_to_errstack(const char *const restrict name,\
+				t_fstack *const restrict afstack)
 {
 	t_list	*new;
 
 	new = ft_lstnew(name, ft_strlen(name));
 	if (new == NULL)
 	{
-		return (-1);
 	}
 	else
 	{
-		ft_lstadd(aerr_list, new);
-		return (1);
+		ft_lstadd(&(afstack->err_list), new);
 	}
 }
 
@@ -45,18 +43,18 @@ static void	add_to_stack(const char *const restrict name,\
 {
 	t_finfo	*restrict	new_node;
 
-	new_node = finfo_lstnew(name, &stat_info);
+	new_node = finfo_lstnew(name, stat_info);
 	if (new_node == NULL)
 	{
 		ft_list_error(afstack);
 	}
 	if (((*aflags) & flg_d) == 1 || S_ISDIR(new_node->inf.st_mode) != 1)
 	{
-		finfo_lstadd(afstack->ndir_stack, new_node);
+		finfo_lstadd(&(afstack->ndir_stack), new_node);
 	}
 	else
 	{
-		finfo_lstadd(afstack->dir_stack, new_node);
+		finfo_lstadd(&(afstack->dir_stack), new_node);
 	}
 }
 
@@ -76,14 +74,8 @@ void		ft_sort_params(char **restrict argv,\
 		}
 		else
 		{
-			if (pass_to_err(argv[0], afstack->err_list) == -1)
-			{
-				ft_list_error(afstack);
-			}
+			add_to_errstack(argv[0], afstack);
 		}
 		argv++;
 	}
 }
-
-//			dprintf(2, "ft_ls: %s: ", argv[0]);
-//			perror(NULL);
