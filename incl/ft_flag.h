@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 02:14:33 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/12 10:31:58 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/13 09:02:03 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ typedef	enum	e_flags
 {
 	flg_R = 1LU << 0,
 	flg_a = 1LU << 1,
-	flg_l = 1LU << 2,
-	flg_r = 1LU << 3,
-	flg_t = 1LU << 4,
+	flg_d = 1LU << 2,
+	flg_l = 1LU << 3,
+	flg_r = 1LU << 4,
+	flg_t = 1LU << 5,
 }				t_flags;
 
 void		ft_flag_parser(int *const restrict aargc,\
@@ -51,7 +52,7 @@ void		ft_flag_parser(int *const restrict aargc,\
 ** 	a = 1LU << 16, include dirname starting with '.' (hidden files)
 ** 	// b = 1LU << 17, same as -B but with c escape codes
 ** 	// c = 1LU << 18, sort by file status last changed if -t or -l
-** 	// d = 1LU << 19, directories are listed as plain files
+** 	d = 1LU << 19, directories are listed as plain files
 ** 	// e = 1LU << 20, print access control list if present(-l)
 ** 	// f = 1LU << 21, output is not sorted (turns on -a)
 ** 	// g = 1LU << 22, display groupname in -l, supressing owner

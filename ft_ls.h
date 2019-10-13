@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/12 19:08:32 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/13 09:01:18 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 // # include <time.h>//subheader
 
-# define USAGE "usage: ft_ls [-Ralrt] [file ...]\n"
+# define USAGE "usage: ft_ls [-Radlrt] [file ...]\n"
 
 /*
 **# define USAGE "usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]"

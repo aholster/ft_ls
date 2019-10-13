@@ -6,14 +6,15 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/21 19:28:30 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/12 17:55:25 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/13 07:29:47 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../incl/ft_finfo.h"
 #include "./../libft/libft.h"
 
-t_finfo	*finfo_lstnew(const char *const restrict s_name)
+t_finfo	*finfo_lstnew(const char *const restrict s_name,
+			const struct stat *const restrict astat_info)
 {
 	t_finfo	*restrict head;
 
@@ -29,6 +30,7 @@ t_finfo	*finfo_lstnew(const char *const restrict s_name)
 			return (NULL);
 		}
 	}
+	ft_memcpy(&(head->inf), astat_info, sizeof(struct stat));
 	head->next = NULL;
 	return (head);
 }
