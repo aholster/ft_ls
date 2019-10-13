@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/13 13:30:05 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/13 18:09:36 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ typedef struct			s_fstack
 {
 	t_finfo *restrict	ndir_stack;
 	t_finfo *restrict	dir_stack;
-	t_list				*err_list;
+	t_list				*err_stack;
 }						t_fstack;
 
+void					ft_error_cleanup(t_fstack *const restrict afstack);
 
 void					ft_fstack_del(t_fstack *const restrict afstack);
 
@@ -57,7 +58,7 @@ void					ft_sort_params(char **restrict argv,\
 							t_fstack *const restrict afstack,\
 							const t_flags *const restrict aflags);
 
-void					ft_run_stacks(t_fstack *const restrict afil_stack,\
+void					ft_run_stacks(t_fstack *const restrict afstack,\
 							const t_flags *const restrict aflags);
 
 #endif

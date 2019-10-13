@@ -6,20 +6,13 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 09:43:25 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/13 13:29:53 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/13 18:21:52 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 #include <sys/stat.h>
-
-static void	ft_list_error(t_fstack *const restrict afstack)
-{
-	perror("ft_ls");
-	ft_fstack_del(afstack);
-	exit(-1);
-}
 
 static void	add_to_errstack(const char *const restrict name,\
 				t_fstack *const restrict afstack)
@@ -29,10 +22,11 @@ static void	add_to_errstack(const char *const restrict name,\
 	new = ft_lstnew(name, ft_strlen(name));
 	if (new == NULL)
 	{
+		ft_error_cleanup(afstack);
 	}
 	else
 	{
-		ft_lstadd(&(afstack->err_list), new);
+		ft_lstadd(&(afstack->err_stack), new);
 	}
 }
 
@@ -46,15 +40,18 @@ static void	add_to_stack(const char *const restrict name,\
 	new_node = finfo_lstnew(name, stat_info);
 	if (new_node == NULL)
 	{
-		ft_list_error(afstack);
-	}
-	if (((*aflags) & flg_d) == 1 || S_ISDIR(new_node->inf.st_mode) != 1)
-	{
-		finfo_lstadd(&(afstack->ndir_stack), new_node);
+		ft_error_cleanup(afstack);
 	}
 	else
 	{
-		finfo_lstadd(&(afstack->dir_stack), new_node);
+		if (((*aflags) & flg_d) == 1 || S_ISDIR(new_node->inf.st_mode) != 1)
+		{
+			finfo_lstadd(&(afstack->ndir_stack), new_node);
+		}
+		else
+		{
+			finfo_lstadd(&(afstack->dir_stack), new_node);
+		}
 	}
 }
 

@@ -6,11 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/12 13:20:09 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/13 13:20:34 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/13 18:10:18 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include "./incl/ft_stack_sorters.h"
 
 #include <sys/stat.h>
 
@@ -20,12 +21,16 @@ static void	list_print(t_finfo *elem)
 	printf("%llu\n", elem->inf.st_ino);
 }
 
-void		ft_run_stacks(t_fstack *const restrict afil_stack,\
+void		ft_run_stacks(t_fstack *const restrict afstack,\
 				const t_flags *const restrict aflags)
 {
-	finfo_lstiter(afil_stack->ndir_stack, &list_print);
+	if (afstack->err_stack != NULL)
+	{
+		ft_sort_err_stack(afstack);
+	}
+	finfo_lstiter(afstack->ndir_stack, &list_print);
 	printf("now showing dir list\n");
-	finfo_lstiter(afil_stack->dir_stack, &list_print);
-	ft_fstack_del(afil_stack);
+	finfo_lstiter(afstack->dir_stack, &list_print);
+	ft_fstack_del(afstack);
 	(void)aflags;
 }
