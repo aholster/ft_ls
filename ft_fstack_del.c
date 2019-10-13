@@ -1,40 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_main.c                                          :+:    :+:            */
+/*   ft_fstack_del.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/11 01:15:48 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/13 12:13:39 by aholster      ########   odam.nl         */
+/*   Created: 2019/10/13 12:11:31 by aholster       #+#    #+#                */
+/*   Updated: 2019/10/13 13:20:53 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int			main(int argc, char **argv)
+void	ft_fstack_del(t_fstack *const restrict afstack)
 {
-	t_flags				flag_stock;
-	t_fstack			fil_stack;
-
-	if (argc == 0)
-	{
-		dprintf(2, USAGE);
-		exit(-1);
-	}
-	else
-	{
-		argc--;
-		argv++;
-		if (argc != 0)
-		{
-			ft_flag_parser(&argc, &argv, &flag_stock);
-			if (argc != 0)
-			{
-				ft_sort_params(argv, &fil_stack, &flag_stock);
-			}
-		}
-		ft_run_stacks(&fil_stack, &flag_stock);
-	}
-	return (1);
+	finfo_lstdel(&(afstack->ndir_stack));
+	finfo_lstdel(&(afstack->dir_stack));
+	ft_lstdel(&(afstack->err_list), &ft_del);
+	ft_bzero(afstack, sizeof(t_fstack));
 }

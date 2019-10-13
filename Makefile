@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/10/13 09:03:29 by aholster      ########   odam.nl          #
+#    Updated: 2019/10/13 13:21:18 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ FINFODIR := ./finfo_handlers/
 FINFOSRC := finfo_lstadd finfo_lstdel finfo_lstdelone finfo_lstiter\
  finfo_lstnew
 
-SOURCE := main sort_params run_stacks
+SOURCE := main sort_params run_stacks fstack_del
 
 FILEC := $(SOURCE:%=./ft_%.c) $(PARSRC:%=$(PARDIR)%.c) $(FINFOSRC:%=$(FINFODIR)%.c)
 
