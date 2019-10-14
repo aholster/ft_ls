@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_sort_err_stack.c                                :+:    :+:            */
+/*   ft_process_err_queue.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/13 13:58:01 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/13 18:14:56 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/14 10:27:42 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,21 @@ static void		merge_sort(t_list **const restrict alst)
 	*alst = reconstitute_lst(*alst, midpoint);
 }
 
-void			ft_sort_err_stack(t_fstack *const restrict afstack)
+void			ft_process_err_queue(t_fstack *const restrict afstack,
+					const t_flags *const restrict aflags)
 {
 	t_list	*restrict	iterator;
 
-	merge_sort(&(afstack->err_stack));
-	iterator = afstack->err_stack;
+	if (((*aflags) & flg_f) == 0)
+	{
+		merge_sort(&(afstack->err_queue));
+	}
+	iterator = afstack->err_queue;
 	while (iterator != NULL)
 	{
 		dprintf(2, "ft_ls : %s: ", iterator->content);
 		perror(NULL);
 		iterator = iterator->next;
 	}
-	ft_lstdel(&(afstack->err_stack), &ft_del);
+	ft_lstdel(&(afstack->err_queue), &ft_del);
 }

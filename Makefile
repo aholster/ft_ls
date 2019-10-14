@@ -6,22 +6,22 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/10/13 14:04:42 by aholster      ########   odam.nl          #
+#    Updated: 2019/10/14 10:32:43 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 DATE := $(shell date)
 
 SORTDIR := ./stack_sorters/
-SORTSRC := sort_err_stack
+SORTSRC := process_err_queue
 
 PARDIR := ./flag_parser/
 PARSRC := ft_flag_parser flg_cap_r flg_low_a flg_low_l flg_low_r flg_low_t\
- flg_low_d
+ flg_low_d flg_low_f flg_low_u flg_low_i
 
 FINFODIR := ./finfo_handlers/
 FINFOSRC := finfo_lstadd finfo_lstdel finfo_lstdelone finfo_lstiter\
- finfo_lstnew
+ finfo_lstnew finfo_lstaddend
 
 SOURCE := main sort_params run_stacks\
  fstack_del error_cleanup
@@ -31,7 +31,8 @@ FILEC := $(SOURCE:%=./ft_%.c) $(PARSRC:%=$(PARDIR)%.c) $(SORTSRC:%=$(SORTDIR)ft_
 
 OBJ := $(FILEC:%.c=%.o)
 
-HEAD := ft_ls.h $(PARDIR)/ft_flag_parser.h ./incl/ft_flag.h ./incl/finfo.h
+HEAD := ft_ls.h $(PARDIR)/ft_flag_parser.h ./incl/ft_flag.h ./incl/finfo.h\
+	
 
 NAME := ft_ls
 
@@ -61,7 +62,7 @@ clean:
 	@make clean -C ./libft
 	@echo "\033[0;33mInitializing Summary Deletions...\033[0;00m"
 	@rm -rf $(OBJ)
-	@find "./" -type f \( -name '*~' -o -name '\#*\#' -o -name '.DS_Store' \)\
+#	@find "./" -type f \( -name '*~' -o -name '\#*\#' -o -name '.DS_Store' \)\
 	 -exec rm -rfv {} \;
 	@echo "\033[0;31m	Executed!\033[0;00m\n"
 

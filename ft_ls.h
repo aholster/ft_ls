@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/13 18:09:36 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/14 10:33:34 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,11 @@
 
 # include "./incl/ft_flag.h"
 
-//# include <stdlib.h>
 # include <stdio.h>
 
 # include "./ft_printf/ft_printf.h"//subheader?
-//# include <unistd.h>//subheader?
 
 # include <dirent.h> //move to subheader
-//# include <sys/stat.h>//subheader?
 
 // # include <sys/types.h>
 // # include <pwd.h> //subheader
@@ -37,7 +34,7 @@
 # include "./libft/libft.h"
 # include "./incl/finfo.h"
 
-# define USAGE "usage: ft_ls [-Radlrt] [file ...]\n"
+# define USAGE "usage: ft_ls [-Radfilrtu] [file ...]\n"
 
 /*
 **# define USAGE "usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]"
@@ -47,7 +44,7 @@ typedef struct			s_fstack
 {
 	t_finfo *restrict	ndir_stack;
 	t_finfo *restrict	dir_stack;
-	t_list				*err_stack;
+	t_list				*err_queue;
 }						t_fstack;
 
 void					ft_error_cleanup(t_fstack *const restrict afstack);

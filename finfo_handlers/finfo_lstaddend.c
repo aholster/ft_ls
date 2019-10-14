@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_fstack_del.c                                    :+:    :+:            */
+/*   finfo_lstaddend.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/13 12:11:31 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 10:26:16 by aholster      ########   odam.nl         */
+/*   Created: 2019/10/14 10:18:57 by aholster       #+#    #+#                */
+/*   Updated: 2019/10/14 10:23:41 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "./../incl/finfo.h"
 
-void	ft_fstack_del(t_fstack *const restrict afstack)
+t_finfo	*finfo_lstaddend(t_finfo *restrict *const restrict lst,\
+						t_finfo *const new)
 {
-	finfo_lstdel(&(afstack->ndir_stack));
-	finfo_lstdel(&(afstack->dir_stack));
-	ft_lstdel(&(afstack->err_queue), &ft_del);
-	ft_bzero(afstack, sizeof(t_fstack));
+	t_finfo *internal;
+
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return (new);
+	}
+	internal = *lst;
+	while (internal->next != NULL)
+	{
+		internal = internal->next;
+	}
+	internal->next = new;
+	return (new);
 }

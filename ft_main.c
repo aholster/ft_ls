@@ -6,11 +6,28 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 01:15:48 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/13 12:13:39 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/14 10:26:21 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+#include <sys/stat.h>
+
+static void	stack_minimum_assert(t_fstack *const restrict afstack,\
+				const t_flags *const restrict aflags)
+{
+	char	*fake_argv[2];
+
+	if (afstack->ndir_stack == NULL &&\
+		afstack->dir_stack == NULL &&\
+		afstack->err_queue == NULL)
+	{
+		fake_argv[0] = ".";
+		fake_argv[1] = NULL;
+		ft_sort_params(fake_argv, afstack, aflags);
+	}
+}
 
 int			main(int argc, char **argv)
 {
@@ -34,6 +51,7 @@ int			main(int argc, char **argv)
 				ft_sort_params(argv, &fil_stack, &flag_stock);
 			}
 		}
+		stack_minimum_assert(&fil_stack, &flag_stock);
 		ft_run_stacks(&fil_stack, &flag_stock);
 	}
 	return (1);

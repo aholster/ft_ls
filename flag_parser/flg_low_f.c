@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_fstack_del.c                                    :+:    :+:            */
+/*   flg_low_f.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/13 12:11:31 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 10:26:16 by aholster      ########   odam.nl         */
+/*   Created: 2019/10/14 10:13:05 by aholster       #+#    #+#                */
+/*   Updated: 2019/10/14 10:13:26 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "./../incl/ft_flag.h"
 
-void	ft_fstack_del(t_fstack *const restrict afstack)
+void	flg_low_f(t_flags *const restrict aflags)
 {
-	finfo_lstdel(&(afstack->ndir_stack));
-	finfo_lstdel(&(afstack->dir_stack));
-	ft_lstdel(&(afstack->err_queue), &ft_del);
-	ft_bzero(afstack, sizeof(t_fstack));
+	(*aflags) |= flg_f;
 }

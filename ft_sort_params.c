@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 09:43:25 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/13 18:21:52 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/14 10:28:26 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <sys/stat.h>
 
-static void	add_to_errstack(const char *const restrict name,\
+static void	add_to_errqueue(const char *const restrict name,\
 				t_fstack *const restrict afstack)
 {
 	t_list	*new;
@@ -26,7 +26,7 @@ static void	add_to_errstack(const char *const restrict name,\
 	}
 	else
 	{
-		ft_lstadd(&(afstack->err_stack), new);
+		ft_lstaddend(&(afstack->err_queue), new);
 	}
 }
 
@@ -44,7 +44,7 @@ static void	add_to_stack(const char *const restrict name,\
 	}
 	else
 	{
-		if (((*aflags) & flg_d) == 1 || S_ISDIR(new_node->inf.st_mode) != 1)
+		if (((*aflags) & flg_d) > 0 || S_ISDIR(new_node->inf.st_mode) != 1)
 		{
 			finfo_lstadd(&(afstack->ndir_stack), new_node);
 		}
@@ -71,7 +71,7 @@ void		ft_sort_params(char **restrict argv,\
 		}
 		else
 		{
-			add_to_errstack(argv[0], afstack);
+			add_to_errqueue(argv[0], afstack);
 		}
 		argv++;
 	}

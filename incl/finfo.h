@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/12 15:12:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/13 13:22:31 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/14 10:24:21 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ t_finfo				*finfo_lstnew(const char *const restrict s_name,\
 
 void				finfo_lstadd(t_finfo *restrict *const restrict alst,\
 						t_finfo *const new);
+t_finfo				*finfo_lstaddend(t_finfo *restrict *const restrict lst,\
+						t_finfo *const new);//consider deleting
+
 void				finfo_lstiter(t_finfo *restrict lst,\
 						void (*const f)(t_finfo *restrict elem));
 
