@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/12 13:20:09 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 10:26:26 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/14 16:15:08 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 
 static void	list_print(t_finfo *elem)
 {
-	printf("node:%p, %s\t", elem, elem->s_name);
-	printf("%llu\n", elem->inf.st_ino);
+//	printf("node:%p, %s\t", elem, elem->s_name);
+	printf("time:%ld, %ld,\t%s\n", elem->inf.st_atimespec.tv_sec, elem->inf.st_atimespec.tv_nsec, elem->s_name);
+//	printf("%llu\n", elem->inf.st_ino);
 }
 
 void		ft_run_stacks(t_fstack *const restrict afstack,\
@@ -30,9 +31,9 @@ void		ft_run_stacks(t_fstack *const restrict afstack,\
 	}
 	if (afstack->ndir_stack != NULL)
 	{
-		printf("now showing ndir list\n");
+		// printf("now showing ndir list\n");
+		ft_process_ndir_stack(afstack, aflags);
 		finfo_lstiter(afstack->ndir_stack, &list_print);
-//		ft_process_ndir_stack(afstack, aflags);
 	}
 	if (afstack->dir_stack != NULL)
 	{

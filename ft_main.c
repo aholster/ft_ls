@@ -6,13 +6,13 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 01:15:48 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 10:26:21 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/14 10:41:37 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-#include <sys/stat.h>
+//#include <sys/stat.h>
 
 static void	stack_minimum_assert(t_fstack *const restrict afstack,\
 				const t_flags *const restrict aflags)

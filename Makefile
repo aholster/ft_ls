@@ -6,14 +6,15 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/10/14 10:32:43 by aholster      ########   odam.nl          #
+#    Updated: 2019/10/14 15:20:01 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 DATE := $(shell date)
 
 SORTDIR := ./stack_sorters/
-SORTSRC := process_err_queue
+SORTSRC := process_err_queue process_ndir_stack sort_finfo_stack\
+ sorter_method sorter_method_rev
 
 PARDIR := ./flag_parser/
 PARSRC := ft_flag_parser flg_cap_r flg_low_a flg_low_l flg_low_r flg_low_t\
@@ -21,7 +22,7 @@ PARSRC := ft_flag_parser flg_cap_r flg_low_a flg_low_l flg_low_r flg_low_t\
 
 FINFODIR := ./finfo_handlers/
 FINFOSRC := finfo_lstadd finfo_lstdel finfo_lstdelone finfo_lstiter\
- finfo_lstnew finfo_lstaddend
+ finfo_lstnew
 
 SOURCE := main sort_params run_stacks\
  fstack_del error_cleanup
@@ -32,7 +33,7 @@ FILEC := $(SOURCE:%=./ft_%.c) $(PARSRC:%=$(PARDIR)%.c) $(SORTSRC:%=$(SORTDIR)ft_
 OBJ := $(FILEC:%.c=%.o)
 
 HEAD := ft_ls.h $(PARDIR)/ft_flag_parser.h ./incl/ft_flag.h ./incl/finfo.h\
-	
+ ./incl/ft_stack_sorters.h
 
 NAME := ft_ls
 
