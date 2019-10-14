@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 13:03:36 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 15:20:39 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/14 17:57:08 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ static t_finfo	*reconstitute_lst(t_finfo *const front_seg,\
 	}
 }
 
-static void	finfo_merge_sort(t_finfo **const restrict alst,\
-			const t_decider method)
+static void		finfo_merge_sort(t_finfo **const restrict alst,\
+					const t_decider method)
 {
 	t_finfo	*midpoint;
 
@@ -73,8 +73,9 @@ static void	finfo_merge_sort(t_finfo **const restrict alst,\
 	*alst = reconstitute_lst(*alst, midpoint, method);
 }
 
-void	ft_sort_finfo_stack(t_finfo *restrict *const restrict afinfo_stack,\
-			const t_flags *const restrict aflags)
+void			ft_sort_finfo_stack(\
+					t_finfo *restrict *const restrict afinfo_stack,\
+					const t_flags *const restrict aflags)
 {
 	t_decider			method;
 

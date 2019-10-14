@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 10:40:04 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 14:04:01 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/14 18:06:57 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_process_ndir_stack(t_fstack *const restrict afstack,\
 	}
 	iterator = afstack->ndir_stack;//create output stack
 	res_lst = NULL;
-	new = NULL;
 	while (iterator != NULL)
 	{
 		new = ft_lstnew(iterator->s_name, ft_strlen(iterator->s_name) + 1);

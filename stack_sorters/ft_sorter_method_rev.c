@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 15:00:16 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 17:53:40 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/14 17:56:13 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static t_sortcode	rev_chrono_modif_sort(\
 	}
 }
 
-static t_sortcode	rev_chrono_access_sort(const t_finfo *const restrict pri_node,\
+static t_sortcode	rev_chrono_access_sort(\
+						const t_finfo *const restrict pri_node,\
 						const t_finfo *const restrict sec_node)
 {
 	const struct timespec *const pri_time = (&pri_node->inf.st_atimespec);

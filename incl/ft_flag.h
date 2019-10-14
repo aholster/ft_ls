@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 02:14:33 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 15:36:23 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/14 18:00:58 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef	enum	e_flags
 	flg_l = 1LU << 5,
 	flg_r = 1LU << 6,//done?
 	flg_t = 1LU << 7,//done
-	flg_u = 1LU << 8,
+	flg_u = 1LU << 8,//done(?) think about lexic backup decider
 }				t_flags;
 
 void		ft_flag_parser(int *const restrict aargc,\
