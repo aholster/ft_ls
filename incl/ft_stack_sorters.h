@@ -6,10 +6,9 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/13 13:59:38 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 15:11:16 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/16 16:07:32 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef FT_STACK_SORTERS_H
 # define FT_STACK_SORTERS_H
@@ -31,6 +30,5 @@ void		ft_sort_finfo_stack(\
 
 t_decider	ft_sorter_method(const t_flags *const restrict aflags);
 t_decider	ft_sorter_method_rev(const t_flags *const restrict aflags);
-
 
 #endif

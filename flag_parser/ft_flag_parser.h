@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:13:18 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 10:33:18 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/16 15:02:50 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 typedef void	(*t_flg_handler)(t_flags *const restrict);
 
+void	flg_cap_l(t_flags *const restrict aflags);
 void	flg_cap_r(t_flags *const restrict aflags);
 void	flg_low_a(t_flags *const restrict aflags);
 void	flg_low_d(t_flags *const restrict aflags);

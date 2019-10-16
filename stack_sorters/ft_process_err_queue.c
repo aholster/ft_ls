@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/13 13:58:01 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 10:27:42 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/16 16:05:12 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void			ft_process_err_queue(t_fstack *const restrict afstack,
 					const t_flags *const restrict aflags)
 {
 	t_list	*restrict	iterator;
+	int					ret;
+	struct stat			dummy;
 
 	if (((*aflags) & flg_f) == 0)
 	{
@@ -80,6 +82,14 @@ void			ft_process_err_queue(t_fstack *const restrict afstack,
 	iterator = afstack->err_queue;
 	while (iterator != NULL)
 	{
+		if (((*aflags) & flg_L) > 0)
+		{
+			ret = lstat(iterator->content, &dummy);
+		}
+		else
+		{
+			ret = stat(iterator->content, &dummy);
+		}
 		dprintf(2, "ft_ls : %s: ", iterator->content);
 		perror(NULL);
 		iterator = iterator->next;

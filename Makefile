@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/10/14 15:20:01 by aholster      ########   odam.nl          #
+#    Updated: 2019/10/16 15:02:33 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SORTSRC := process_err_queue process_ndir_stack sort_finfo_stack\
  sorter_method sorter_method_rev
 
 PARDIR := ./flag_parser/
-PARSRC := ft_flag_parser flg_cap_r flg_low_a flg_low_l flg_low_r flg_low_t\
+PARSRC := ft_flag_parser flg_cap_l flg_cap_r flg_low_a flg_low_l flg_low_r flg_low_t\
  flg_low_d flg_low_f flg_low_u flg_low_i
 
 FINFODIR := ./finfo_handlers/

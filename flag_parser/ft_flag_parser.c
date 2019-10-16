@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:11:26 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 10:34:09 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/16 15:03:48 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	flag_trans_tbl(const unsigned char flag_chr,\
 				t_flags *const restrict aflags)
 {
 	static const t_flg_handler	trans_tbl[128] = {
+		['L'] = &flg_cap_l,
 		['R'] = &flg_cap_r,
 		['a'] = &flg_low_a,
 		['d'] = &flg_low_d,

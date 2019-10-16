@@ -6,14 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/12 13:20:09 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 19:27:06 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/16 16:08:44 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "./incl/ft_stack_sorters.h"
-
-//#include <sys/stat.h>
 
 static void	list_print(t_finfo *elem)
 {
@@ -34,7 +32,6 @@ void		ft_run_stacks(t_fstack *const restrict afstack,\
 	if (afstack->ndir_stack != NULL)
 	{
 		ft_process_ndir_stack(afstack, aflags);
-		finfo_lstiter(afstack->ndir_stack, &list_print);
 	}
 	if (afstack->dir_stack != NULL)
 	{

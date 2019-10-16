@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 02:14:33 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 18:00:58 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/16 15:01:54 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 
 typedef	enum	e_flags
 {
-	flg_R = 1LU << 0,
-	flg_a = 1LU << 1,
-	flg_d = 1LU << 2,//done?
-	flg_f = 1LU << 3,//probably done
-	flg_i = 1LU << 4,
-	flg_l = 1LU << 5,
-	flg_r = 1LU << 6,//done?
-	flg_t = 1LU << 7,//done
-	flg_u = 1LU << 8,//done(?) think about lexic backup decider
+	flg_L = 1LU << 0,
+	flg_R = 1LU << 1,
+	flg_a = 1LU << 2,
+	flg_d = 1LU << 3,//done?
+	flg_f = 1LU << 4,//probably done
+	flg_i = 1LU << 5,
+	flg_l = 1LU << 6,
+	flg_r = 1LU << 7,//done?
+	flg_t = 1LU << 8,//done
+	flg_u = 1LU << 9,//done(?) think about lexic backup decider
 }				t_flags;
 
 void		ft_flag_parser(int *const restrict aargc,\
@@ -43,7 +44,7 @@ void		ft_flag_parser(int *const restrict aargc,\
 ** 	// G = 1LU << 5, Colourized output!
 ** 	// H = 1LU << 6, symbolic links on command line are followed?\
 **			(intresting, possibly easy) (assumes -F, -d, -l are all off)
-** 	// L = 1LU << 7, follow all symlinks to final target (cancels -P)
+** 	L = 1LU << 7, follow all symlinks to final target (cancels -P)
 ** 	// O = 1LU << 8, include file flags in (-l) ouput (what??)
 ** 	// P = 1LU << 9, if argu is symlink, list link rather than object (supresses -H and -L)
  	R = 1LU << 10, Recursive traversal of subdirs
