@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_process_err_queue.c                             :+:    :+:            */
+/*   ft_sortnprocess_err_queue.c                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/13 13:58:01 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/16 16:05:12 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/16 16:28:38 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void		merge_sort(t_list **const restrict alst)
 	*alst = reconstitute_lst(*alst, midpoint);
 }
 
-void			ft_process_err_queue(t_fstack *const restrict afstack,
+void			ft_sortnprocess_err_queue(t_fstack *const restrict afstack,
 					const t_flags *const restrict aflags)
 {
 	t_list	*restrict	iterator;
