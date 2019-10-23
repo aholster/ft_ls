@@ -6,14 +6,14 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/10/16 16:40:08 by aholster      ########   odam.nl          #
+#    Updated: 2019/10/23 19:24:49 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 DATE := $(shell date)
 
 PRODIR := ./stack_processors/
-PROSRC := process_ndir_stack process_dir_stack
+PROSRC := process_ndir_stack process_dir_stack process_file_to_txt
 
 SORTDIR := ./stack_sorters/
 SORTSRC := sortnprocess_err_queue sort_finfo_stack\
