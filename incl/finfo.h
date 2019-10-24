@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/12 15:12:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 17:56:21 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/24 19:09:39 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,8 @@ void				finfo_lstiter(t_finfo *restrict lst,\
 
 void				finfo_lstdel(t_finfo *restrict *const restrict alst);
 void				finfo_lstdelone(t_finfo *restrict *const restrict alst);
+
+t_finfo				*finfo_stack_pop(\
+						t_finfo *restrict *const restrict afinfo_stack);
 
 #endif

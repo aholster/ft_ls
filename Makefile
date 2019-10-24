@@ -6,14 +6,14 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/10/23 19:24:49 by aholster      ########   odam.nl          #
+#    Updated: 2019/10/24 19:10:15 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 DATE := $(shell date)
 
 PRODIR := ./stack_processors/
-PROSRC := process_ndir_stack process_dir_stack process_file_to_txt
+PROSRC := process_ndir_stack process_dir_stack process_files_to_txt
 
 SORTDIR := ./stack_sorters/
 SORTSRC := sortnprocess_err_queue sort_finfo_stack\
@@ -25,7 +25,7 @@ PARSRC := ft_flag_parser flg_cap_l flg_cap_r flg_low_a flg_low_l flg_low_r flg_l
 
 FINFODIR := ./finfo_handlers/
 FINFOSRC := finfo_lstadd finfo_lstdel finfo_lstdelone finfo_lstiter\
- finfo_lstnew
+ finfo_lstnew finfo_stack_pop
 
 SOURCE := main sort_params run_stacks\
  fstack_del error_cleanup
