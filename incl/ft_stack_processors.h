@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:27:27 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/24 19:00:29 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/24 19:39:44 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ int				ft_process_files_to_txt(\
 
 typedef	struct	s_longests{
 	int			fname;
+	int			inode;
+	int			groupname;
+	int			username;
 }				t_longests;
 
 #endif

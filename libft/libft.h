@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/12 18:16:38 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/12 09:41:30 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/24 20:03:56 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,11 @@ t_list				*ft_strarrtolst(char **strarr);
 int					ft_lstmemtomem(char **feed, size_t *totallen,\
 					t_list *lst);
 int					ft_lststrtostr(char **feed, t_list *lst);
+
+int					ft_lst_stack_push(t_list **const astack,\
+						void const *content,\
+						const size_t content_size);
+t_list				*ft_lst_stack_pop(t_list **const astack);
 
 # pragma mark str handling
 
