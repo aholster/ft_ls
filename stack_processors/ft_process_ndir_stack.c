@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 10:40:04 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/24 20:01:48 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/26 20:52:17 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ static char	*tlist_popnstrip(t_list **const restrict astack)
 	{
 		first_node = ft_lst_stack_pop(astack);
 		stxt = first_node->content;
-		ft_lstdelone(&first_node, &ft_del);
+		ft_bzero(first_node, sizeof(t_list));
+		free(first_node);
+		// ft_lstdelone(&first_node, &ft_del);
 		return (stxt);
 	}
 	else
@@ -49,7 +51,8 @@ void		ft_process_ndir_stack(t_fstack *const restrict afstack,\
 
 	txtstk = NULL;
 	mlen = 0;
-	if (ft_process_files_to_txt(&(afstack->ndir_stack), &txtstk, &mlen, aflags) == -1)
+	if (ft_process_files_to_txt(&(afstack->ndir_stack),
+		&txtstk, &mlen, aflags) == -1)
 	{
 		ft_lstdel(&txtstk, &ft_del);
 		ft_error_cleanup(afstack);
