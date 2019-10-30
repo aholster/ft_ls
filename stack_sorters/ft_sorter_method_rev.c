@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 15:00:16 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 17:56:13 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/31 00:10:34 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static t_sortcode	rev_chrono_modif_sort(\
 						const t_finfo *const restrict pri_node,\
 						const t_finfo *const restrict sec_node)
 {
-	const struct timespec *const pri_time = (&pri_node->inf.st_mtimespec);
-	const struct timespec *const sec_time = (&sec_node->inf.st_mtimespec);
+	const struct timespec *const pri_time = (&pri_node->stat.st_mtimespec);
+	const struct timespec *const sec_time = (&sec_node->stat.st_mtimespec);
 
 	if (pri_time->tv_sec == sec_time->tv_sec)
 	{
@@ -55,8 +55,8 @@ static t_sortcode	rev_chrono_access_sort(\
 						const t_finfo *const restrict pri_node,\
 						const t_finfo *const restrict sec_node)
 {
-	const struct timespec *const pri_time = (&pri_node->inf.st_atimespec);
-	const struct timespec *const sec_time = (&sec_node->inf.st_atimespec);
+	const struct timespec *const pri_time = (&pri_node->stat.st_atimespec);
+	const struct timespec *const sec_time = (&sec_node->stat.st_atimespec);
 
 	if (pri_time->tv_sec == sec_time->tv_sec)
 	{

@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/12 15:12:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/26 19:22:03 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/31 00:10:46 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 typedef struct		s_finfo
 {
 	char *restrict	s_name;
-	struct stat		inf;
+	struct stat		stat;
 	struct s_finfo	*next;
 }					t_finfo;
 

@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:27:27 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/26 19:45:29 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/30 22:41:34 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 # define FT_STACK_PROCESSORS_H
 
 # include "./../ft_ls.h"
+
+# define MAX_INODE_LEN 21
+
+typedef	struct	s_longests{
+	int			fname;
+	int			inode;
+	int			timelen;
+	int			sizelen;
+	int			groupname;
+	int			username;
+}				t_longests;
 
 void			ft_process_ndir_stack(t_fstack *const restrict afstack,\
 					const t_flags *const restrict aflags);
@@ -27,11 +38,8 @@ int				ft_process_files_to_txt(\
 					int *const restrict abiggest_len,\
 					const t_flags *const restrict aflags);
 
-typedef	struct	s_longests{
-	int			fname;
-	int			inode;
-	int			groupname;
-	int			username;
-}				t_longests;
+void			ft_find_longest_fields(t_finfo *restrict finfo_stack,\
+					t_longests *const restrict amin_fields,\
+					const t_flags *const restrict aflags);
 
 #endif

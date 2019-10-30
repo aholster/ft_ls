@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:11:26 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/16 15:03:48 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/30 21:41:30 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	flag_trans_tbl(const unsigned char flag_chr,\
 		['r'] = &flg_low_r,
 		['t'] = &flg_low_t,
 		['u'] = &flg_low_u,
+		['1'] = &flg_one,
 	};
 
 	if (trans_tbl[flag_chr] != NULL)

@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 09:43:25 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/30 21:09:14 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/31 00:10:34 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	add_to_stack(const char *const restrict name,\
 	}
 	else
 	{
-		if (((*aflags) & flg_d) > 0 || S_ISDIR(new_node->inf.st_mode) != 1)
+		if (((*aflags) & flg_d) > 0 || S_ISDIR(new_node->stat.st_mode) != 1)
 		{
 			finfo_lstadd(&(afstack->ndir_stack), new_node);
 		}

@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/21 19:28:30 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/13 13:30:36 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/31 00:10:34 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_finfo	*finfo_lstnew(const char *const restrict s_name,
 			return (NULL);
 		}
 	}
-	ft_memcpy(&(head->inf), astat_info, sizeof(struct stat));
+	ft_memcpy(&(head->stat), astat_info, sizeof(struct stat));
 	head->next = NULL;
 	return (head);
 }

@@ -6,14 +6,15 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/10/30 20:55:15 by aholster      ########   odam.nl          #
+#    Updated: 2019/10/30 22:01:04 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 DATE := $(shell date)
 
 PRODIR := ./stack_processors/
-PROSRC := process_ndir_stack process_dir_stack process_files_to_txt
+PROSRC := process_ndir_stack process_dir_stack process_files_to_txt\
+ find_longest_fields
 
 SORTDIR := ./stack_sorters/
 SORTSRC := sortnprocess_err_queue sort_finfo_stack\
@@ -21,7 +22,7 @@ SORTSRC := sortnprocess_err_queue sort_finfo_stack\
 
 PARDIR := ./flag_parser/
 PARSRC := ft_flag_parser flg_cap_l flg_cap_r flg_low_a flg_low_l flg_low_r flg_low_t\
- flg_low_d flg_low_f flg_low_u flg_low_i
+ flg_low_d flg_low_f flg_low_u flg_low_i flg_one
 
 FINFODIR := ./finfo_handlers/
 FINFOSRC := finfo_lstadd finfo_lstdel finfo_lstdelone finfo_lstiter\

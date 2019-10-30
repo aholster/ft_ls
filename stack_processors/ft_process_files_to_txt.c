@@ -6,52 +6,71 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/18 19:31:37 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/30 21:25:55 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/31 00:10:34 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../incl/ft_stack_processors.h"
+#include <limits.h>
+#include <time.h>
 
-static int	inode_len(uint64_t inode)
+static int	ft_long_format_file(const t_finfo *const restrict cur_file,\
+				t_list **const restrict aout_stack,\
+				const t_longests *const restrict amin_fields)
 {
-	int	len;
+	char	holder[PATH_MAX + MAX_INODE_LEN + 1001];
+	int		status;
 
-	len = 0;
-	if (inode == 0)
+	ft_putstr(ctime(&(cur_file->stat.st_mtimespec.tv_sec)));
+	status = snprintf(holder, sizeof(holder), "%s", cur_file->s_name);
+	if (status == -1)
 	{
-		return (1);
+		return (-1);
 	}
-	while (inode != 0)
+	else if (ft_lst_stack_push(aout_stack, holder, status + 1) == -1)
 	{
-		len++;
-		inode /= 10;
+		return (-1);
 	}
-	return (len);
+	(void)amin_fields;
+	return (0);
 }
 
-static void	find_largest_fields(t_finfo *restrict lst_iterator,\
-				t_longests *const restrict amin_fields,\
-				const t_flags *const restrict aflags)
+static int	ft_inode_file(const t_finfo *const restrict cur_file,\
+				t_list **const restrict aout_stack,\
+				const t_longests *const restrict amin_fields)
 {
-	int						namelen;
-	uint64_t				inode;
+	char	holder[PATH_MAX + MAX_INODE_LEN + 1];
+	int		status;
 
-	inode = 0;
-	while (lst_iterator != NULL)
+	status = snprintf(holder, sizeof(holder), "%*llu %s",\
+		amin_fields->inode, cur_file->stat.st_ino, cur_file->s_name);
+	if (status == -1)
 	{
-		namelen = (int)ft_strlen(lst_iterator->s_name);
-		if (namelen + 1 > amin_fields->fname)
-		{
-			amin_fields->fname = namelen + 1;
-		}
-		if (lst_iterator->inf.st_ino > inode)
-		{
-			inode = lst_iterator->inf.st_ino;
-		}
-		lst_iterator = lst_iterator->next;
+		return (-1);
 	}
-	(void)aflags;
-	amin_fields->inode = inode_len(inode);
+	else if (ft_lst_stack_push(aout_stack, holder, status + 1) == -1)
+	{
+		return (-1);
+	}
+	return (0);
+}
+
+static int	ft_basic_file(const t_finfo *const restrict cur_file,\
+				t_list **const restrict aout_stack)
+{
+	char	holder[PATH_MAX + 1];
+	int		status;
+
+	status = snprintf(holder, sizeof(holder), "%s", cur_file->s_name);
+	if (status == -1)
+	{
+		return (-1);
+	}
+	else if (ft_lst_stack_push(aout_stack, holder, status + 1) == -1)
+	{
+		return (-1);
+	}
+	return (0);
 }
 
 int			ft_process_files_to_txt(\
@@ -61,33 +80,31 @@ int			ft_process_files_to_txt(\
 				const t_flags *const restrict aflags)
 {
 	t_finfo *restrict		cur_file;
-	char					holder[1028];
-	int						rec_len;
+	int						ret_status;
 	t_longests				min_fields;
 
-	ft_bzero(&min_fields, sizeof(t_longests));
-	find_largest_fields(*afinfo_stack, &min_fields, aflags);
+	ft_find_longest_fields(*afinfo_stack, &min_fields, aflags);
 	*abiggest_len = min_fields.fname;//change this to be full entry len
 	cur_file = finfo_stack_pop(afinfo_stack);
 	while (cur_file != NULL)
 	{
-		if (((*aflags) & flg_i) > 0)
+		if (((*aflags) & flg_l) > 0)
 		{
-			rec_len = snprintf(holder, sizeof(holder),"%*llu %s", min_fields.inode, cur_file->inf.st_ino, cur_file->s_name);
+			ret_status = ft_long_format_file(cur_file, aout_stack, &min_fields);
+		}
+		else if (((*aflags) & flg_i) > 0)
+		{
+			ret_status = ft_inode_file(cur_file, aout_stack, &min_fields);
 		}
 		else
 		{
-			rec_len = snprintf(holder, sizeof(holder),"%s", cur_file->s_name);
-		}
-		if (rec_len == -1)
-		{
-			return (-1);
-		}
-		if (ft_lst_stack_push(aout_stack, holder, rec_len + 1) == -1)
-		{
-			return (-1);
+			ret_status = ft_basic_file(cur_file, aout_stack);
 		}
 		finfo_lstdelone(&cur_file);
+		if (ret_status == -1)
+		{
+			return (-1);
+		}
 		cur_file = finfo_stack_pop(afinfo_stack);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:13:18 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/16 15:02:50 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/30 21:41:01 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	flg_low_l(t_flags *const restrict aflags);
 void	flg_low_r(t_flags *const restrict aflags);
 void	flg_low_t(t_flags *const restrict aflags);
 void	flg_low_u(t_flags *const restrict aflags);
+void	flg_one(t_flags *const restrict aflags);
 
 #endif

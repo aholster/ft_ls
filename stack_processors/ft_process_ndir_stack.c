@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 10:40:04 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/30 21:28:16 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/30 22:09:50 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		ft_process_ndir_stack(t_fstack *const restrict afstack,\
 
 	out_stack = NULL;
 	longest_rec_len = 0;
-	if (ft_process_files_to_txt(&(afstack->ndir_stack),
+	if (ft_process_files_to_txt(&(afstack->ndir_stack),\
 		&out_stack, &longest_rec_len, aflags) == -1)
 	{
 		ft_lstdel(&out_stack, &ft_del);
