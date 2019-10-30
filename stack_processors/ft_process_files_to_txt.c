@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/18 19:31:37 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/26 21:22:52 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/30 21:25:55 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,13 @@ int			ft_process_files_to_txt(\
 	while (cur_file != NULL)
 	{
 		if (((*aflags) & flg_i) > 0)
+		{
 			rec_len = snprintf(holder, sizeof(holder),"%*llu %s", min_fields.inode, cur_file->inf.st_ino, cur_file->s_name);
+		}
 		else
+		{
 			rec_len = snprintf(holder, sizeof(holder),"%s", cur_file->s_name);
+		}
 		if (rec_len == -1)
 		{
 			return (-1);

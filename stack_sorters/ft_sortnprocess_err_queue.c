@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/13 13:58:01 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/16 16:28:38 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/30 21:09:22 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ void			ft_sortnprocess_err_queue(t_fstack *const restrict afstack,
 	{
 		if (((*aflags) & flg_L) > 0)
 		{
-			ret = lstat(iterator->content, &dummy);
+			ret = stat(iterator->content, &dummy);
 		}
 		else
 		{
-			ret = stat(iterator->content, &dummy);
+			ret = lstat(iterator->content, &dummy);
 		}
 		dprintf(2, "ft_ls : %s: ", iterator->content);
 		perror(NULL);

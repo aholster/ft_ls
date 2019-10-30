@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/10/24 19:10:15 by aholster      ########   odam.nl          #
+#    Updated: 2019/10/30 20:55:15 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ AR = ar rcs
 
 all: $(NAME)
 
-assemble: $(OBJ)
+assemble: $(OBJ) $(HEAD)
 	@$(CC) -o $(NAME) $(FILEC) -L ./ft_printf/ -lftprintf -L ./libft/ -lft
 
 $(NAME):
