@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:27:27 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/02 10:19:46 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/02 15:18:46 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define MAX_INODE_LEN 21
 
 # define TIMELEN 13
+
+# define MAX_TIMELEN 21
 
 # define EPOCH_SIXMONTH 15778476
 
@@ -49,6 +51,11 @@ void			ft_find_longest_fields(t_finfo *restrict finfo_stack,\
 int				ft_long_format_file(const t_finfo *const restrict cur_file,\
 					t_list **const restrict aout_stack,\
 					const t_longests *const restrict amin_fields,\
+					const t_flags *const restrict aflags);
+
+int				ft_generate_time(char *const restrict abufp,\
+					size_t *const restrict aoffset,\
+					const struct stat *const restrict astat,\
 					const t_flags *const restrict aflags);
 
 #endif

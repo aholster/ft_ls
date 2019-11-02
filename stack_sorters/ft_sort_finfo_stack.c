@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 13:03:36 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 17:57:08 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/02 12:38:21 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static void		find_midpoint(t_finfo *lst,\
 
 static t_finfo	*reconstitute_lst(t_finfo *const front_seg,\
 					t_finfo *const back_seg,\
-					const t_decider method)
+					const t_decider method,\
+					const t_flags *const restrict aflags)
 {
 	if (front_seg == NULL)
 	{
@@ -45,32 +46,33 @@ static t_finfo	*reconstitute_lst(t_finfo *const front_seg,\
 	}
 	else
 	{
-		if (method(front_seg, back_seg) == cor_order)
+		if (method(front_seg, back_seg, aflags) == cor_order)
 		{
 			front_seg->next = reconstitute_lst(front_seg->next, back_seg,\
-												method);
+												method, aflags);
 			return (front_seg);
 		}
 		else
 		{
 			back_seg->next = reconstitute_lst(front_seg, back_seg->next,\
-												method);
+												method, aflags);
 			return (back_seg);
 		}
 	}
 }
 
 static void		finfo_merge_sort(t_finfo **const restrict alst,\
-					const t_decider method)
+					const t_decider method,\
+					const t_flags *const restrict aflags)
 {
 	t_finfo	*midpoint;
 
 	if (*alst == NULL || (*alst)->next == NULL)
 		return ;
 	find_midpoint(*alst, &midpoint);
-	finfo_merge_sort(alst, method);
-	finfo_merge_sort(&midpoint, method);
-	*alst = reconstitute_lst(*alst, midpoint, method);
+	finfo_merge_sort(alst, method, aflags);
+	finfo_merge_sort(&midpoint, method, aflags);
+	*alst = reconstitute_lst(*alst, midpoint, method, aflags);
 }
 
 void			ft_sort_finfo_stack(\
@@ -87,5 +89,5 @@ void			ft_sort_finfo_stack(\
 	{
 		method = ft_sorter_method_rev(aflags);
 	}
-	finfo_merge_sort((t_finfo **const restrict)afinfo_stack, method);
+	finfo_merge_sort((t_finfo **const restrict)afinfo_stack, method, aflags);
 }

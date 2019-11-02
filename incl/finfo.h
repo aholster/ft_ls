@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/12 15:12:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/31 00:10:46 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/02 12:39:20 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <sys/stat.h>
+# include "./ft_flag.h"
 
 typedef struct		s_finfo
 {
@@ -30,7 +31,8 @@ typedef enum		e_sortcode
 }					t_sortcode;
 
 typedef t_sortcode	(*t_decider)(const t_finfo *const restrict,\
-						const t_finfo *const restrict);
+						const t_finfo *const restrict,\
+						const t_flags *const restrict aflags);
 
 t_finfo				*finfo_lstnew(const char *const restrict s_name,\
 						const struct stat *const restrict astat_info);
