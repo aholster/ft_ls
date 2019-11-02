@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 15:00:16 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/31 00:10:34 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/02 08:05:40 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_sortcode	rev_chrono_modif_sort(\
 	}
 	else
 	{
-		if (pri_time->tv_sec <= sec_time->tv_sec)
+		if (pri_time->tv_sec < sec_time->tv_sec)
 			return (bad_order);
 		else
 			return (cor_order);
@@ -67,7 +67,7 @@ static t_sortcode	rev_chrono_access_sort(\
 	}
 	else
 	{
-		if (pri_time->tv_sec <= sec_time->tv_sec)
+		if (pri_time->tv_sec < sec_time->tv_sec)
 			return (bad_order);
 		else
 			return (cor_order);

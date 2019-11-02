@@ -6,13 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:11:26 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/30 21:41:30 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/02 12:00:43 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../ft_ls.h"
 #include "./../libft/libft.h"
-#include "ft_flag_parser.h"
 
 static void	bad_flag(const unsigned char flag_chr)
 {
@@ -23,24 +22,29 @@ static void	bad_flag(const unsigned char flag_chr)
 static void	flag_trans_tbl(const unsigned char flag_chr,\
 				t_flags *const restrict aflags)
 {
-	static const t_flg_handler	trans_tbl[128] = {
-		['L'] = &flg_cap_l,
-		['R'] = &flg_cap_r,
-		['a'] = &flg_low_a,
-		['d'] = &flg_low_d,
-		['f'] = &flg_low_f,
-		['i'] = &flg_low_i,
-		['l'] = &flg_low_l,
-		['r'] = &flg_low_r,
-		['t'] = &flg_low_t,
-		['u'] = &flg_low_u,
-		['1'] = &flg_one,
+	static const t_flg_tbl	trans_tabl[128] = {
+		['L'] = {flg_L, 0},
+		['R'] = {flg_R, 0},
+		['a'] = {flg_a, 0},
+		['d'] = {flg_d, 0},
+		['f'] = {flg_f, 0},
+		['i'] = {flg_i, 0},
+		['l'] = {flg_l, 0},
+		['r'] = {flg_r, 0},
+		['t'] = {flg_t, 0},
+		['u'] = {flg_u, 0},
+		['1'] = {flg_1, 0},
 	};
 
-	if (trans_tbl[flag_chr] != NULL)
-		trans_tbl[flag_chr](aflags);
+	if (trans_tabl[flag_chr].enable != 0)
+	{
+		(*aflags) |= trans_tabl[flag_chr].enable;
+		(*aflags) &= ~(trans_tabl[flag_chr].disable);
+	}
 	else
+	{
 		bad_flag(flag_chr);
+	}
 }
 
 void		ft_flag_parser(int *const restrict aargc,\

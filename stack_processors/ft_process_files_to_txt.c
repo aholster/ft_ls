@@ -6,34 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/18 19:31:37 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/31 00:10:34 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/02 08:03:06 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../incl/ft_stack_processors.h"
 #include <limits.h>
-#include <time.h>
-
-static int	ft_long_format_file(const t_finfo *const restrict cur_file,\
-				t_list **const restrict aout_stack,\
-				const t_longests *const restrict amin_fields)
-{
-	char	holder[PATH_MAX + MAX_INODE_LEN + 1001];
-	int		status;
-
-	ft_putstr(ctime(&(cur_file->stat.st_mtimespec.tv_sec)));
-	status = snprintf(holder, sizeof(holder), "%s", cur_file->s_name);
-	if (status == -1)
-	{
-		return (-1);
-	}
-	else if (ft_lst_stack_push(aout_stack, holder, status + 1) == -1)
-	{
-		return (-1);
-	}
-	(void)amin_fields;
-	return (0);
-}
 
 static int	ft_inode_file(const t_finfo *const restrict cur_file,\
 				t_list **const restrict aout_stack,\
@@ -76,7 +54,7 @@ static int	ft_basic_file(const t_finfo *const restrict cur_file,\
 int			ft_process_files_to_txt(\
 				t_finfo *restrict *const restrict afinfo_stack,\
 				t_list **const restrict aout_stack,\
-				int *const restrict abiggest_len,\
+				int *const restrict amax_reclen,\
 				const t_flags *const restrict aflags)
 {
 	t_finfo *restrict		cur_file;
@@ -84,13 +62,13 @@ int			ft_process_files_to_txt(\
 	t_longests				min_fields;
 
 	ft_find_longest_fields(*afinfo_stack, &min_fields, aflags);
-	*abiggest_len = min_fields.fname;//change this to be full entry len
+	*amax_reclen = min_fields.fname;//change this to be full entry len
 	cur_file = finfo_stack_pop(afinfo_stack);
 	while (cur_file != NULL)
 	{
 		if (((*aflags) & flg_l) > 0)
 		{
-			ret_status = ft_long_format_file(cur_file, aout_stack, &min_fields);
+			ret_status = ft_long_format_file(cur_file, aout_stack, &min_fields, aflags);
 		}
 		else if (((*aflags) & flg_i) > 0)
 		{

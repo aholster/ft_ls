@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/10/30 22:01:04 by aholster      ########   odam.nl          #
+#    Updated: 2019/11/02 11:59:57 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,14 @@ DATE := $(shell date)
 
 PRODIR := ./stack_processors/
 PROSRC := process_ndir_stack process_dir_stack process_files_to_txt\
- find_longest_fields
+ find_longest_fields longformat_file
 
 SORTDIR := ./stack_sorters/
 SORTSRC := sortnprocess_err_queue sort_finfo_stack\
  sorter_method sorter_method_rev
 
 PARDIR := ./flag_parser/
-PARSRC := ft_flag_parser flg_cap_l flg_cap_r flg_low_a flg_low_l flg_low_r flg_low_t\
- flg_low_d flg_low_f flg_low_u flg_low_i flg_one
+PARSRC := ft_flag_parser
 
 FINFODIR := ./finfo_handlers/
 FINFOSRC := finfo_lstadd finfo_lstdel finfo_lstdelone finfo_lstiter\
@@ -36,7 +35,7 @@ FILEC := $(SOURCE:%=./ft_%.c) $(PARSRC:%=$(PARDIR)%.c) $(SORTSRC:%=$(SORTDIR)ft_
 
 OBJ := $(FILEC:%.c=%.o)
 
-HEAD := ft_ls.h $(PARDIR)/ft_flag_parser.h ./incl/ft_flag.h ./incl/finfo.h\
+HEAD := ft_ls.h ./incl/ft_flag.h ./incl/finfo.h\
  ./incl/ft_stack_sorters.h ./incl/ft_stack_processors.h
 
 NAME := ft_ls
@@ -52,7 +51,7 @@ all: $(NAME)
 assemble: $(OBJ) $(HEAD)
 	@$(CC) -o $(NAME) $(FILEC) -L ./ft_printf/ -lftprintf -L ./libft/ -lft
 
-$(NAME):
+$(NAME): $(OBJ) $(HEAD)
 	@make -C ./ft_printf -j
 	@make -C ./libft -j
 	@echo "\033[0;33mStarting assembly of $(NAME)…\033[0;00m"
