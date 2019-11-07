@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/18 19:31:37 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/02 08:03:06 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/07 13:29:26 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_inode_file(const t_finfo *const restrict cur_file,\
 	int		status;
 
 	status = snprintf(holder, sizeof(holder), "%*llu %s",\
-		amin_fields->inode, cur_file->stat.st_ino, cur_file->s_name);
+		amin_fields->inode_len, cur_file->stat.st_ino, cur_file->s_name);
 	if (status == -1)
 	{
 		return (-1);
@@ -61,29 +61,21 @@ int			ft_process_files_to_txt(\
 	int						ret_status;
 	t_longests				min_fields;
 
-	ft_find_longest_fields(*afinfo_stack, &min_fields, aflags);
-	*amax_reclen = min_fields.fname;//change this to be full entry len
-	cur_file = finfo_stack_pop(afinfo_stack);
-	while (cur_file != NULL)
+	ft_find_longest_fields(*afinfo_stack, &min_fields, amax_reclen, aflags);
+	while (*afinfo_stack != NULL)
 	{
+		cur_file = finfo_stack_pop(afinfo_stack);
 		if (((*aflags) & flg_l) > 0)
-		{
 			ret_status = ft_long_format_file(cur_file, aout_stack, &min_fields, aflags);
-		}
 		else if (((*aflags) & flg_i) > 0)
-		{
 			ret_status = ft_inode_file(cur_file, aout_stack, &min_fields);
-		}
 		else
-		{
 			ret_status = ft_basic_file(cur_file, aout_stack);
-		}
 		finfo_lstdelone(&cur_file);
 		if (ret_status == -1)
 		{
 			return (-1);
 		}
-		cur_file = finfo_stack_pop(afinfo_stack);
 	}
 	return (1);
 }

@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_itoa.c                                          :+:    :+:            */
+/*   ft_ll_len.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/01/13 16:43:03 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/07 15:28:33 by aholster      ########   odam.nl         */
+/*   Created: 2019/11/07 15:27:12 by aholster       #+#    #+#                */
+/*   Updated: 2019/11/07 15:27:50 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	*ft_itoa(int n)
+unsigned int	ft_ll_len(long long n, const unsigned int base)
 {
-	char			*str;
-	unsigned int	index;
+	unsigned int length;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	index = ft_ll_len((long long)n, 10);
-	str = ft_strnew(index);
-	if (str == NULL)
-		return (NULL);
+	length = 0;
+	if (n == 0)
+		return (1);
 	if (n < 0)
+		length++;
+	while (n != 0)
 	{
-		str[0] = '-';
-		n = -(n);
+		n = n / base;
+		length++;
 	}
-	while (index > 1 || (index > 0 && str[0] != '-'))
-	{
-		index--;
-		str[index] = ((n % 10) + '0');
-		n = n / 10;
-	}
-	return (str);
+	return (length);
 }

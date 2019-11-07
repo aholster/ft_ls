@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/12 18:18:57 by aholster       #+#    #+#                */
-/*   Updated: 2019/05/08 18:44:47 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/07 15:28:33 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_putnbr(int n)
 		write(1, "-2147483648", 11);
 	else
 	{
-		curlen = ft_nbrlen(n, 10) - 1;
+		curlen = ft_ll_len(n, 10) - 1;
 		if (n < 0)
 		{
 			buf[0] = '-';

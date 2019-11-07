@@ -6,15 +6,20 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/11/05 07:04:19 by aholster      ########   odam.nl          #
+#    Updated: 2019/11/07 12:36:46 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 DATE := $(shell date)
 
+LONDIR := ./long_format/
+LONSRC := longformat_file generate_time\
+ generate_permissions init_permissions_table\
+ generate_gid_uid
+
 PRODIR := ./stack_processors/
 PROSRC := process_ndir_stack process_dir_stack process_files_to_txt\
- find_longest_fields longformat_file generate_time generate_permissions
+ find_longest_fields
 
 SORTDIR := ./stack_sorters/
 SORTSRC := sortnprocess_err_queue sort_finfo_stack\
@@ -30,13 +35,15 @@ FINFOSRC := finfo_lstadd finfo_lstdel finfo_lstdelone finfo_lstiter\
 SOURCE := main sort_params run_stacks\
  fstack_del error_cleanup
 
-FILEC := $(SOURCE:%=./ft_%.c) $(PARSRC:%=$(PARDIR)%.c) $(SORTSRC:%=$(SORTDIR)ft_%.c)\
- $(FINFOSRC:%=$(FINFODIR)%.c) $(PROSRC:%=$(PRODIR)ft_%.c)
+FILEC := $(SOURCE:%=./ft_%.c) $(PARSRC:%=$(PARDIR)%.c)\
+ $(SORTSRC:%=$(SORTDIR)ft_%.c) $(FINFOSRC:%=$(FINFODIR)%.c)\
+ $(PROSRC:%=$(PRODIR)ft_%.c) $(LONSRC:%=$(LONDIR)ft_%.c)
 
 OBJ := $(FILEC:%.c=%.o)
 
 HEAD := ft_ls.h ./incl/ft_flag.h ./incl/finfo.h\
- ./incl/ft_stack_sorters.h ./incl/ft_stack_processors.h
+ ./incl/ft_stack_sorters.h ./incl/ft_stack_processors.h\
+ ./incl/ft_long_format.h
 
 NAME := ft_ls
 

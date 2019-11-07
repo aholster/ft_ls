@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/07 07:56:11 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/07 16:07:44 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "./incl/ft_flag.h"
 
 # include <stdio.h>
-
 // # include "./ft_printf/ft_printf.h"
 
 // # include <dirent.h>

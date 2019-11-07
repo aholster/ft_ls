@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/30 18:25:03 by aholster       #+#    #+#                */
-/*   Updated: 2019/01/30 19:59:42 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/07 15:28:33 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char		*ft_itoba(int n, unsigned int base)
 	}
 	if (base == 1)
 		return (ft_base1(n));
-	index = ft_nbrlen(num, base);
+	index = ft_ll_len(num, base);
 	str = ft_strnew(index);
 	if (str == NULL)
 		return (NULL);
