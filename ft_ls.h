@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/02 14:26:48 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/07 07:56:11 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,9 @@
 
 # include <stdio.h>
 
-# include "./ft_printf/ft_printf.h"//subheader?
+// # include "./ft_printf/ft_printf.h"
 
-# include <dirent.h> //move to subheader
-
-// # include <pwd.h> //subheader
-// # include <uuid/uuid.h>//subheader
-
-// # include <grp.h>//subheader
-
-// # include <sys/xattr.h>//subheader?
+// # include <dirent.h>
 
 # include "./libft/libft.h"
 # include "./incl/finfo.h"

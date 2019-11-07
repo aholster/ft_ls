@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/02 13:44:21 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/02 15:18:51 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/02 17:35:59 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	small_time(char *const restrict abuf,\
 		{
 			return (-1);
 		}
-		*aoffset = TIMELEN;
+		*aoffset += TIMELEN;
 		return (TIMELEN);
 	}
 }
@@ -95,7 +95,7 @@ int			ft_generate_time(char *const restrict abuf,\
 			{
 				return (-1);
 			}
-			*aoffset = MAX_TIMELEN;
+			*aoffset += MAX_TIMELEN;
 		}
 		else
 		{

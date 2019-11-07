@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:27:27 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/02 15:18:46 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/07 06:31:47 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FT_STACK_PROCESSORS_H
 
 # include "./../ft_ls.h"
+
+# define PERMLST_LEN 12
 
 # define MAX_INODE_LEN 21
 
@@ -57,5 +59,9 @@ int				ft_generate_time(char *const restrict abufp,\
 					size_t *const restrict aoffset,\
 					const struct stat *const restrict astat,\
 					const t_flags *const restrict aflags);
+
+int				ft_generate_permissions(char *const restrict aholder,\
+					size_t *const restrict aoffset,\
+					const t_finfo *const restrict cur_file);
 
 #endif

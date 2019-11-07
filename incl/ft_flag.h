@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 02:14:33 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/02 15:01:28 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/07 07:53:43 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ typedef	struct	s_flg_tbl
 	t_flags		disable;
 }				t_flg_tbl;
 
-void		ft_flag_parser(int *const restrict aargc,\
-				char **restrict *const restrict aargv,\
-				t_flags *const restrict aflags);
+void			ft_flag_parser(int *const restrict aargc,\
+					char **restrict *const restrict aargv,\
+					t_flags *const restrict aflags);
 
 #endif
 
