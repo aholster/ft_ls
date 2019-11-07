@@ -6,13 +6,15 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 05:36:07 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/07 07:54:12 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/07 08:24:41 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../incl/ft_stack_processors.h"
 
 #include <sys/xattr.h>
+
+#include <sys/acl.h>
 
 static char	identify_filetype(const mode_t file_type)
 {
@@ -82,6 +84,7 @@ static int	find_xattr(char *const restrict abuf,\
 				const char *const restrict file_name)
 {
 	ssize_t	status;
+	acl_t	acl;
 
 	status = listxattr(file_name, NULL, 0, XATTR_NOFOLLOW);
 	if (status == -1)
@@ -90,6 +93,13 @@ static int	find_xattr(char *const restrict abuf,\
 	}
 	else if (status == 0)
 	{
+		acl = acl_get_file(file_name, ACL_TYPE_EXTENDED);
+		if (acl != NULL)
+		{
+			*abuf = '+';
+			acl_free(acl);
+			return (0);
+		}
 		*abuf = ' ';
 	}
 	else
