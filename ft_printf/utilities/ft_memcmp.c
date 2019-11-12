@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/17 18:57:47 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/04 19:09:10 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../incl/ft_utilities.h"
+#include "../incl/ft_utilities.h"
 
 static int	smallcheck(void const *s1, void const *s2, size_t n)
 {

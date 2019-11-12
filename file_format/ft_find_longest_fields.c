@@ -6,13 +6,42 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 21:50:00 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/07 15:52:38 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/12 05:28:06 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../incl/ft_stack_processors.h"
+#include <pwd.h>
+#include <grp.h>
+#include <uuid/uuid.h>
 
-void		find_long_format_fields(t_finfo *restrict lst_iterator,\
+#include "../incl/ft_file_format.h"
+#include "../libft/libft.h"
+
+static void	gid_uid_len(const t_finfo *const restrict afinfo,\
+				t_longests *const restrict amin_fields)
+{
+	int				uidlen;
+	int				gidlen;
+	struct group	*gname;
+	struct passwd	*uname;
+
+	uname = getpwuid(afinfo->stat.st_uid);
+	if (uname != NULL)
+		uidlen = (int)ft_strlen(uname->pw_name);
+	else
+		uidlen = (int)ft_ull_len(afinfo->stat.st_uid, 10);
+	if (uidlen > amin_fields->uname_len)
+		amin_fields->uname_len = uidlen;
+	gname = getgrgid(afinfo->stat.st_gid);
+	if (gname != NULL)
+		gidlen = (int)ft_strlen(gname->gr_name);
+	else
+		gidlen = (int)ft_ull_len(afinfo->stat.st_uid, 10);
+	if (gidlen > amin_fields->gname_len)
+		amin_fields->gname_len = gidlen;
+}
+
+static void	find_long_format_fields(const t_finfo *restrict lst_iterator,\
 				t_longests *const restrict amin_fields)
 {
 	int						namelen;
@@ -36,13 +65,14 @@ void		find_long_format_fields(t_finfo *restrict lst_iterator,\
 		{
 			hlinks = lst_iterator->stat.st_nlink;
 		}
+		gid_uid_len(lst_iterator, amin_fields);
 		lst_iterator = lst_iterator->next;
 	}
-	amin_fields->hlink_len = ft_ull_len((ino_t)hlinks, 10);
+	amin_fields->hlink_len = ft_ull_len(hlinks, 10);
 	amin_fields->inode_len = ft_ull_len(inode, 10);
 }
 
-void		find_inode_fields(t_finfo *restrict lst_iterator,\
+static void	find_inode_fields(const t_finfo *restrict lst_iterator,\
 				t_longests *const restrict amin_fields)
 {
 	int						namelen;
@@ -65,7 +95,7 @@ void		find_inode_fields(t_finfo *restrict lst_iterator,\
 	amin_fields->inode_len = ft_ull_len(inode, 10);
 }
 
-void		find_basic_fields(t_finfo *restrict lst_iterator,\
+static void	find_basic_fields(const t_finfo *restrict lst_iterator,\
 				t_longests *const restrict amin_fields)
 {
 	int						namelen;
@@ -81,9 +111,9 @@ void		find_basic_fields(t_finfo *restrict lst_iterator,\
 	}
 }
 
-void		ft_find_longest_fields(t_finfo *restrict finfo_stack,\
+void		ft_find_longest_fields(const t_finfo *restrict finfo_stack,\
 				t_longests *const restrict amin_fields,\
-				int *const restrict amax_reclen,\
+				int *const restrict amax_len,\
 				const t_flags *const restrict aflags)
 {
 	ft_bzero(amin_fields, sizeof(t_longests));
@@ -94,11 +124,11 @@ void		ft_find_longest_fields(t_finfo *restrict finfo_stack,\
 	else if (((*aflags) & flg_i) > 0)
 	{
 		find_inode_fields(finfo_stack, amin_fields);
-		*amax_reclen = amin_fields->fname_len + amin_fields->inode_len;
+		*amax_len = amin_fields->fname_len + amin_fields->inode_len;
 	}
 	else
 	{
 		find_basic_fields(finfo_stack, amin_fields);
-		*amax_reclen = amin_fields->fname_len;
+		*amax_len = amin_fields->fname_len;
 	}
 }

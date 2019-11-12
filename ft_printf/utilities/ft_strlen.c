@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/14 13:39:30 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/08 21:41:36 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../incl/ft_utilities.h"
+#include "../incl/ft_utilities.h"
 
 static char const	*ft_unrolledlen(const uint64_t himagic,\
 						const uint64_t lomagic,\

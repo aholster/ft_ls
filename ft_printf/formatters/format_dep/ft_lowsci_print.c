@@ -6,11 +6,11 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/23 14:15:42 by jesmith        #+#    #+#                */
-/*   Updated: 2019/10/04 17:40:15 by jesmith       ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../incl/ft_formatters.h"
+#include "../../incl/ft_formatters.h"
 
 static size_t		ft_expon_prefix(char *buffer, short expon)
 {

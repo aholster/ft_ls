@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/17 15:05:30 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/04 19:09:20 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../incl/ft_utilities.h"
+#include "../incl/ft_utilities.h"
 
 static void	ft_bigset(void *restrict b,\
 				const unsigned char c,\

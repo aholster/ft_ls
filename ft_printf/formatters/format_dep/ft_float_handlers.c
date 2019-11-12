@@ -6,11 +6,11 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/17 12:34:56 by jesmith        #+#    #+#                */
-/*   Updated: 2019/10/03 19:47:41 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../incl/ft_formatters.h"
+#include "../../incl/ft_formatters.h"
 
 size_t				ft_x_offset(char *restrict *const restrict buffer,\
 						size_t *const restrict nb_len,\

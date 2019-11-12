@@ -6,14 +6,14 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/18 18:17:05 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/12 13:39:34 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_INTERNALS_H
 # define FT_INTERNALS_H
 
-# include "./../incl/ft_utilities.h"
+# include "../incl/ft_utilities.h"
 # include "./ft_writer.h"
 
 # include <sys/types.h>

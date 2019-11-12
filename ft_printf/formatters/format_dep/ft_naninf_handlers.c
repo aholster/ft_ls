@@ -6,11 +6,11 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/30 11:23:32 by jesmith        #+#    #+#                */
-/*   Updated: 2019/10/03 19:47:41 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../../incl/ft_formatters.h"
+#include "../../incl/ft_formatters.h"
 
 void	ft_captolow(char *const restrict buffer)
 {

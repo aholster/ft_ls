@@ -6,11 +6,13 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/02 13:44:21 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/07 12:39:39 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/11 22:52:45 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../incl/ft_long_format.h"
+#include <stdio.h>
+
+#include "../incl/ft_file_format.h"
 #include <time.h>
 
 static void	relevant_time(const time_t *restrict *const restrict arec_time,\
@@ -68,8 +70,8 @@ static int	small_time(char *const restrict abuf,\
 		{
 			return (-1);
 		}
-		*aoffset += TIMELEN;
-		return (TIMELEN);
+		*aoffset += DATELEN;
+		return (DATELEN);
 	}
 }
 
@@ -95,7 +97,7 @@ int			ft_generate_time(char *const restrict abuf,\
 			{
 				return (-1);
 			}
-			*aoffset += MAX_TIMELEN;
+			*aoffset += MAX_DATELEN;
 		}
 		else
 		{

@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 15:00:16 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/02 12:48:53 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../incl/ft_stack_sorters.h"
+#include "../incl/ft_stack_sorters.h"
 
 static void			relevant_timespec(\
 						const struct timespec *restrict *const arec_time,\

@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/13 13:58:01 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/30 21:09:22 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../incl/ft_stack_sorters.h"
+#include "../incl/ft_stack_sorters.h"
 
 static void		find_midpoint(t_list *lst, t_list **const restrict amidpoint)
 {

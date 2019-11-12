@@ -6,34 +6,37 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 05:36:07 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/07 12:39:32 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "./../incl/ft_long_format.h"
 
 #include <sys/xattr.h>
 
 #include <sys/acl.h>
 
-static char	identify_filetype(const mode_t file_type)
+#include "../incl/ft_file_format.h"
+#include "../libft/libft.h"
+
+static void	identify_filetype(const mode_t file_type, char *const restrict abuf)
 {
-	if ((S_IFDIR == file_type) > 0)
-		return ('d');
-	else if ((S_IFREG == file_type) > 0)
-		return ('-');
-	else if ((S_IFLNK == file_type) > 0)
-		return ('l');
-	else if ((S_IFIFO == file_type) > 0)
-		return ('p');
-	else if ((S_IFBLK == file_type) > 0)
-		return ('b');
-	else if ((S_IFSOCK == file_type) > 0)
-		return ('s');
-	else if ((S_IFWHT == file_type) > 0)
-		return ('w');
+	if (S_ISBLK(file_type) == 1)
+		*abuf = 'b';
+	else if (S_ISCHR(file_type) == 1)
+		*abuf = 'c';
+	else if (S_ISDIR(file_type) == 1)
+		*abuf = 'd';
+	else if (S_ISLNK(file_type) == 1)
+		*abuf = 'l';
+	else if (S_ISSOCK(file_type) == 1)
+		*abuf = 's';
+	else if (S_ISFIFO(file_type) == 1)
+		*abuf = 'p';
+	else if (S_ISREG(file_type) == 1)
+		*abuf = '-';
+	else if (S_ISWHT(file_type) == 1)
+		*abuf = 'w';
 	else
-		return ('U');
+		*abuf = 'U';
 }
 
 /*
@@ -78,7 +81,7 @@ void		ft_generate_permissions(char *const restrict aholder,\
 	{
 		init_permissions_table(perm_table);
 	}
-	buf[0] = identify_filetype(file_mode & S_IFMT);
+	identify_filetype(file_mode & S_IFMT, buf);
 	ft_memcpy(buf + 1, perm_table[file_mode & ALLPERMS], 9);
 	find_xattr(buf + 10, cur_file->s_name);
 	buf[11] = ' ';

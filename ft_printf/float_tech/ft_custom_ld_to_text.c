@@ -6,12 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/26 17:50:52 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/04 18:58:04 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "float_tech.h"
-#include "./../incl/ft_flt_support.h"
+#include "../incl/ft_flt_support.h"
 
 static int	posiponent_loop(t_numlst **alst, short exponent)
 {

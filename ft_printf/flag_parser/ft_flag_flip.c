@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/03 21:30:50 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/03 22:05:20 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../incl/ft_flag_parser.h"
+#include "../incl/ft_flag_parser.h"
 
 void			ft_flag_flip(const char *const restrict format,\
 					size_t *const restrict aindex,\

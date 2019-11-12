@@ -6,11 +6,11 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/06/03 16:34:02 by jesmith        #+#    #+#                */
-/*   Updated: 2019/10/04 17:55:25 by jesmith       ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../incl/ft_formatters.h"
+#include "../incl/ft_formatters.h"
 
 static int				ft_lowhex_noprec(const char *const restrict buffer,\
 							const unsigned long long nb,\

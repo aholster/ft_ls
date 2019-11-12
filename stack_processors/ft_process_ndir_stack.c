@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 10:40:04 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/02 08:03:21 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/12 05:28:06 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../incl/ft_stack_processors.h"
+#include "../incl/ft_stack_processors.h"
 #include <sys/ioctl.h>
 
 static void	find_term_width(int *const restrict width)
@@ -45,13 +45,13 @@ void		ft_process_ndir_stack(t_fstack *const restrict afstack,\
 {
 	t_list					*out_stack;
 	char *restrict			cur_txt;
-	int						max_reclen;
+	int						max_len;
 	int						term_width;
 
 	out_stack = NULL;
-	max_reclen = 0;
+	max_len = 0;
 	if (ft_process_files_to_txt(&(afstack->ndir_stack),\
-		&out_stack, &max_reclen, aflags) == -1)
+		&out_stack, &max_len, aflags) == -1)
 	{
 		ft_lstdel(&out_stack, &ft_del);
 		ft_error_cleanup(afstack);

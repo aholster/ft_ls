@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/03 21:31:43 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/04 12:02:13 by jesmith       ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../incl/ft_flag_parser.h"
+#include "../incl/ft_flag_parser.h"
 
 static int	ft_isdigit_internal(const char c)
 {

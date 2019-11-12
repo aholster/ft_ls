@@ -6,15 +6,18 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 12:14:16 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/07 16:59:34 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 #include <pwd.h>
 #include <grp.h>
 #include <uuid/uuid.h>
 
-#include "./../incl/ft_long_format.h"
+#include "../incl/ft_file_format.h"
+#include "../libft/libft.h"
 
 int		ft_generate_gid_uid(char *const restrict aholder,\
 			size_t *const restrict aoffset,\
@@ -30,11 +33,11 @@ int		ft_generate_gid_uid(char *const restrict aholder,\
 	uname = getpwuid(stat->st_uid);
 	if (uname != NULL)
 	{
-		index = sprintf(buf, "%*s  ", amin_fields->uname_len, uname->pw_name);
+		index = sprintf(buf, "%-*s  ", amin_fields->uname_len, uname->pw_name);
 	}
 	else
 	{
-		index = sprintf(buf, "%*u  ", amin_fields->uname_len, stat->st_uid);
+		index = sprintf(buf, "%-*u  ", amin_fields->uname_len, stat->st_uid);
 	}
 	if (index >= 0)
 		*aoffset += index;
@@ -43,11 +46,11 @@ int		ft_generate_gid_uid(char *const restrict aholder,\
 	gname = getgrgid(stat->st_gid);
 	if (gname != NULL)
 	{
-		index = sprintf(buf + index, "%*s  ", amin_fields->gname_len, gname->gr_name);
+		index = sprintf(buf + index, "%-*s  ", amin_fields->gname_len, gname->gr_name);
 	}
 	else
 	{
-		index = sprintf(buf + index, "%*u  ", amin_fields->gname_len, stat->st_gid);
+		index = sprintf(buf + index, "%-*u  ", amin_fields->gname_len, stat->st_gid);
 	}
 	if (index >= 0)
 		*aoffset += index;

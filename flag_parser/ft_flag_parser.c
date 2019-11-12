@@ -6,12 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:11:26 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/07 07:57:36 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../ft_ls.h"
-#include "./../libft/libft.h"
+#include "../ft_ls.h"
+#include "../libft/libft.h"
 
 static void	bad_flag(const unsigned char flag_chr)
 {

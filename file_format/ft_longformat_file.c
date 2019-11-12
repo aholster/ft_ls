@@ -6,11 +6,13 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 21:23:08 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/07 17:05:25 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/11 22:52:45 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../incl/ft_long_format.h"
+#include <stdio.h>
+
+#include "../incl/ft_file_format.h"
 #include <limits.h>
 
 #include "../libft/libft.h"
@@ -31,7 +33,7 @@ int			ft_long_format_file(const t_finfo *const restrict cur_file,\
 				const t_longests *const restrict amin_fields,\
 				const t_flags *const restrict aflags)
 {
-	char	holder[PATH_MAX + MAX_INODE_LEN + MAX_HLINK_LEN + MAX_TIMELEN + PERMLST_LEN + 1001];
+	char	holder[PATH_MAX + MAX_INODE_LEN + MAX_HLINK_LEN + MAX_DATELEN + PERMLST_LEN + 1001];
 	size_t	offset;
 	int		status;
 	const struct stat *const restrict astat = &(cur_file->stat);

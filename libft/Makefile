@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/10/24 19:51:47 by aholster      ########   odam.nl          #
+#    Updated: 2019/11/07 15:29:25 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ BASICOR := memset bzero memcpy memccpy memmove memchr memcmp\
  strstr strnstr strcmp strncmp\
  atoi isalpha isdigit isalnum isascii isprint toupper tolower
 
-CUSOR:= nbrlen del lstaddend itoba iswhitespace isprime power putstrarr\
+CUSOR:= ll_len ull_len del lstaddend itoba iswhitespace isprime power putstrarr\
  putstrarr_fd strarrdel strarrtolst lsttostrarr lstlen min max constrain\
  segdefault factorial count_if range sqrt absneg swap lsttardest memjoin \
  memdup strarrnew textangle stralloc bitprint putmem putmem_fd\

@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/12 18:16:38 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/24 20:03:56 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/07 15:29:10 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ int					ft_factorial(int nb);
 # pragma mark simple math
 
 char				*ft_itoba(int n, unsigned int base);
-unsigned int		ft_nbrlen(long long n, unsigned int base);
+unsigned int		ft_ll_len(long long n, unsigned int base);
+unsigned int		ft_ull_len(unsigned long long n, const unsigned int base);
 int					ft_max(int val1, int val2);
 int					ft_min(int val1, int val2);
 int					ft_constrain(int in, int min, int max);
