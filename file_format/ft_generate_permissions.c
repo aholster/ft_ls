@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 05:36:07 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 12:55:59 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ static void	find_xattr(char *const restrict abuf,\
 	}
 }
 
-void		ft_generate_permissions(char *const restrict aholder,\
-				size_t *const restrict aoffset,\
-				const t_finfo *const restrict cur_file)
+int			ft_generate_permissions(const t_finfo *const restrict afile,\
+				t_compcaps *const restrict acaps,\
+				const t_flags aflags)
 {
 	static char		perm_table[4096][10] = {[0][0] = 'N'};
-	char			buf[PERMLST_LEN];
-	const mode_t	file_mode = cur_file->stat.st_mode;
+	char			buf[PERM_LEN];
+	const mode_t	file_mode = afile->stat.st_mode;
 
 	if (perm_table[0][0] == 'N')
 	{
@@ -83,8 +83,16 @@ void		ft_generate_permissions(char *const restrict aholder,\
 	}
 	identify_filetype(file_mode & S_IFMT, buf);
 	ft_memcpy(buf + 1, perm_table[file_mode & ALLPERMS], 9);
-	find_xattr(buf + 10, cur_file->s_name);
-	buf[11] = ' ';
-	ft_memcpy(aholder, buf, PERMLST_LEN);
-	*aoffset += PERMLST_LEN;
+	find_xattr(buf + 10, afile->s_name);
+	buf[11] = '\0';
+	if (ft_fvec_enter_comp(afile->fvect, f_perm, buf, PERM_LEN) == -1)
+	{
+		return (-1);
+	}
+	else
+	{
+		(void)aflags;
+		(void)acaps;
+		return (1);
+	}
 }

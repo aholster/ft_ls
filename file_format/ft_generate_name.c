@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_process_dir_stack.c                             :+:    :+:            */
+/*   ft_generate_name.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/16 16:34:08 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 15:44:13 by aholster      ########   odam.nl         */
+/*   Created: 2019/11/13 08:10:29 by aholster       #+#    #+#                */
+/*   Updated: 2019/11/13 09:57:40 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/ft_stack_processors.h"
+#include "../incl/ft_file_format.h"
+#include "../libft/libft.h"
 
-static void	list_print(t_finfo *elem)
-{
-	printf("node:%p, %s\n", elem, elem->s_name);
-}
-
-void		ft_process_dir_stack(t_fstack *const restrict afstack,\
+int			ft_generate_name(const t_finfo *const restrict afile,\
+				t_compcaps *const restrict acaps,\
 				const t_flags aflags)
 {
-	printf("now showing dir list\n");
-	finfo_lstiter(afstack->dir_stack, &list_print);
+	const size_t	len = ft_strlen(afile->s_name);
+
+	if (ft_fvec_enter_comp(afile->fvect, f_name,\
+			afile->s_name, len + 1) == -1)
+	{
+		return (-1);
+	}
+	else if ((int)len > acaps->fname_len)
+	{
+		acaps->fname_len = len;
+	}
 	(void)aflags;
-	(void)afstack;
+	return (1);
 }

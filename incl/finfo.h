@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/12 15:12:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/07 07:53:59 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 07:02:37 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct		s_finfo
 {
 	char *restrict	s_name;
 	struct stat		stat;
+	struct s_fvec	*fvect;
 	struct s_finfo	*next;
 }					t_finfo;
 
@@ -30,9 +31,9 @@ typedef enum		e_sortcode
 	bad_order,
 }					t_sortcode;
 
-typedef t_sortcode	(*t_decider)(const t_finfo *const restrict,\
+typedef	t_sortcode	(*t_decider)(const t_finfo *const restrict,\
 						const t_finfo *const restrict,\
-						const t_flags *const restrict);
+						const t_flags);
 
 t_finfo				*finfo_lstnew(const char *const restrict s_name,\
 						const struct stat *const restrict astat_info);

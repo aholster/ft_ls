@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 13:03:36 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 07:01:04 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void		find_midpoint(t_finfo *lst,\
 static t_finfo	*reconstitute_lst(t_finfo *const front_seg,\
 					t_finfo *const back_seg,\
 					const t_decider method,\
-					const t_flags *const restrict aflags)
+					const t_flags aflags)
 {
 	if (front_seg == NULL)
 	{
@@ -63,7 +63,7 @@ static t_finfo	*reconstitute_lst(t_finfo *const front_seg,\
 
 static void		finfo_merge_sort(t_finfo **const restrict alst,\
 					const t_decider method,\
-					const t_flags *const restrict aflags)
+					const t_flags aflags)
 {
 	t_finfo	*midpoint;
 
@@ -77,11 +77,11 @@ static void		finfo_merge_sort(t_finfo **const restrict alst,\
 
 void			ft_sort_finfo_stack(\
 					t_finfo *restrict *const restrict afinfo_stack,\
-					const t_flags *const restrict aflags)
+					const t_flags aflags)
 {
 	t_decider			method;
 
-	if (((*aflags) & flg_r) == 0)
+	if ((aflags & flg_r) == 0)
 	{
 		method = ft_sorter_method(aflags);
 	}

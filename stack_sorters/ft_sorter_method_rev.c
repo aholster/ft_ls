@@ -6,44 +6,22 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 15:00:16 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 09:12:31 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_stack_sorters.h"
-
-static void			relevant_timespec(\
-						const struct timespec *restrict *const arec_time,\
-						const struct stat *const restrict astat,\
-						const t_flags *const restrict aflags)
-{
-	if (((*aflags) & flg_c) > 0)
-	{
-		*arec_time = &(astat->st_ctimespec);
-	}
-	else if (((*aflags) & flg_u) > 0)
-	{
-		*arec_time = &(astat->st_atimespec);
-	}
-	else if (((*aflags) & flg_U) > 0)
-	{
-		*arec_time = &(astat->st_birthtimespec);
-	}
-	else
-	{
-		*arec_time = &(astat->st_mtimespec);
-	}
-}
+#include "../ft_ls.h"
 
 static t_sortcode	rev_chrono_sort(const t_finfo *const restrict pri_node,\
 						const t_finfo *const restrict sec_node,\
-						const t_flags *const restrict aflags)
+						const t_flags aflags)
 {
 	const struct timespec *pri_time;
 	const struct timespec *sec_time;
 
-	relevant_timespec(&pri_time, &(pri_node->stat), aflags);
-	relevant_timespec(&sec_time, &(sec_node->stat), aflags);
+	ft_relevant_time(&pri_time, &(pri_node->stat), aflags);
+	ft_relevant_time(&sec_time, &(sec_node->stat), aflags);
 	if (pri_time->tv_sec == sec_time->tv_sec)
 	{
 		if (pri_time->tv_nsec <= sec_time->tv_nsec)
@@ -62,7 +40,7 @@ static t_sortcode	rev_chrono_sort(const t_finfo *const restrict pri_node,\
 
 static t_sortcode	rev_lexical_sort(const t_finfo *const restrict pri_node,\
 						const t_finfo *const restrict sec_node,\
-						const t_flags *const restrict aflags)
+						const t_flags aflags)
 {
 	const char *const restrict pri_name = pri_node->s_name;
 	const char *const restrict sec_name = sec_node->s_name;
@@ -78,9 +56,9 @@ static t_sortcode	rev_lexical_sort(const t_finfo *const restrict pri_node,\
 	(void)aflags;
 }
 
-t_decider			ft_sorter_method_rev(const t_flags *const restrict aflags)
+t_decider			ft_sorter_method_rev(const t_flags aflags)
 {
-	if (((*aflags) & flg_t) > 0)
+	if ((aflags & flg_t) > 0)
 	{
 		return (&rev_chrono_sort);
 	}

@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 09:43:25 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/31 00:10:34 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 07:01:04 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	add_to_errqueue(const char *const restrict name,\
 static void	add_to_stack(const char *const restrict name,\
 				const struct stat *const restrict stat_info,\
 				t_fstack *const restrict afstack,\
-				const t_flags *const restrict aflags)
+				const t_flags aflags)
 {
 	t_finfo	*restrict	new_node;
 
@@ -42,7 +42,7 @@ static void	add_to_stack(const char *const restrict name,\
 	}
 	else
 	{
-		if (((*aflags) & flg_d) > 0 || S_ISDIR(new_node->stat.st_mode) != 1)
+		if ((aflags & flg_d) > 0 || S_ISDIR(new_node->stat.st_mode) != 1)
 		{
 			finfo_lstadd(&(afstack->ndir_stack), new_node);
 		}
@@ -55,14 +55,14 @@ static void	add_to_stack(const char *const restrict name,\
 
 void		ft_sort_params(char **restrict argv,\
 				t_fstack *const restrict afstack,\
-				const t_flags *const restrict aflags)
+				const t_flags aflags)
 {
 	struct stat			stat_info;
 	int					ret;
 
 	while (argv[0] != NULL)
 	{
-		if (((*aflags) & flg_L) > 0)
+		if ((aflags & flg_L) > 0)
 		{
 			ret = stat(argv[0], &stat_info);
 		}

@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/11 22:44:16 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 15:43:24 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 # define FT_LS_H
 
 # include <stdio.h>
-// # include "./ft_printf/ft_printf.h"
-
 
 # include "./libft/libft.h"
 # include "./incl/finfo.h"
 
-# define USAGE "usage: ft_ls [-LRTUacdfilrtu1] [file ...]\n"
+# define USAGE "usage: ft_ls [-LRTUacdfgilnortu1] [file ...]\n"
 
 /*
-** # define USAGE "usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]"
+** #      "usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]"
 */
 
 typedef struct			s_fstack
@@ -39,9 +37,14 @@ void					ft_fstack_del(t_fstack *const restrict afstack);
 
 void					ft_sort_params(char **restrict argv,\
 							t_fstack *const restrict afstack,\
-							const t_flags *const restrict aflags);
+							const t_flags aflags);
 
 void					ft_run_stacks(t_fstack *const restrict afstack,\
-							const t_flags *const restrict aflags);
+							const t_flags aflags);
+
+void					ft_relevant_time(\
+							const struct timespec **const arec_time,\
+							const struct stat *const restrict astat,\
+							const t_flags aflags);
 
 #endif

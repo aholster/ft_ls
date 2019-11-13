@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/12 13:20:09 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/26 18:55:25 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 07:01:04 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "./incl/ft_stack_processors.h"
 
 void		ft_run_stacks(t_fstack *const restrict afstack,\
-				const t_flags *const restrict aflags)
+				const t_flags aflags)
 {
 	if (afstack->err_queue != NULL)
 	{
@@ -23,7 +23,7 @@ void		ft_run_stacks(t_fstack *const restrict afstack,\
 	}
 	if (afstack->ndir_stack != NULL)
 	{
-		if (((*aflags) & flg_f) == 0)
+		if ((aflags & flg_f) == 0)
 		{
 			ft_sort_finfo_stack(&(afstack->ndir_stack), aflags);
 		}
@@ -31,7 +31,7 @@ void		ft_run_stacks(t_fstack *const restrict afstack,\
 	}
 	if (afstack->dir_stack != NULL)
 	{
-		if (((*aflags) & flg_f) == 0)
+		if ((aflags & flg_f) == 0)
 		{
 			ft_sort_finfo_stack(&(afstack->dir_stack), aflags);
 		}

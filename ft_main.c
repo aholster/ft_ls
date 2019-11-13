@@ -6,14 +6,14 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 01:15:48 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/16 16:08:21 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 07:03:39 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 static void	stack_minimum_assert(t_fstack *const restrict afstack,\
-				const t_flags *const restrict aflags)
+				const t_flags aflags)
 {
 	char	*fake_argv[2];
 
@@ -39,6 +39,7 @@ int			main(int argc, char **argv)
 	}
 	else
 	{
+		flag_stock = 0;
 		argc--;
 		argv++;
 		if (argc != 0)
@@ -46,11 +47,11 @@ int			main(int argc, char **argv)
 			ft_flag_parser(&argc, &argv, &flag_stock);
 			if (argc != 0)
 			{
-				ft_sort_params(argv, &fil_stack, &flag_stock);
+				ft_sort_params(argv, &fil_stack, flag_stock);
 			}
 		}
-		stack_minimum_assert(&fil_stack, &flag_stock);
-		ft_run_stacks(&fil_stack, &flag_stock);
+		stack_minimum_assert(&fil_stack, flag_stock);
+		ft_run_stacks(&fil_stack, flag_stock);
 	}
 	return (1);
 }

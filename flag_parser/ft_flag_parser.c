@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:11:26 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 12:12:55 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ static const t_flg_tbl	g_trans_tabl[128] = {
 	['c'] = {flg_c, flg_U + flg_u},
 	['d'] = {flg_d + flg_a, 0},
 	['f'] = {flg_f, 0},
+	['g'] = {flg_g, 0},
 	['i'] = {flg_i, 0},
 	['l'] = {flg_l, 0},
+	['n'] = {flg_n, 0},
+	['o'] = {flg_o, 0},
 	['r'] = {flg_r, 0},
 	['t'] = {flg_t, 0},
 	['u'] = {flg_u, flg_c + flg_U},
@@ -70,7 +73,9 @@ void		ft_flag_parser(int *const restrict aargc,\
 		while (index < len)
 		{
 			if (flag_block[index] >= '\0')
+			{
 				flag_trans_tbl(flag_block[index], aflags);
+			}
 			index++;
 		}
 		(*aargv)++;

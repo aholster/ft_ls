@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 10:40:04 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/12 05:28:06 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 07:00:51 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*tlist_popnstrip(t_list **const restrict astack)
 }
 
 void		ft_process_ndir_stack(t_fstack *const restrict afstack,\
-				const t_flags *const restrict aflags)
+				const t_flags aflags)
 {
 	t_list					*out_stack;
 	char *restrict			cur_txt;

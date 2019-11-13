@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/13 13:58:01 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 07:01:04 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,20 @@ static void		merge_sort(t_list **const restrict alst)
 }
 
 void			ft_sortnprocess_err_queue(t_fstack *const restrict afstack,
-					const t_flags *const restrict aflags)
+					const t_flags aflags)
 {
 	t_list	*restrict	iterator;
 	int					ret;
 	struct stat			dummy;
 
-	if (((*aflags) & flg_f) == 0)
+	if ((aflags & flg_f) == 0)
 	{
 		merge_sort(&(afstack->err_queue));
 	}
 	iterator = afstack->err_queue;
 	while (iterator != NULL)
 	{
-		if (((*aflags) & flg_L) > 0)
+		if ((aflags & flg_L) > 0)
 		{
 			ret = stat(iterator->content, &dummy);
 		}

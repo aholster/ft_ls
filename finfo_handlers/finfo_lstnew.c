@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/21 19:28:30 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 02:29:44 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ t_finfo	*finfo_lstnew(const char *const restrict s_name,
 
 	head = (t_finfo *)malloc(sizeof(t_finfo));
 	if (head == NULL)
+	{
 		return (NULL);
+	}
 	else
 	{
 		head->s_name = ft_strdup(s_name);
@@ -32,5 +34,6 @@ t_finfo	*finfo_lstnew(const char *const restrict s_name,
 	}
 	ft_memcpy(&(head->stat), astat_info, sizeof(struct stat));
 	head->next = NULL;
+	head->fvect = NULL;
 	return (head);
 }

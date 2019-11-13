@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 02:14:33 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/07 07:53:43 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 12:10:45 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,15 @@ typedef	enum	e_flags
 	flg_c = 1LU << 5,
 	flg_d = 1LU << 6,//done?
 	flg_f = 1LU << 7,
-	flg_i = 1LU << 8,
-	flg_l = 1LU << 9,
-	flg_r = 1LU << 10,
-	flg_t = 1LU << 11,
-	flg_u = 1LU << 12,
-	flg_1 = 1LLU << 13,//output
+	flg_g = 1LU << 8,
+	flg_i = 1LU << 9,
+	flg_l = 1LU << 10,
+	flg_n = 1LU << 11,
+	flg_o = 1LU << 12,
+	flg_r = 1LU << 13,
+	flg_t = 1LU << 14,
+	flg_u = 1LU << 15,
+	flg_1 = 1LLU << 16,//output
 }				t_flags;
 
 typedef	struct	s_flg_tbl
@@ -69,14 +72,14 @@ void			ft_flag_parser(int *const restrict aargc,\
  	d = 1LU << 19, directories are listed as plain files
 ** 		// e = 1LU << 20, print access control list if present(-l)
  	f = 1LU << 21, output is not sorted (turns on -a)
-** 		// g = 1LU << 22, display groupname in -l, supressing owner
+** 	g = 1LU << 22, display groupname in -l, supressing owner
 ** 		// h = 1LU << 23, in -l, uses unit prefixes to reduce size to 3 digits
 	i = 1LU << 24, print inode! (easy!)
 ** 		// k = 1LU << 25, if -s is on, prints file alloc in kilobytes, not blocks
  	l = 1LU << 26, AWW YEAHH LONG FORMATTTTT
 ** 		// m = 1LU << 27, stream output format, list across page seperated by ','
-** 		// n = 1LU << 28, lists user and group ID numerically (seems doable)(turns on -l)
-** 		// o = 1LU << 29, list in (-l) output but omit groupid
+** 	n = 1LU << 28, lists user and group ID numerically (seems doable)(turns on -l)
+** 	o = 1LU << 29, list in (-l) output but omit groupid
 ** 		// p = 1LU << 30, postfix all dirnames with '/' (mini -F)
 ** 		// q = 1LU << 31, forceprint non writeables as '?' (defualt to terminal) (conflict with -B)
  	r = 1LU << 32, reverse order of sorting,\

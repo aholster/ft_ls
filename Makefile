@@ -6,17 +6,16 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/11/11 21:52:08 by aholster      ########   odam.nl          #
+#    Updated: 2019/11/13 09:13:12 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 DATE := $(shell date)
 
 LONDIR := ./file_format/
-LONSRC := longformat_file generate_time\
- generate_permissions init_permissions_table\
- generate_gid_uid\
- find_longest_fields
+LONSRC := create_components fvec_enter_comp init_permissions_table\
+ generate_inode generate_permissions generate_hardlinks generate_uid\
+ generate_gid generate_size generate_date generate_name
 
 PRODIR := ./stack_processors/
 PROSRC := process_ndir_stack process_dir_stack process_files_to_txt
@@ -33,7 +32,7 @@ FINFOSRC := finfo_lstadd finfo_lstdel finfo_lstdelone finfo_lstiter\
  finfo_lstnew finfo_stack_pop
 
 SOURCE := main sort_params run_stacks\
- fstack_del error_cleanup
+ fstack_del error_cleanup relevant_time
 
 FILEC := $(SOURCE:%=./ft_%.c) $(PARSRC:%=$(PARDIR)%.c)\
  $(SORTSRC:%=$(SORTDIR)ft_%.c) $(FINFOSRC:%=$(FINFODIR)%.c)\
