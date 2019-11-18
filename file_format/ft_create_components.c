@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 05:29:03 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 12:55:59 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/18 22:22:35 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ int			ft_create_components(t_finfo *restrict afinfo,\
 				t_compcaps *const restrict acaps,\
 				const t_flags aflags)
 {
-	t_components		index;
+	t_component_names	index;
 	const t_comp_gen	component_table[T_COMPCOUNT] = {
 		[f_inode] = &ft_generate_inode,
-		[f_perm]	= &ft_generate_permissions,
+		[f_perm] = &ft_generate_permissions,
 		[f_nlnk] = &ft_generate_hardlinks,
 		[f_uid] = &ft_generate_uid,
 		[f_gid] = &ft_generate_gid,

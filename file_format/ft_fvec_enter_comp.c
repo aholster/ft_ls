@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 04:28:22 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 12:58:23 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/18 22:25:50 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../libft/libft.h"
 
 int			ft_fvec_enter_comp(t_fvec *const restrict afvec,\
-				const t_components component_num,\
+				const t_component_names component_num,\
 				const char *const restrict component_str,\
 				const size_t component_size)
 {

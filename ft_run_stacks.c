@@ -6,13 +6,31 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/12 13:20:09 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 07:01:04 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/13 16:30:48 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "./incl/ft_stack_sorters.h"
 #include "./incl/ft_stack_processors.h"
+
+/*
+** static int	is_only_one_dir(const t_fstack *const restrict afstack)
+** {
+** 	if (afstack->err_queue != NULL || afstack->ndir_stack != NULL)
+** 	{
+** 		return (1);
+** 	}
+** 	else if (afstack->dir_stack != NULL && afstack->dir_stack->next != NULL)
+** 	{
+** 		return (1);
+** 	}
+** 	else
+** 	{
+** 		return (0);
+** 	}
+** }
+*/
 
 void		ft_run_stacks(t_fstack *const restrict afstack,\
 				const t_flags aflags)

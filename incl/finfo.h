@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/12 15:12:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 07:02:37 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/18 20:57:22 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,10 @@ void				finfo_lstdelone(t_finfo *restrict *const restrict alst);
 
 t_finfo				*finfo_stack_pop(\
 						t_finfo *restrict *const restrict afinfo_stack);
+
+int					finfo_stack_push(\
+						t_finfo *restrict *const restrict afinfo_stack,\
+						const char *const restrict s_name,\
+						const struct stat *const restrict astat_finfo);
 
 #endif

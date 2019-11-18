@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:11:26 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 12:12:55 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/18 20:09:11 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,27 @@ static const t_flg_tbl	g_trans_tabl[128] = {
 	['1'] = {flg_1, 0},
 };
 
-static void	flag_trans_tbl(const unsigned char flag_chr,\
+static void	parse_argument_flags(const char *const restrict flag_block,\
+				const size_t len,\
 				t_flags *const restrict aflags)
 {
-	if (g_trans_tabl[flag_chr].enable != 0)
+	size_t			index;
+	unsigned char	flag_chr;
+
+	index = 1;
+	while (index < len && flag_block[index] != '\0')
 	{
-		(*aflags) |= g_trans_tabl[flag_chr].enable;
-		(*aflags) &= ~(g_trans_tabl[flag_chr].disable);
-	}
-	else
-	{
-		bad_flag(flag_chr);
+		flag_chr = flag_block[index];
+		if (flag_chr < 128 && g_trans_tabl[flag_chr].enable != 0)
+		{
+			(*aflags) |= g_trans_tabl[flag_chr].enable;
+			(*aflags) &= ~(g_trans_tabl[flag_chr].disable);
+		}
+		else
+		{
+			bad_flag(flag_chr);
+		}
+		index++;
 	}
 }
 
@@ -57,28 +67,31 @@ void		ft_flag_parser(int *const restrict aargc,\
 				char **restrict *const restrict aargv,\
 				t_flags *const restrict aflags)
 {
-	size_t					index;
 	size_t					len;
-	const char *restrict	flag_block;
 
 	while ((*aargc) != 0 && (**aargv)[0] == '-')
 	{
-		flag_block = (**aargv);
-		index = 1;
-		len = ft_strlen(flag_block);
-		if (len == 1)
+		len = ft_strlen((**aargv));
+		if (len <= 1)
 		{
 			break ;
 		}
-		while (index < len)
+		else
 		{
-			if (flag_block[index] >= '\0')
-			{
-				flag_trans_tbl(flag_block[index], aflags);
-			}
-			index++;
+			parse_argument_flags((**aargv), len, aflags);
 		}
 		(*aargv)++;
 		(*aargc)--;
 	}
 }
+
+/*
+**	if (isatty(std_out) == 1)
+**	{
+**		a terminal
+**	}
+**	else
+**	{
+**		not a terminal
+**	}
+*/

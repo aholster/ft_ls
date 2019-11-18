@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 12:34:59 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 13:10:01 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/18 22:22:31 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,14 @@ typedef struct s_list	t_list;
 
 typedef	struct	s_compcaps{
 	int			inode_len;
-	// int			perm_len;
 	int			hlink_len;
 	int			uname_len;
 	int			gname_len;
 	int			fsize_len;
-	// int			date_len;
 	int			fname_len;
 }				t_compcaps;
 
-typedef enum	e_components{
+typedef enum	e_component_names{
 	f_inode = 0,
 	f_perm = 1,
 	f_nlnk = 2,
@@ -44,7 +42,7 @@ typedef enum	e_components{
 	f_size = 5,
 	f_date = 6,
 	f_name = 7,
-}				t_components;
+}				t_component_names;
 
 # define T_COMPCOUNT 8
 # define VECTOR_START 1024
@@ -60,12 +58,18 @@ typedef	int		(*t_comp_gen)(const t_finfo *const restrict,\
 					t_compcaps *const restrict,\
 					const t_flags);
 
+typedef	int		(*t_unifier)(const t_fvec *const restrict,\
+					t_compcaps *const restrict,\
+					t_list **const restrict);
+
+t_unifier		ft_unifier_method(const t_flags aflags);
+
 int				ft_create_components(t_finfo *restrict afinfo_stack,\
 					t_compcaps *const restrict acaps,\
 					const t_flags aflags);
 
 int				ft_fvec_enter_comp(t_fvec *const restrict afvec,\
-					const t_components component_num,\
+					const t_component_names component_num,\
 					const char *const restrict component_str,\
 					const size_t component_size);
 

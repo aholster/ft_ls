@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 01:15:48 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 07:03:39 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/18 19:08:59 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int			main(int argc, char **argv)
 	}
 	else
 	{
-		flag_stock = 0;
+		ft_bzero(&flag_stock, sizeof(t_flags));
 		argc--;
 		argv++;
 		if (argc != 0)

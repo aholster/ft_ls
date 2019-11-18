@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/11/13 09:13:12 by aholster      ########   odam.nl          #
+#    Updated: 2019/11/18 22:45:43 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ LONSRC := create_components fvec_enter_comp init_permissions_table\
  generate_gid generate_size generate_date generate_name
 
 PRODIR := ./stack_processors/
-PROSRC := process_ndir_stack process_dir_stack process_files_to_txt
+PROSRC := process_ndir_stack process_dir_stack process_files_to_txt\
+ unifier_method
 
 SORTDIR := ./stack_sorters/
 SORTSRC := sortnprocess_err_queue sort_finfo_stack\
@@ -29,7 +30,7 @@ PARSRC := ft_flag_parser
 
 FINFODIR := ./finfo_handlers/
 FINFOSRC := finfo_lstadd finfo_lstdel finfo_lstdelone finfo_lstiter\
- finfo_lstnew finfo_stack_pop
+ finfo_lstnew finfo_stack_pop finfo_stack_push
 
 SOURCE := main sort_params run_stacks\
  fstack_del error_cleanup relevant_time
@@ -49,7 +50,7 @@ NAME := ft_ls
 NORM := norminette $(FILEC) $(HEAD) | grep -e "Error"  -e "Warning" -B 1
 
 GCCC = ${CC} -c
-CC = gcc -g -Wall -Werror -Wextra
+CC = gcc -g -Wall -Werror -Wextra -fsanitize=address
 AR = ar rcs
 
 all: $(NAME)
