@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:11:26 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/20 12:01:48 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/22 11:39:24 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static const t_flg_tbl	g_trans_tabl[128] = {
 	['r'] = {flg_r, 0},
 	['t'] = {flg_t, 0},
 	['u'] = {flg_u, flg_c + flg_U},
-	['x'] = {flg_x, flg_C + flg_l + flg_1 + flg_x},
+	['x'] = {flg_x, flg_C + flg_l + flg_1},
 	['1'] = {flg_1, flg_C + flg_l + flg_x + flg_m},
 };
 
@@ -68,19 +68,15 @@ static void	parse_argument_flags(const char *const restrict flag_block,\
 
 static void	set_default_flags(t_flags *const restrict aflags)
 {
-	if (isatty(1) == 1)
+	if ((*aflags & (flg_m | flg_1 | flg_l | flg_C | flg_x)) == 0)
 	{
-		if ((*aflags & (flg_m | flg_1 | flg_l | flg_C | flg_x)) == 0)
+		if (isatty(1) == 1)
 		{
 			*aflags |= flg_C;
 		}
-	}
-	else
-	{
-		(*aflags) &= ~(flg_x | flg_C);
-		if ((*aflags & (flg_m | flg_1 | flg_l)) == 0)
+		else
 		{
-			(*aflags) |= flg_1;
+			*aflags |= flg_1;
 		}
 	}
 }

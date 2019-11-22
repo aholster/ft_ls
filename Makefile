@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/11/20 12:09:30 by aholster      ########   odam.nl          #
+#    Updated: 2019/11/22 14:13:55 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LONSRC := create_components fvec_enter_comp init_permissions_table\
 
 PRODIR := ./stack_processors/
 PROSRC := process_ndir_stack process_dir_stack process_files_to_txt\
- unifier_method printer
+ unifier_method printer multi_column_print
 
 SORTDIR := ./stack_sorters/
 SORTSRC := sortnprocess_err_queue sort_finfo_stack\

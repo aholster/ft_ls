@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:27:27 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/22 08:18:23 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/22 14:13:41 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,9 @@ int				ft_process_files_to_txt(\
 int				ft_printer(const t_list *const restrict out_list,\
 					const int max_len,\
 					const t_flags aflags);
+
+int				ft_multi_column_print(const t_list *restrict iterator,\
+					const int max_len,\
+					const uint32_t term_width);
 
 #endif

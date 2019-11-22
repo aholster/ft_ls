@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:34:08 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/20 07:13:45 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/22 17:28:50 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <sys/dir.h>
 
 #include "../incl/ft_stack_processors.h"
+#include "../incl/ft_stack_sorters.h"
 
 #include <limits.h>
 
@@ -30,44 +31,28 @@ static int	ft_dirp_to_finfostack(DIR *const restrict dirp,\
 	record = readdir(dirp);
 	while (record != NULL)
 	{
-		snprintf(full_path, sizeof(full_path), "%s/%s", path, record->d_name);
-		if ((aflags & flg_L) > 0)
+		if ((aflags & flg_a) != flg_a && record->d_name[0] != '.')
 		{
-			status = stat(full_path, &f_stat);
-		}
-		else
-		{
-			status = lstat(full_path, &f_stat);
-		}
-		if (status == 0)
-		{
-			if (finfo_stack_push(afinfo_stack, record->d_name, &f_stat) == -1)
+			snprintf(full_path, sizeof(full_path), "%s/%s", path, record->d_name);
+			if ((aflags & flg_L) > 0)
 			{
-				return (-1);
+				status = stat(full_path, &f_stat);
+			}
+			else
+			{
+				status = lstat(full_path, &f_stat);
+			}
+			if (status == 0)
+			{
+				if (finfo_stack_push(afinfo_stack, record->d_name, &f_stat) == -1)
+				{
+					return (-1);
+				}
 			}
 		}
 		record = readdir(dirp);
 	}
 	return (1);
-}
-
-static char	*tlist_popnstrip(t_list **const restrict astack)
-{
-	t_list			*first_node;
-	char *restrict	stxt;
-
-	if (*astack != NULL)
-	{
-		first_node = ft_lst_stack_pop(astack);
-		stxt = first_node->content;
-		ft_bzero(first_node, sizeof(t_list));
-		free(first_node);
-		return (stxt);
-	}
-	else
-	{
-		return (NULL);
-	}
 }
 
 static int	ft_dirp_process(DIR *const restrict dirp,\
@@ -76,7 +61,6 @@ static int	ft_dirp_process(DIR *const restrict dirp,\
 {
 	t_finfo	*dir_stats;
 	t_list	*product;
-	char	*cur_txt;
 	int		temp;
 
 	dir_stats = NULL;
@@ -85,18 +69,23 @@ static int	ft_dirp_process(DIR *const restrict dirp,\
 		finfo_lstdel(&dir_stats);
 		return (-1);
 	}
+	if ((aflags & flg_f) != flg_f)
+	{
+		ft_sort_finfo_stack(&dir_stats, aflags);
+	}
 	if (ft_process_files_to_txt(&dir_stats, &product, &temp, aflags) == -1)
 	{
 		ft_lstdel(&product, &ft_del);
 		finfo_lstdel(&dir_stats);
 		return (-1);
 	}
-	while (product != NULL)
+	finfo_lstdel(&dir_stats);
+	if (ft_printer(product, temp, aflags) == -1)
 	{
-		cur_txt = tlist_popnstrip(&product);
-		printf("%s\n", cur_txt);
-		free(cur_txt);
+		ft_lstdel(&product, &ft_del);
+		return (-1);
 	}
+	ft_lstdel(&product, &ft_del);
 	return (1);
 }
 
