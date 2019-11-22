@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_memdup.c                                        :+:    :+:            */
+/*   ft_lstqueue_pop.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/02/18 16:02:34 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/20 09:15:30 by aholster      ########   odam.nl         */
+/*   Created: 2019/11/20 09:03:41 by aholster       #+#    #+#                */
+/*   Updated: 2019/11/20 09:12:22 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memdup(const void *src, const size_t len)
+t_list	*ft_lstqueue_pop(t_queue *const aqueue)
 {
-	size_t		index;
-	char		*ret;
+	t_list *const	head = aqueue->head;
 
-	index = 0;
-	ret = (char *)malloc(sizeof(char) * len);
-	if (ret == NULL)
+	if (head != NULL)
 	{
+		aqueue->head = head->next;
 		return (NULL);
 	}
 	else
 	{
-		ft_memcpy(ret, src, len);
-		return ((void *)ret);
+		return (head);
 	}
 }

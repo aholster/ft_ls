@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/11/07 15:29:25 by aholster      ########   odam.nl          #
+#    Updated: 2019/11/20 09:32:50 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ BONOR := lstnew lstdelone lstdel lstadd lstiter lstmap
 
 ADVOR := memalloc memdel strnew strdel strclr striter striteri strmap\
  strmapi strequ strnequ strsub strjoin strtrim strsplit itoa putchar\
- putstr putendl putnbr putchar_fd putstr_fd putendl_fd putnbr_fd 
+ putstr putendl putnbr putchar_fd putstr_fd putendl_fd putnbr_fd
 
 BASICOR := memset bzero memcpy memccpy memmove memchr memcmp\
  strlen strdup strcpy strncpy strcat strncat strlcat strchr strrchr\
@@ -29,7 +29,7 @@ CUSOR:= ll_len ull_len del lstaddend itoba iswhitespace isprime power putstrarr\
  memdup strarrnew textangle stralloc bitprint putmem putmem_fd\
  putmemendl putmemendl_fd lstmemtomem lststrtostr iscapital islowercase\
  stock_read stock_write putcaret putcaret_fd strnlen\
- lst_stack_push lst_stack_pop
+ lst_stack_push lst_stack_pop lstqueue_push lstqueue_pop lstqueue_add
 
 
 FILEC = $(ADVOR:%=./ft_%.c) $(BONOR:%=./ft_%.c)\
@@ -45,16 +45,16 @@ NAME = libft.a
 NORM = norminette $(FILEC) $(HEAD) | grep -e "Error"  -e "Warning" -B 1
 
 GCCC = ${CC} -c
-CC = gcc -Wall -Werror -Wextra -O2
+CC = gcc -Wall -Werror -Wextra -fsanitize=address
 AR = ar rcs
 
 all: $(NAME)
 
-assemble: $(OBJ)
+assemble: $(OBJ) $(HEAD)
 	@$(AR) $(NAME) $(OBJ)
 	@ranlib $(NAME)
 
-$(NAME):
+$(NAME): $(OBJ) $(HEAD)
 	@echo "\033[0;33mStarting assembly of libft.a...\033[0;00m"
 	@time make assemble
 	@echo "\033[0;32m$(NAME) successfully assembled!\033[0;00m\n"

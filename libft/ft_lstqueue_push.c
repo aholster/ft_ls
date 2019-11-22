@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_memdup.c                                        :+:    :+:            */
+/*   ft_lstqueue_push.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/02/18 16:02:34 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/20 09:15:30 by aholster      ########   odam.nl         */
+/*   Created: 2019/11/20 09:03:43 by aholster       #+#    #+#                */
+/*   Updated: 2019/11/20 09:10:07 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memdup(const void *src, const size_t len)
+int		ft_lstqueue_push(t_queue *const aqueue,\
+			void const *const content,\
+			const size_t content_size)
 {
-	size_t		index;
-	char		*ret;
+	t_list	*new;
 
-	index = 0;
-	ret = (char *)malloc(sizeof(char) * len);
-	if (ret == NULL)
+	new = ft_lstnew(content, content_size);
+	if (new == NULL)
 	{
-		return (NULL);
+		return (-1);
 	}
 	else
 	{
-		ft_memcpy(ret, src, len);
-		return ((void *)ret);
+		if (aqueue->head == NULL)
+		{
+			aqueue->head = new;
+			aqueue->tail = new;
+		}
+		else
+		{
+			aqueue->tail->next = new;
+			aqueue->tail = new;
+		}
+		return (1);
 	}
 }
