@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 08:22:30 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 15:40:05 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/20 04:58:26 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int			ft_generate_hardlinks(const t_finfo *const restrict afile,\
 	{
 		return (-1);
 	}
-	else if (ft_fvec_enter_comp(afile->fvect, f_nlnk,\
+	else if (ft_fvec_enter_comp(afile, f_nlnk,\
 					numbuf, (size_t)status + 1) == -1)
 	{
 		return (-1);

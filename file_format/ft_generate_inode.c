@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 08:17:32 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 15:39:57 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/20 10:51:54 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int			ft_generate_inode(const t_finfo *const restrict afile,\
 	{
 		return (-1);
 	}
-	else if (ft_fvec_enter_comp(afile->fvect, f_inode,\
-					numbuf, (size_t)status) == -1)
+	else if (ft_fvec_enter_comp(afile, f_inode,\
+					numbuf, (size_t)status + 1) == -1)
 	{
 		return (-1);
 	}

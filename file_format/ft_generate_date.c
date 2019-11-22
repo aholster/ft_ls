@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 05:59:42 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 15:40:55 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/20 04:58:26 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ int			ft_generate_date(const t_finfo *const restrict afile,\
 		if ((aflags & flg_T) > 0)
 		{
 			snprintf(buf, sizeof(buf), "%.20s", date + 4);
-			return (ft_fvec_enter_comp(afile->fvect, f_date,\
+			return (ft_fvec_enter_comp(afile, f_date,\
 							buf, MDATELEN + 1));
 		}
 		else if (small_time(buf, arec_time, date) == -1)
 			return (-1);
-		return (ft_fvec_enter_comp(afile->fvect, f_date, buf, DATELEN + 1));
+		return (ft_fvec_enter_comp(afile, f_date, buf, DATELEN + 1));
 	}
 	(void)acaps;
 }

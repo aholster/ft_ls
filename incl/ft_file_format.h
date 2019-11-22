@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 12:34:59 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/18 22:22:31 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/20 08:07:33 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,8 @@ typedef	int		(*t_comp_gen)(const t_finfo *const restrict,\
 					t_compcaps *const restrict,\
 					const t_flags);
 
-typedef	int		(*t_unifier)(const t_fvec *const restrict,\
-					t_compcaps *const restrict,\
-					t_list **const restrict);
+typedef	t_list	*(*t_unifier)(const t_fvec *const restrict,\
+					const t_compcaps *const restrict);
 
 t_unifier		ft_unifier_method(const t_flags aflags);
 
@@ -68,7 +67,7 @@ int				ft_create_components(t_finfo *restrict afinfo_stack,\
 					t_compcaps *const restrict acaps,\
 					const t_flags aflags);
 
-int				ft_fvec_enter_comp(t_fvec *const restrict afvec,\
+int				ft_fvec_enter_comp(const t_finfo *const restrict afile,\
 					const t_component_names component_num,\
 					const char *const restrict component_str,\
 					const size_t component_size);

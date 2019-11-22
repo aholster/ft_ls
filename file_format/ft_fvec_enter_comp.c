@@ -6,19 +6,20 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 04:28:22 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/18 22:25:50 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/20 05:00:19 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_file_format.h"
 #include "../libft/libft.h"
 
-int			ft_fvec_enter_comp(t_fvec *const restrict afvec,\
+int			ft_fvec_enter_comp(const t_finfo *const restrict afile,\
 				const t_component_names component_num,\
 				const char *const restrict component_str,\
 				const size_t component_size)
 {
-	char	*new_vec;
+	char					*new_vec;
+	t_fvec	*const restrict afvec = afile->fvect;
 
 	if (afvec->tail + component_size > afvec->size)
 	{

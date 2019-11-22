@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:11:26 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/18 20:09:11 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/20 12:01:48 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,26 @@ static void	bad_flag(const unsigned char flag_chr)
 }
 
 static const t_flg_tbl	g_trans_tabl[128] = {
+	['C'] = {flg_C, flg_x + flg_l + flg_1},
 	['L'] = {flg_L, 0},
 	['R'] = {flg_R, 0},
 	['T'] = {flg_T, 0},
 	['U'] = {flg_U, flg_c + flg_u},
 	['a'] = {flg_a, 0},
 	['c'] = {flg_c, flg_U + flg_u},
-	['d'] = {flg_d + flg_a, 0},
-	['f'] = {flg_f, 0},
-	['g'] = {flg_g, 0},
+	['d'] = {flg_d, 0},
+	['f'] = {flg_f + flg_a, 0},
+	['g'] = {flg_g + flg_l, 0},
 	['i'] = {flg_i, 0},
-	['l'] = {flg_l, 0},
-	['n'] = {flg_n, 0},
-	['o'] = {flg_o, 0},
+	['l'] = {flg_l, flg_C + flg_x + flg_m + flg_1},
+	['m'] = {flg_m, flg_C + flg_x + flg_l + flg_1},
+	['n'] = {flg_n + flg_l, 0},
+	['o'] = {flg_o + flg_l, 0},
 	['r'] = {flg_r, 0},
 	['t'] = {flg_t, 0},
 	['u'] = {flg_u, flg_c + flg_U},
-	['1'] = {flg_1, 0},
+	['x'] = {flg_x, flg_C + flg_l + flg_1 + flg_x},
+	['1'] = {flg_1, flg_C + flg_l + flg_x + flg_m},
 };
 
 static void	parse_argument_flags(const char *const restrict flag_block,\
@@ -63,6 +66,25 @@ static void	parse_argument_flags(const char *const restrict flag_block,\
 	}
 }
 
+static void	set_default_flags(t_flags *const restrict aflags)
+{
+	if (isatty(1) == 1)
+	{
+		if ((*aflags & (flg_m | flg_1 | flg_l | flg_C | flg_x)) == 0)
+		{
+			*aflags |= flg_C;
+		}
+	}
+	else
+	{
+		(*aflags) &= ~(flg_x | flg_C);
+		if ((*aflags & (flg_m | flg_1 | flg_l)) == 0)
+		{
+			(*aflags) |= flg_1;
+		}
+	}
+}
+
 void		ft_flag_parser(int *const restrict aargc,\
 				char **restrict *const restrict aargv,\
 				t_flags *const restrict aflags)
@@ -83,15 +105,5 @@ void		ft_flag_parser(int *const restrict aargc,\
 		(*aargv)++;
 		(*aargc)--;
 	}
+	set_default_flags(aflags);
 }
-
-/*
-**	if (isatty(std_out) == 1)
-**	{
-**		a terminal
-**	}
-**	else
-**	{
-**		not a terminal
-**	}
-*/

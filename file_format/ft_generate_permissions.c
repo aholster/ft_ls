@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 05:36:07 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 12:55:59 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/20 05:15:47 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	identify_filetype(const mode_t file_type, char *const restrict abuf)
 	else if (S_ISWHT(file_type) == 1)
 		*abuf = 'w';
 	else
-		*abuf = 'U';
+		*abuf = '?';
 }
 
 /*
@@ -85,7 +85,7 @@ int			ft_generate_permissions(const t_finfo *const restrict afile,\
 	ft_memcpy(buf + 1, perm_table[file_mode & ALLPERMS], 9);
 	find_xattr(buf + 10, afile->s_name);
 	buf[11] = '\0';
-	if (ft_fvec_enter_comp(afile->fvect, f_perm, buf, PERM_LEN) == -1)
+	if (ft_fvec_enter_comp(afile, f_perm, buf, PERM_LEN) == -1)
 	{
 		return (-1);
 	}

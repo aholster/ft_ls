@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 08:10:29 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/18 22:23:19 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/20 04:58:26 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			ft_generate_name(const t_finfo *const restrict afile,\
 {
 	const size_t	len = ft_strlen(afile->s_name);
 
-	if (ft_fvec_enter_comp(afile->fvect, f_name,\
+	if (ft_fvec_enter_comp(afile, f_name,\
 			afile->s_name, len + 1) == -1)
 	{
 		return (-1);

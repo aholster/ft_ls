@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:34:08 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/18 21:14:18 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/20 07:13:45 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 
 #include "../incl/ft_stack_processors.h"
 
+#include <limits.h>
+
 static int	ft_dirp_to_finfostack(DIR *const restrict dirp,\
+				const char *const restrict path,\
 				t_finfo *restrict *const restrict afinfo_stack,\
 				const t_flags aflags)
 {
+	char			full_path[PATH_MAX + 1];
 	struct dirent	*record;
 	struct stat		f_stat;
 	int				status;
@@ -26,13 +30,14 @@ static int	ft_dirp_to_finfostack(DIR *const restrict dirp,\
 	record = readdir(dirp);
 	while (record != NULL)
 	{
+		snprintf(full_path, sizeof(full_path), "%s/%s", path, record->d_name);
 		if ((aflags & flg_L) > 0)
 		{
-			status = stat(record->d_name, &f_stat);
+			status = stat(full_path, &f_stat);
 		}
 		else
 		{
-			status = lstat(record->d_name, &f_stat);
+			status = lstat(full_path, &f_stat);
 		}
 		if (status == 0)
 		{
@@ -66,6 +71,7 @@ static char	*tlist_popnstrip(t_list **const restrict astack)
 }
 
 static int	ft_dirp_process(DIR *const restrict dirp,\
+				const char *const restrict path,\
 				const t_flags aflags)
 {
 	t_finfo	*dir_stats;
@@ -74,7 +80,7 @@ static int	ft_dirp_process(DIR *const restrict dirp,\
 	int		temp;
 
 	dir_stats = NULL;
-	if (ft_dirp_to_finfostack(dirp, &dir_stats, aflags) == -1)
+	if (ft_dirp_to_finfostack(dirp, path, &dir_stats, aflags) == -1)
 	{
 		finfo_lstdel(&dir_stats);
 		return (-1);
@@ -110,10 +116,11 @@ void		ft_process_dir_stack(t_fstack *const restrict afstack,\
 		}
 		else
 		{
-			if (ft_dirp_process(current_dir, aflags) == -1)
+			if (ft_dirp_process(current_dir, iterator->s_name, aflags) == -1)
 			{
 				ft_error_cleanup(afstack);
 			}
+			closedir(current_dir);
 		}
 		iterator = iterator->next;
 	}

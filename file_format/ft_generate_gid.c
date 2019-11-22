@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 07:22:37 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 12:51:06 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/20 04:58:26 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int			ft_generate_gid(const t_finfo *const restrict afile,\
 			acaps->gname_len = size + 1;
 		}
 	}
-	if (ft_fvec_enter_comp(afile->fvect, f_gid, gidstr, size + 1) == -1)
+	if (ft_fvec_enter_comp(afile, f_gid, gidstr, size + 1) == -1)
 	{
 		return (-1);
 	}
