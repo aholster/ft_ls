@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/18 19:17:53 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 08:32:10 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include "./libft/libft.h"
 # include "./incl/finfo.h"
 
-# define USAGE "usage: ft_ls [-LRTUacdfgilnortu1] [file ...]\n"
+# define USAGE "usage: ft_ls [-BCFGLRTUabcdfgilmnopqrtuwx1] [file ...]\n"
 
 /*
-** #      "usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]"
+** #     	   "usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]"
 */
 
 typedef struct			s_fstack

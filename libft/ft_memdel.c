@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/16 19:47:11 by aholster       #+#    #+#                */
-/*   Updated: 2019/02/01 21:27:09 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 06:52:21 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
 
 void	ft_memdel(void **ap)
 {

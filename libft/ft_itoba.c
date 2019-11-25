@@ -6,11 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/30 18:25:03 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/07 15:28:33 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 06:43:36 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 static char	*ft_base1(int n)
 {

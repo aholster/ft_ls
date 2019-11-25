@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 12:34:59 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/20 08:07:33 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 09:12:47 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 # define FT_FILE_FORMAT_H
 
 # include "finfo.h"
+# include <limits.h>
+
+# define MAX_NAMELEN (PATH_MAX * 4)
+
+/*
+**	MAX_NAMELEN is the maximum length of a filename
+**	as with -B all non-rpint characters are printed as \xxx
+**	the maximum length name is the path_max, but entirely nonprintables
+*/
 
 # define PERM_LEN 12
 

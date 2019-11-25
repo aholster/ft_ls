@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 21:53:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/20 10:51:39 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 09:12:42 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 #include "../incl/ft_file_format.h"
 #include "../libft/libft.h"
-#include <limits.h>
 
 static t_list	*unify_l_i(const t_fvec *const restrict components,\
 					const t_compcaps *const restrict acaps)
@@ -75,7 +74,7 @@ static t_list	*unify_i(const t_fvec *const restrict components,\
 					const t_compcaps *const restrict acaps)
 {
 	int		status;
-	char	str[PATH_MAX + 25 + 1];
+	char	str[MAX_NAMELEN + 25 + 1];
 	t_list	*new;
 
 	status = snprintf(str, sizeof(str), "%*s %s", acaps->inode_len,\
@@ -96,7 +95,7 @@ static t_list	*unify_basic(const t_fvec *const restrict components,\
 					const t_compcaps *const restrict acaps)
 {
 	int		status;
-	char	str[PATH_MAX + 1];
+	char	str[MAX_NAMELEN + 1];
 	t_list	*new;
 
 	status = snprintf(str, sizeof(str), "%s",\

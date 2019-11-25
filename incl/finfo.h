@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/12 15:12:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/18 20:57:22 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 13:15:55 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@
 # include <sys/stat.h>
 # include "./ft_flag.h"
 
+# include <limits.h>
+
 typedef struct		s_finfo
 {
-	char *restrict	s_name;
+	char			s_name[PATH_MAX + 1];
+	// char *restrict	s_name;
 	struct stat		stat;
 	struct s_fvec	*fvect;
 	struct s_finfo	*next;

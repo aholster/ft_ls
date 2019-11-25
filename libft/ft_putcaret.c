@@ -6,11 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/22 17:53:04 by aholster       #+#    #+#                */
-/*   Updated: 2019/05/22 18:05:23 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 06:48:28 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <unistd.h>
 
 void	ft_putcaret(int c)
 {

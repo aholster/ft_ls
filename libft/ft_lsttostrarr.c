@@ -6,11 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/31 21:26:14 by aholster       #+#    #+#                */
-/*   Updated: 2019/04/06 14:49:51 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 06:44:04 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 char	**ft_lsttostrarr(t_list *lst)
 {

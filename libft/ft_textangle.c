@@ -6,11 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/24 18:02:21 by aholster       #+#    #+#                */
-/*   Updated: 2019/03/25 15:12:47 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 06:45:21 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 char	**ft_textangle(size_t x, size_t y, char c)
 {

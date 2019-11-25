@@ -6,12 +6,13 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/20 11:31:08 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/22 14:17:47 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 07:34:44 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <sys/ioctl.h>
+#include <unistd.h>
 
 #include "../libft/libft.h"
 // #include "../incl/ft_flag.h"
@@ -111,22 +112,26 @@ int				ft_printer(const t_list *const restrict out_list,\
 	int				status;
 	const uint32_t	term_width = find_term_width();
 
-	status = -1;
-	if ((aflags & flg_m) > 0)
+	if (out_list != NULL)
 	{
-		status = stream_format_print(out_list, term_width);
+		status = -1;
+		if ((aflags & flg_m) > 0)
+		{
+			status = stream_format_print(out_list, term_width);
+		}
+		else if ((aflags & flg_C) > 0)
+		{
+			status = ft_multi_column_print(out_list, max_len, term_width);
+		}
+		else if ((aflags & flg_x) > 0)
+		{
+			status = multi_column_alt(out_list, max_len, term_width);
+		}
+		else if ((aflags & (flg_1 | flg_l)) > 0)
+		{
+			status = per_line_print(out_list);
+		}
+		return (status);
 	}
-	else if ((aflags & flg_C) > 0)
-	{
-		status = ft_multi_column_print(out_list, max_len, term_width);
-	}
-	else if ((aflags & flg_x) > 0)
-	{
-		status = multi_column_alt(out_list, max_len, term_width);
-	}
-	else if ((aflags & (flg_1 | flg_l)) > 0)
-	{
-		status = per_line_print(out_list);
-	}
-	return (status);
+	return (1);
 }

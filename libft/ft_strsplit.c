@@ -6,11 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/20 16:41:45 by aholster       #+#    #+#                */
-/*   Updated: 2019/02/01 18:58:56 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 06:45:17 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 static unsigned int	ft_wordskip(char const *s, int c)
 {

@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:34:08 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/22 17:28:50 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 06:26:01 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	ft_dirp_to_finfostack(DIR *const restrict dirp,\
 	record = readdir(dirp);
 	while (record != NULL)
 	{
-		if ((aflags & flg_a) != flg_a && record->d_name[0] != '.')
+		if ((aflags & flg_a) == flg_a || record->d_name[0] != '.')
 		{
 			snprintf(full_path, sizeof(full_path), "%s/%s", path, record->d_name);
 			if ((aflags & flg_L) > 0)

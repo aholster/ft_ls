@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/11/20 09:32:50 by aholster      ########   odam.nl          #
+#    Updated: 2019/11/25 06:37:16 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ CUSOR:= ll_len ull_len del lstaddend itoba iswhitespace isprime power putstrarr\
  memdup strarrnew textangle stralloc bitprint putmem putmem_fd\
  putmemendl putmemendl_fd lstmemtomem lststrtostr iscapital islowercase\
  stock_read stock_write putcaret putcaret_fd strnlen\
- lst_stack_push lst_stack_pop lstqueue_push lstqueue_pop lstqueue_add
+ lst_stack_push lst_stack_pop lstqueue_push lstqueue_pop lstqueue_add\
+ calloc
 
 
 FILEC = $(ADVOR:%=./ft_%.c) $(BONOR:%=./ft_%.c)\

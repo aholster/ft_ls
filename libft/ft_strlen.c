@@ -6,11 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/14 13:39:30 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/08 21:23:40 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 07:00:39 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdint.h>
 
 static char const	*ft_unrolledlen(const uint64_t himagic,\
 						const uint64_t lomagic,\

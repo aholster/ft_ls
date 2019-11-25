@@ -6,9 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:11:26 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/22 11:39:24 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 08:41:34 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <unistd.h>
 
 #include "../ft_ls.h"
 #include "../libft/libft.h"
@@ -20,12 +22,16 @@ static void	bad_flag(const unsigned char flag_chr)
 }
 
 static const t_flg_tbl	g_trans_tabl[128] = {
+	['B'] = {flg_B, flg_q + flg_w + flg_b},
 	['C'] = {flg_C, flg_x + flg_l + flg_1},
+	['F'] = {flg_F + flg_p, 0},
+	['G'] = {flg_G, 0},
 	['L'] = {flg_L, 0},
 	['R'] = {flg_R, 0},
 	['T'] = {flg_T, 0},
 	['U'] = {flg_U, flg_c + flg_u},
 	['a'] = {flg_a, 0},
+	['b'] = {flg_b, flg_q + flg_w + flg_B},
 	['c'] = {flg_c, flg_U + flg_u},
 	['d'] = {flg_d, 0},
 	['f'] = {flg_f + flg_a, 0},
@@ -35,9 +41,12 @@ static const t_flg_tbl	g_trans_tabl[128] = {
 	['m'] = {flg_m, flg_C + flg_x + flg_l + flg_1},
 	['n'] = {flg_n + flg_l, 0},
 	['o'] = {flg_o + flg_l, 0},
+	['p'] = {flg_p, flg_F},
+	['q'] = {flg_q, flg_b + flg_B + flg_w},
 	['r'] = {flg_r, 0},
 	['t'] = {flg_t, 0},
 	['u'] = {flg_u, flg_c + flg_U},
+	['w'] = {flg_w, flg_b + flg_B + flg_q},
 	['x'] = {flg_x, flg_C + flg_l + flg_1},
 	['1'] = {flg_1, flg_C + flg_l + flg_x + flg_m},
 };
@@ -68,15 +77,28 @@ static void	parse_argument_flags(const char *const restrict flag_block,\
 
 static void	set_default_flags(t_flags *const restrict aflags)
 {
+	const int	atty = isatty(1);
+
 	if ((*aflags & (flg_m | flg_1 | flg_l | flg_C | flg_x)) == 0)
 	{
-		if (isatty(1) == 1)
+		if (atty == 1)
 		{
 			*aflags |= flg_C;
 		}
 		else
 		{
 			*aflags |= flg_1;
+		}
+	}
+	if ((*aflags & (flg_q | flg_w | flg_B | flg_b)) == 0)
+	{
+		if (atty == 1)
+		{
+			*aflags |= flg_q;
+		}
+		else
+		{
+			*aflags |= flg_w;
 		}
 	}
 }

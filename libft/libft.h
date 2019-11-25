@@ -6,14 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/12 18:16:38 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/20 09:32:38 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 06:48:15 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <stdlib.h>
-# include <unistd.h>
 # include <string.h>
 
 typedef struct		s_list
@@ -84,8 +82,9 @@ char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strnew(size_t size);
 char				*ft_strncat(char *s1, char const *s2, size_t n);
-char				*ft_strnstr(char const *haystack, char const *needle,\
-size_t len);
+char				*ft_strnstr(char const *haystack,\
+						char const *needle,\
+						size_t len);
 char				*ft_strrchr(char const *s, int c);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_strstr(char const *haystack, char const *needle);
@@ -116,12 +115,14 @@ int					*ft_range(int min, int max);
 
 void				ft_del(void *data, size_t size);
 t_list				*ft_lstaddend(t_list **const lst, t_list *const new);
-unsigned int		ft_lstlen(t_list *lst);
-void				ft_lsttardest(t_list **lst, t_list **target,\
+unsigned int		ft_lstlen(const t_list *lst);
+void				ft_lsttardest(t_list **lst,\
+						t_list **target,\
 						void (*del)(void *, size_t));
 char				**ft_lsttostrarr(t_list *lst);
 t_list				*ft_strarrtolst(char **strarr);
-int					ft_lstmemtomem(char **feed, size_t *totallen,\
+int					ft_lstmemtomem(char **feed,\
+						size_t *totallen,\
 						t_list *lst);
 int					ft_lststrtostr(char **feed, t_list *lst);
 
@@ -134,7 +135,8 @@ int					ft_lstqueue_push(t_queue *const aqueue,\
 						void const *const content,\
 						const size_t content_size);
 t_list				*ft_lstqueue_pop(t_queue *const aqueue);
-void				ft_lstqueue_add(t_queue *const aqueue, t_list *const anode);
+void				ft_lstqueue_add(t_queue *const aqueue,\
+						t_list *const anode);
 
 # pragma mark str handling
 
@@ -152,14 +154,17 @@ void				ft_putcaret_fd(int c, const int fd);
 
 # pragma mark mem handling
 
+void				*ft_calloc(size_t const size, size_t const n);
 void				ft_stock_write(unsigned char *stock, size_t bitnum);
 int					ft_stock_read(const unsigned char *stock, size_t bitnum);
 void				ft_putmem(char *mem, size_t len);
 void				ft_putmem_fd(char *mem, size_t len, const int fd);
 void				ft_putmemendl(char *mem, size_t len);
 void				ft_putmemendl_fd(char *mem, size_t len, const int fd);
-void				*ft_memjoin(const void *mem1, size_t size1, \
-					const void *mem2, size_t size2);
+void				*ft_memjoin(const void *mem1,\
+						size_t size1, \
+						const void *mem2,\
+						size_t size2);
 void				*ft_memdup(const void *src, const size_t len);
 
 void				ft_bitprint(const void *addr, size_t size);

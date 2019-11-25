@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/03/27 15:51:49 by aholster       #+#    #+#                */
-/*   Updated: 2019/03/27 18:39:13 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 06:50:33 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
 
 void	ft_bitprint(const void *addr, size_t size)
 {

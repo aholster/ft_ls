@@ -6,11 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/04/06 15:14:09 by aholster       #+#    #+#                */
-/*   Updated: 2019/06/07 17:28:05 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/25 06:43:39 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 int	ft_lstmemtomem(char **feed, size_t *totallen, t_list *lst)
 {
