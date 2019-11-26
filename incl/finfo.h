@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/12 15:12:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/25 13:15:55 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 08:08:01 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 typedef struct		s_finfo
 {
 	char			s_name[PATH_MAX + 1];
-	// char *restrict	s_name;
+	size_t			s_name_len;
 	struct stat		stat;
 	struct s_fvec	*fvect;
 	struct s_finfo	*next;

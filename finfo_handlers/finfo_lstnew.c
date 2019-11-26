@@ -6,35 +6,30 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/21 19:28:30 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/25 14:01:44 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 06:23:41 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/finfo.h"
 #include "../libft/libft.h"
 
-t_finfo	*finfo_lstnew(const char *const restrict s_name,
+t_finfo	*finfo_lstnew(const char *const restrict s_name,\
 			const struct stat *const restrict astat_info)
 {
-	t_finfo	*restrict head;
+	t_finfo	*restrict	new;
+	size_t				name_len;
 
-	head = (t_finfo *)malloc(sizeof(t_finfo));
-	if (head == NULL)
+	new = (t_finfo *)ft_calloc(sizeof(t_finfo), 1);
+	if (new == NULL)
 	{
 		return (NULL);
 	}
 	else
 	{
-		ft_strcpy(head->s_name, s_name);
-		// head->s_name = ft_strdup(s_name);
-		// if (head->s_name == NULL)
-		// {
-		// 	free(head);
-		// 	return (NULL);
-		// }
+		name_len = ft_strlen(s_name);
+		ft_memcpy(new->s_name, s_name, name_len);
+		new->s_name_len = name_len;
+		ft_memcpy(&(new->stat), astat_info, sizeof(struct stat));
+		return (new);
 	}
-	ft_memcpy(&(head->stat), astat_info, sizeof(struct stat));
-	head->next = NULL;
-	head->fvect = NULL;
-	return (head);
 }

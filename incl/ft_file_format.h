@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 12:34:59 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/25 09:12:47 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 10:18:29 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 # include "finfo.h"
 # include <limits.h>
 
-# define MAX_NAMELEN (PATH_MAX * 4)
+# define MAX_NAMELEN ((PATH_MAX * 4) + 5)
 
 /*
 **	MAX_NAMELEN is the maximum length of a filename
 **	as with -B all non-rpint characters are printed as \xxx
 **	the maximum length name is the path_max, but entirely nonprintables
 */
+
+# define COLOR_LEN 11
 
 # define PERM_LEN 12
 
@@ -40,6 +42,7 @@ typedef	struct	s_compcaps{
 	int			gname_len;
 	int			fsize_len;
 	int			fname_len;
+	int			max_len;
 }				t_compcaps;
 
 typedef enum	e_component_names{
@@ -58,6 +61,7 @@ typedef enum	e_component_names{
 
 typedef struct	s_fvec{
 	size_t		indices[T_COMPCOUNT];
+	size_t		color_len;
 	size_t		tail;
 	size_t		size;
 	char		*svec;

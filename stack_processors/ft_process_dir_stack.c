@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:34:08 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/25 06:26:01 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 10:12:23 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,12 @@ static int	ft_dirp_process(DIR *const restrict dirp,\
 				const char *const restrict path,\
 				const t_flags aflags)
 {
-	t_finfo	*dir_stats;
-	t_list	*product;
-	int		temp;
+	t_finfo			*dir_stats;
+	t_list			*product;
+	t_print_widths	widths;
 
 	dir_stats = NULL;
+	ft_bzero(&widths, sizeof(t_print_widths));
 	if (ft_dirp_to_finfostack(dirp, path, &dir_stats, aflags) == -1)
 	{
 		finfo_lstdel(&dir_stats);
@@ -73,14 +74,14 @@ static int	ft_dirp_process(DIR *const restrict dirp,\
 	{
 		ft_sort_finfo_stack(&dir_stats, aflags);
 	}
-	if (ft_process_files_to_txt(&dir_stats, &product, &temp, aflags) == -1)
+	if (ft_process_files_to_txt(&dir_stats, &product, &widths, aflags) == -1)
 	{
 		ft_lstdel(&product, &ft_del);
 		finfo_lstdel(&dir_stats);
 		return (-1);
 	}
 	finfo_lstdel(&dir_stats);
-	if (ft_printer(product, temp, aflags) == -1)
+	if (ft_printer(product, &widths, aflags) == -1)
 	{
 		ft_lstdel(&product, &ft_del);
 		return (-1);

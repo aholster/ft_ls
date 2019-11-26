@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 08:10:29 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/25 16:22:44 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 11:26:13 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,101 +15,56 @@
 #include "../incl/ft_file_format.h"
 #include "../libft/libft.h"
 
-static int	utfbasic(const char *const restrict str)
+/*
+** ex fx cx dx bx eg ed ab ag ac ad
+*/
+
+static void	insert_color(const t_finfo *const restrict afile,\
+				char *const restrict name_buf,\
+				size_t *const restrict aindex)
 {
-	if ((*str & 0xe0) == 0xc0 && (str[1] & 0xc0) == 0x80)
+	const mode_t	file_mode = afile->stat.st_mode;
+
+	*aindex += 7;
+	if (S_ISDIR(file_mode) == 1)
 	{
-		return (1);
-	}
-	else if ((*str & 0xf0) == 0xe0 && (str[1] & 0xc0) == 0x80\
-			&& (str[2] & 0xc0) == 0x80)
-	{
-		return (1);
-	}
-	else if ((*str & 0xf8) == 0xf0 && (str[1] & 0xc0) == 0x80\
-			&& (str[2] & 0xc0) == 0x80 && (str[3] & 0xc0) == 0x80)
-	{
-		return (1);
+		ft_memcpy(name_buf, "\033[34;0m", 7);
 	}
 	else
 	{
-		return (0);
+		ft_memcpy(name_buf, "\033[0;00m", 7);
 	}
-}
-
-static int	replace_nonprint(const t_finfo *const restrict afile,\
-				size_t len,\
-				t_compcaps *const restrict acaps,\
-				const t_flags aflags)
-{
-	char						buffer[MAX_NAMELEN];
-	const char *const restrict	file_name = afile->s_name;
-	size_t						index;
-	size_t						buf_index;
-
-	index = 0;
-	buf_index = 0;
-	while (index < len)
-	{
-		if (ft_isprint(file_name[index]) == 1)
-		{
-			buffer[buf_index] = file_name[index];
-			buf_index++;
-		}
-		else if (utfbasic(file_name + index) == 1)
-		{
-			(void)index;
-		}
-		else
-		{
-			if ((aflags & flg_q) == flg_q)
-			{
-				buffer[buf_index] = '?';
-				buf_index++;
-			}
-			else
-			{
-				snprintf(buffer + buf_index, sizeof(buffer) - buf_index,\
-					"\\%.3hho", file_name[index]);
-				buf_index += 4;
-			}
-		}
-		index++;
-	}
-	buffer[buf_index] = '\0';
-	if (ft_fvec_enter_comp(afile, f_name,\
-			buffer, buf_index + 1) == -1)
-	{
-		return (-1);
-	}
-	if ((int)len > acaps->fname_len)
-	{
-		acaps->fname_len = len;
-	}
-	return (1);
 }
 
 int			ft_generate_name(const t_finfo *const restrict afile,\
 				t_compcaps *const restrict acaps,\
 				const t_flags aflags)
 {
-	const size_t	len = ft_strlen(afile->s_name);
+	char	name[MAX_NAMELEN];
+	size_t	text_len;
+	size_t	color_len;
 
-	if ((aflags & flg_w) == flg_w)
+	color_len = 0;
+	if ((aflags & flg_G) == flg_G)
 	{
-		if (ft_fvec_enter_comp(afile, f_name,\
-				afile->s_name, len + 1) == -1)
-		{
-			return (-1);
-		}
-		else if ((int)len > acaps->fname_len)
-		{
-			acaps->fname_len = len;
-		}
-		return (1);
+		insert_color(afile, name, &color_len);
 	}
-	else
+	ft_memcpy(name + color_len, afile->s_name, afile->s_name_len);
+	text_len = afile->s_name_len;
+	if ((aflags & flg_G) == flg_G)
 	{
-		return (replace_nonprint(afile, len, acaps, aflags) == -1);
+		ft_memcpy(name + text_len + color_len, "\033[0m", 4);
+		color_len += 4;
 	}
+	name[text_len + color_len] = '\0';
+	if (ft_fvec_enter_comp(afile, f_name, name, text_len + color_len + 1) == -1)
+	{
+		return (-1);
+	}
+	if ((int)text_len > acaps->fname_len)
+	{
+		acaps->fname_len = (int)text_len;
+	}
+	afile->fvect->color_len = color_len;
+	return (1);
 }

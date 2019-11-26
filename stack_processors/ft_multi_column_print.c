@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/22 14:11:57 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/25 09:35:35 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 10:22:57 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 #include "../libft/libft.h"
 #include "../incl/ft_flag.h"
+
+#include "../incl/ft_stack_processors.h"
 
 static size_t	calc_col_cap(const size_t len, const size_t max_cols)
 {
@@ -58,7 +60,7 @@ static void		fill_in_list_arr(const t_list *restrict iterator,\
 }
 
 static int		print_out_list_arr(const t_list **const restrict list_arr,\
-					const int max_len,\
+					const int byt_width,\
 					const size_t column_cap,\
 					size_t segment_len)
 {
@@ -80,7 +82,7 @@ static int		print_out_list_arr(const t_list **const restrict list_arr,\
 			}
 			else
 			{
-				status = dprintf(1, "%-*s", max_len, list_arr[i]->content);
+				status = dprintf(1, "%-*s", byt_width, list_arr[i]->content);
 			}
 			if (status == -1)
 			{
@@ -95,24 +97,22 @@ static int		print_out_list_arr(const t_list **const restrict list_arr,\
 }
 
 int				ft_multi_column_print(const t_list *const restrict iterator,\
-					const int max_len,\
+					const int byt_width,\
+					const int vis_width,\
 					const uint32_t term_width)
 {
 	const size_t	lst_len = ft_lstlen(iterator);
-	const size_t	col_cap = calc_col_cap(lst_len, term_width / max_len);
+	const size_t	col_cap = calc_col_cap(lst_len, term_width / vis_width);
 	const size_t	segment_len = lst_len / col_cap + (lst_len % col_cap != 0);
 	const t_list	**list_arr;
 
-	// printf("max_col calculated to be: %u\n", term_width / max_len);
-	// printf("lst len: %zu, predicted cols to use :%zu\n", lst_len, col_cap);
-	// printf("estimated list splitting point: every %zu items\n", mini_lstcap);
 	list_arr = (const t_list **)ft_calloc(sizeof(t_list *), col_cap + 1);
 	if (list_arr == NULL)
 	{
 		return (-1);
 	}
 	fill_in_list_arr(iterator, list_arr, segment_len);
-	if (print_out_list_arr(list_arr, max_len, col_cap, segment_len) == -1)
+	if (print_out_list_arr(list_arr, byt_width, col_cap, segment_len) == -1)
 	{
 		free(list_arr);
 		return (-1);

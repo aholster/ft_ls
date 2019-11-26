@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:11:26 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/25 08:41:34 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 06:02:42 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,24 +82,20 @@ static void	set_default_flags(t_flags *const restrict aflags)
 	if ((*aflags & (flg_m | flg_1 | flg_l | flg_C | flg_x)) == 0)
 	{
 		if (atty == 1)
-		{
 			*aflags |= flg_C;
-		}
 		else
-		{
 			*aflags |= flg_1;
-		}
 	}
 	if ((*aflags & (flg_q | flg_w | flg_B | flg_b)) == 0)
 	{
 		if (atty == 1)
-		{
 			*aflags |= flg_q;
-		}
 		else
-		{
 			*aflags |= flg_w;
-		}
+	}
+	if (atty == 1)
+	{
+		*aflags |= flg_G;
 	}
 }
 

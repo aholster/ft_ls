@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/20 11:31:08 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/25 07:34:44 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 10:21:34 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include <unistd.h>
 
 #include "../libft/libft.h"
-// #include "../incl/ft_flag.h"
 #include "../incl/ft_stack_processors.h"
+#include "../incl/ft_file_format.h"
 
 static uint32_t	find_term_width(void)
 {
@@ -33,37 +33,36 @@ static uint32_t	find_term_width(void)
 }
 
 static int		stream_format_print(const t_list *restrict iterator,\
+					const t_flags is_color,\
 					const uint32_t term_width)
 {
-	ssize_t	current_line;
+	ssize_t			n;
+	const size_t	offset = COLOR_LEN * ((is_color & flg_G) > 0);
 
-	current_line = 0;
+	n = 0;
 	while (iterator->next != NULL)
 	{
 		if (dprintf(1, "%s, ", iterator->content) == -1)
 		{
 			return (-1);
 		}
-		current_line += iterator->content_size + 1;
-		if (current_line + iterator->next->content_size + 1 >= term_width)
+		n += iterator->content_size + 1 - offset;
+		if (n + iterator->next->content_size + 1 - offset >= term_width)
 		{
 			if (write(1, "\n", 1) == -1)
-			{
 				return (-1);
-			}
-			current_line = 0;
+			n = 0;
 		}
 		iterator = iterator->next;
 	}
-	if (dprintf(1, "%s\n", iterator->content) == -1)
-	{
+	if (dprintf(1, "%s, \n", iterator->content) == -1)
 		return (-1);
-	}
 	return (1);
 }
 
 static int		multi_column_alt(const t_list *restrict iterator,\
-					const int max_len,\
+					const int byt_width,\
+					const int vis_width,\
 					const uint32_t term_width)
 {
 	size_t	current_line;
@@ -71,8 +70,8 @@ static int		multi_column_alt(const t_list *restrict iterator,\
 	current_line = 0;
 	while (iterator != NULL)
 	{
-		current_line += max_len;
-		if (current_line + max_len >= term_width || iterator->next == NULL)
+		current_line += vis_width;
+		if (current_line + vis_width >= term_width || iterator->next == NULL)
 		{
 			if (dprintf(1, "%s\n", iterator->content) == -1)
 			{
@@ -82,7 +81,7 @@ static int		multi_column_alt(const t_list *restrict iterator,\
 		}
 		else
 		{
-			if (dprintf(1, "%-*s", max_len, iterator->content) == -1)
+			if (dprintf(1, "%-*s", byt_width, iterator->content) == -1)
 			{
 				return (-1);
 			}
@@ -105,33 +104,33 @@ static int		per_line_print(const t_list *restrict iterator)
 	return (1);
 }
 
-int				ft_printer(const t_list *const restrict out_list,\
-					const int max_len,\
+int				ft_printer(const t_list *const restrict lst,\
+					const t_print_widths *const restrict awidths,\
 					const t_flags aflags)
 {
-	int				status;
-	const uint32_t	term_width = find_term_width();
+	const uint32_t	t_width = find_term_width();
+	const int		byt_width = awidths->byt_width;
+	const int		vis_width = awidths->vis_width;
 
-	if (out_list != NULL)
+	if (lst != NULL)
 	{
-		status = -1;
 		if ((aflags & flg_m) > 0)
 		{
-			status = stream_format_print(out_list, term_width);
+			return (stream_format_print(lst, aflags & flg_G, t_width));
 		}
 		else if ((aflags & flg_C) > 0)
 		{
-			status = ft_multi_column_print(out_list, max_len, term_width);
+			return (ft_multi_column_print(lst, byt_width, vis_width, t_width));
 		}
 		else if ((aflags & flg_x) > 0)
 		{
-			status = multi_column_alt(out_list, max_len, term_width);
+			return (multi_column_alt(lst, byt_width, vis_width, t_width));
 		}
 		else if ((aflags & (flg_1 | flg_l)) > 0)
 		{
-			status = per_line_print(out_list);
+			return (per_line_print(lst));
 		}
-		return (status);
+		return (-1);
 	}
 	return (1);
 }
