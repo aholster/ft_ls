@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/22 16:41:14 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/25 14:00:15 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 12:18:32 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	finfo_lstdelone(t_finfo *restrict *const restrict alst)
 	{
 		free((*alst)->fvect->svec);
 		ft_bzero((*alst)->fvect, sizeof(t_fvec));
+		free((*alst)->fvect);
 	}
-	// free((*alst)->s_name);
 	ft_bzero((*alst), sizeof(t_finfo));
 	free(*alst);
 	*alst = NULL;

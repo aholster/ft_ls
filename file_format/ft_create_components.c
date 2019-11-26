@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 05:29:03 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/18 22:22:35 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 12:09:55 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,13 @@ static int	ft_attach_fvec(t_finfo *const restrict afile)
 {
 	t_fvec	*new;
 
-	new = (t_fvec *)malloc(sizeof(t_fvec));
+	new = (t_fvec *)ft_calloc(sizeof(t_fvec), 1);
 	if (new == NULL)
 	{
 		return (-1);
 	}
 	else
 	{
-		ft_bzero(new, sizeof(t_fvec));
 		new->svec = (char *)malloc(sizeof(char) * VECTOR_START);
 		if (new->svec == NULL)
 		{
