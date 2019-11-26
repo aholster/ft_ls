@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/20 11:31:08 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/25 07:34:44 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 13:13:23 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <unistd.h>
 
 #include "../libft/libft.h"
-// #include "../incl/ft_flag.h"
 #include "../incl/ft_stack_processors.h"
 
 static uint32_t	find_term_width(void)

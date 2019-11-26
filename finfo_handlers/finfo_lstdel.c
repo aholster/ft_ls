@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/22 17:40:24 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 02:52:11 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 15:52:48 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	finfo_lstdel(t_finfo *restrict *const restrict alst)
 {
 	t_finfo *holder;
-	t_finfo *current;
 
 	if (alst == NULL || *alst == NULL)
 	{
@@ -23,13 +22,11 @@ void	finfo_lstdel(t_finfo *restrict *const restrict alst)
 	}
 	else
 	{
-		current = *alst;
-		*alst = NULL;
-		while (current != NULL)
+		while (*alst != NULL)
 		{
-			holder = current->next;
-			finfo_lstdelone(&current);
-			current = holder;
+			holder = (*alst)->next;
+			finfo_lstdelone(alst);
+			*alst = holder;
 		}
 	}
 }

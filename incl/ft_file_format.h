@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 12:34:59 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/25 09:12:47 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 15:32:08 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "finfo.h"
 # include <limits.h>
 
-# define MAX_NAMELEN (PATH_MAX * 4)
+# define MAX_NAMELEN (PATH_MAX * 4) + 2
 
 /*
 **	MAX_NAMELEN is the maximum length of a filename

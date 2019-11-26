@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/20 09:03:41 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/20 09:12:22 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 13:08:43 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,20 @@ t_list	*ft_lstqueue_pop(t_queue *const aqueue)
 
 	if (head != NULL)
 	{
-		aqueue->head = head->next;
-		return (NULL);
+		if (head == aqueue->tail)
+		{
+			aqueue->tail = NULL;
+			aqueue->head = NULL;
+			return (head);
+		}
+		else
+		{
+			aqueue->head = head->next;
+			return (head);
+		}
 	}
 	else
 	{
-		return (head);
+		return (NULL);
 	}
 }

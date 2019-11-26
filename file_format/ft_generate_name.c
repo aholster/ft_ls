@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 08:10:29 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/25 16:22:44 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 16:30:29 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,76 +15,77 @@
 #include "../incl/ft_file_format.h"
 #include "../libft/libft.h"
 
-static int	utfbasic(const char *const restrict str)
+static void	replace_with_question(char *str)
 {
-	if ((*str & 0xe0) == 0xc0 && (str[1] & 0xc0) == 0x80)
-	{
-		return (1);
-	}
-	else if ((*str & 0xf0) == 0xe0 && (str[1] & 0xc0) == 0x80\
-			&& (str[2] & 0xc0) == 0x80)
-	{
-		return (1);
-	}
-	else if ((*str & 0xf8) == 0xf0 && (str[1] & 0xc0) == 0x80\
-			&& (str[2] & 0xc0) == 0x80 && (str[3] & 0xc0) == 0x80)
-	{
-		return (1);
-	}
-	else
-	{
-		return (0);
-	}
-}
-
-static int	replace_nonprint(const t_finfo *const restrict afile,\
-				size_t len,\
-				t_compcaps *const restrict acaps,\
-				const t_flags aflags)
-{
-	char						buffer[MAX_NAMELEN];
-	const char *const restrict	file_name = afile->s_name;
-	size_t						index;
-	size_t						buf_index;
+	size_t	index;
 
 	index = 0;
-	buf_index = 0;
-	while (index < len)
+	while (str[index] != '\0')
 	{
-		if (ft_isprint(file_name[index]) == 1)
+		if (ft_isprint(str[index]) == 0)
 		{
-			buffer[buf_index] = file_name[index];
-			buf_index++;
-		}
-		else if (utfbasic(file_name + index) == 1)
-		{
-			(void)index;
-		}
-		else
-		{
-			if ((aflags & flg_q) == flg_q)
-			{
-				buffer[buf_index] = '?';
-				buf_index++;
-			}
-			else
-			{
-				snprintf(buffer + buf_index, sizeof(buffer) - buf_index,\
-					"\\%.3hho", file_name[index]);
-				buf_index += 4;
-			}
+			str[index] = '?';
 		}
 		index++;
 	}
-	buffer[buf_index] = '\0';
-	if (ft_fvec_enter_comp(afile, f_name,\
-			buffer, buf_index + 1) == -1)
+}
+
+static int	write_name(const t_finfo *const restrict afile,\
+				char name_buf[MAX_NAMELEN],\
+				size_t *const restrict atext_len,\
+				const t_flags aflags)
+{
+	const char	*ascii_escape_table[255] = {
+		['\0'] = "\\0",
+		['\r'] = "\\r",
+		['\n'] = "\\n",
+		['\v'] = "\\v",
+		['\a'] = "\\a",
+		['\b'] = "\\b",
+		['\f'] = "\\f",
+		['\t'] = "\\t",
+		['\\'] = "\\\\",
+		['\"'] = "\\\"",
+	};
+	size_t	index;
+	size_t	tardex;
+
+	index = 0;
+	tardex = 0;
+	if ((aflags & (flg_w | flg_q)) > 0)
 	{
-		return (-1);
+		ft_memcpy(name_buf, afile->s_name, afile->s_namelen + 1);
+		*atext_len += afile->s_namelen;
 	}
-	if ((int)len > acaps->fname_len)
+	if ((aflags & flg_q) > 0)
 	{
-		acaps->fname_len = len;
+		replace_with_question(name_buf);
+	}
+	else if ((aflags & (flg_B | flg_b)) > 0)
+	{
+		while (index + 1 < afile->s_namelen)
+		{
+			if (ft_isprint(afile->s_name[index]) == 1)
+			{
+				name_buf[tardex] = afile->s_name[index];
+				tardex += 1;
+			}
+			else if ((aflags & flg_b) == flg_b && ascii_escape_table[(unsigned char)afile->s_name[index]] != NULL)
+			{
+				ft_memcpy(name_buf + tardex,\
+					ascii_escape_table[(unsigned char)afile->s_name[index]], 2);
+				tardex += 2;
+			}
+			else
+			{
+				snprintf(name_buf + tardex, MAX_NAMELEN - tardex,\
+					"\\%.3hho", afile->s_name[index]);
+				tardex += 4;
+			}
+			index++;
+		}
+		name_buf[tardex] = '\0';
+		*atext_len = tardex;
 	}
 	return (1);
 }
@@ -93,23 +94,22 @@ int			ft_generate_name(const t_finfo *const restrict afile,\
 				t_compcaps *const restrict acaps,\
 				const t_flags aflags)
 {
-	const size_t	len = ft_strlen(afile->s_name);
+	char			name[MAX_NAMELEN];
+	size_t			text_len;
 
-	if ((aflags & flg_w) == flg_w)
+	text_len = 0;
+	// ft_bzero(name, sizeof(name));
+	if (write_name(afile, name, &text_len, aflags) == -1)
 	{
-		if (ft_fvec_enter_comp(afile, f_name,\
-				afile->s_name, len + 1) == -1)
-		{
-			return (-1);
-		}
-		else if ((int)len > acaps->fname_len)
-		{
-			acaps->fname_len = len;
-		}
-		return (1);
+		return (-1);
 	}
-	else
+	if (ft_fvec_enter_comp(afile, f_name, name, text_len + 1) == -1)
 	{
-		return (replace_nonprint(afile, len, acaps, aflags) == -1);
+		return (-1);
 	}
+	else if ((int)text_len > acaps->fname_len)
+	{
+		acaps->fname_len = text_len;
+	}
+	return (1);
 }

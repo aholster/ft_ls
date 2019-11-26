@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 01:15:48 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/18 19:08:59 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 16:35:05 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,13 @@ int			main(int argc, char **argv)
 		ft_bzero(&flag_stock, sizeof(t_flags));
 		argc--;
 		argv++;
+		ft_flag_parser(&argc, &argv, &flag_stock);
 		if (argc != 0)
 		{
-			ft_flag_parser(&argc, &argv, &flag_stock);
-			if (argc != 0)
-			{
-				ft_sort_params(argv, &fil_stack, flag_stock);
-			}
+			ft_sort_params(argv, &fil_stack, flag_stock);
 		}
 		stack_minimum_assert(&fil_stack, flag_stock);
 		ft_run_stacks(&fil_stack, flag_stock);
 	}
-	return (1);
+	return (0);
 }

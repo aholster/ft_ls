@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/22 14:11:57 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/26 12:34:53 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/26 12:50:07 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,7 @@ static int		print_out_list_arr(const t_list **const restrict list_arr,\
 				status = dprintf(1, "%-*s", max_len, list_arr[i]->content);
 			}
 			if (status == -1)
-			{
 				return (-1);
-			}
 			list_arr[i] = list_arr[i]->next;
 			i++;
 		}
