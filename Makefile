@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/11/22 14:13:55 by aholster      ########   odam.nl          #
+#    Updated: 2019/12/01 01:40:59 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,8 @@ PARDIR := ./flag_parser/
 PARSRC := ft_flag_parser
 
 FINFODIR := ./finfo_handlers/
-FINFOSRC := finfo_lstadd finfo_lstdel finfo_lstdelone finfo_lstiter\
- finfo_lstnew finfo_stack_pop finfo_stack_push
+FINFOSRC := finfo_lstadd finfo_lstdel finfo_lstdelone finfo_lstnew\
+ finfo_stack_pop finfo_stack_push
 
 SOURCE := main sort_params run_stacks\
  fstack_del error_cleanup relevant_time

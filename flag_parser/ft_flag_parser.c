@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:11:26 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/26 15:28:45 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/27 09:47:17 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdio.h>
 
 #include "../ft_ls.h"
 #include "../libft/libft.h"
@@ -75,40 +75,14 @@ static void	parse_argument_flags(const char *const restrict flag_block,\
 	}
 }
 
-static void	set_default_flags(t_flags *const restrict aflags)
-{
-	const int	atty = isatty(1);
-
-	if ((*aflags & (flg_m | flg_1 | flg_l | flg_C | flg_x)) == 0)
-	{
-		if (atty == 1)
-		{
-			*aflags |= flg_C;
-		}
-		else
-		{
-			*aflags |= flg_1;
-		}
-	}
-	if ((*aflags & (flg_q | flg_w | flg_B | flg_b)) == 0)
-	{
-		if (atty == 1)
-		{
-			*aflags |= flg_q;
-		}
-		else
-		{
-			*aflags |= flg_w;
-		}
-	}
-}
-
 void		ft_flag_parser(int *const restrict aargc,\
 				char **restrict *const restrict aargv,\
 				t_flags *const restrict aflags)
 {
 	size_t					len;
 
+	(*aargv)++;
+	(*aargc)--;
 	while ((*aargc) != 0 && (**aargv)[0] == '-')
 	{
 		len = ft_strlen((**aargv));
@@ -123,5 +97,4 @@ void		ft_flag_parser(int *const restrict aargc,\
 		(*aargv)++;
 		(*aargc)--;
 	}
-	set_default_flags(aflags);
 }

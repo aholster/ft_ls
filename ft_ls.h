@@ -6,14 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/25 08:32:10 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/01 02:26:02 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
-
-# include <stdio.h>
 
 # include "./libft/libft.h"
 # include "./incl/finfo.h"
@@ -24,10 +22,17 @@
 ** #     	   "usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]"
 */
 
+typedef struct			s_fsort
+{
+	t_finfo_queue		ndir_queue;
+	t_finfo_queue		dir_queue;
+	t_queue				err_queue;
+}						t_fsort;
+
 typedef struct			s_fstack
 {
-	t_finfo *restrict	ndir_stack;
-	t_finfo *restrict	dir_stack;
+	t_finfo				*ndir_stack;
+	t_finfo				*dir_stack;
 	t_list				*err_queue;
 }						t_fstack;
 

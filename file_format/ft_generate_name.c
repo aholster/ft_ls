@@ -6,9 +6,12 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 08:10:29 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/26 16:30:29 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/27 13:46:32 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <unistd.h>
+#include <errno.h>
 
 #include <stdio.h>
 
@@ -44,8 +47,8 @@ static int	write_name(const t_finfo *const restrict afile,\
 		['\b'] = "\\b",
 		['\f'] = "\\f",
 		['\t'] = "\\t",
-		['\\'] = "\\\\",
 		['\"'] = "\\\"",
+		['\\'] = "\\\\",
 	};
 	size_t	index;
 	size_t	tardex;
@@ -54,8 +57,8 @@ static int	write_name(const t_finfo *const restrict afile,\
 	tardex = 0;
 	if ((aflags & (flg_w | flg_q)) > 0)
 	{
-		ft_memcpy(name_buf, afile->s_name, afile->s_namelen + 1);
-		*atext_len += afile->s_namelen;
+		ft_memcpy(name_buf, afile->s_name, afile->s_namelen);
+		*atext_len += afile->s_namelen - 1;
 	}
 	if ((aflags & flg_q) > 0)
 	{
@@ -65,7 +68,7 @@ static int	write_name(const t_finfo *const restrict afile,\
 	{
 		while (index + 1 < afile->s_namelen)
 		{
-			if (ft_isprint(afile->s_name[index]) == 1)
+			if (ft_isprint(afile->s_name[index]) == 1 && afile->s_name[index] != '\\')
 			{
 				name_buf[tardex] = afile->s_name[index];
 				tardex += 1;
@@ -78,16 +81,63 @@ static int	write_name(const t_finfo *const restrict afile,\
 			}
 			else
 			{
-				snprintf(name_buf + tardex, MAX_NAMELEN - tardex,\
-					"\\%.3hho", afile->s_name[index]);
+				sprintf(name_buf + tardex, "\\%.3hho", afile->s_name[index]);
 				tardex += 4;
 			}
 			index++;
 		}
-		name_buf[tardex] = '\0';
 		*atext_len = tardex;
 	}
 	return (1);
+}
+
+static void	suffix_name(const t_finfo *const restrict afile,\
+				char name_buf[MAX_NAMELEN],\
+				size_t *const restrict atext_len,\
+				const t_flags aflags)
+{
+	if ((aflags & flg_p) == flg_p && S_ISDIR(afile->stat.st_mode))
+	{
+		name_buf[*atext_len] = '/';
+		*atext_len += 1;
+	}
+	else if ((aflags & flg_F) == flg_F)
+	{
+		*atext_len += 1;
+		if (S_ISLNK(afile->stat.st_mode))
+			name_buf[*atext_len] = '@';
+		else if (S_ISFIFO(afile->stat.st_mode))
+			name_buf[*atext_len] = '|';
+		else if (S_ISSOCK(afile->stat.st_mode))
+			name_buf[*atext_len] = '=';
+		else if (S_ISWHT(afile->stat.st_mode))
+			name_buf[*atext_len] = '%';
+		else if ((afile->stat.st_mode & (S_IXUSR | S_IXGRP | S_IXOTH)) != 0)
+			name_buf[*atext_len] = '*';
+		else
+		{
+			*atext_len -= 1;
+		}
+	}
+}
+
+static void	suffix_destination(const t_finfo *const restrict afile,\
+				char name_buf[MAX_NAMELEN],\
+				size_t *const restrict atext_len)
+{
+	ssize_t	ret;
+
+	ret = readlink(afile->s_name, name_buf + *atext_len, MAX_NAMELEN - *atext_len);
+	if (ret != -1)
+	{
+		*atext_len += ret;
+	}
+	else
+	{
+		afile->fvect->err_id = errno;
+		dprintf(2, "ft_ls: %s:", afile->s_name);
+		perror(NULL);
+	}
 }
 
 int			ft_generate_name(const t_finfo *const restrict afile,\
@@ -98,10 +148,15 @@ int			ft_generate_name(const t_finfo *const restrict afile,\
 	size_t			text_len;
 
 	text_len = 0;
-	// ft_bzero(name, sizeof(name));
 	if (write_name(afile, name, &text_len, aflags) == -1)
 	{
 		return (-1);
+	}
+	suffix_name(afile, name, &text_len, aflags);
+	name[text_len] = '\0';
+	if ((aflags & flg_l) == flg_l && S_ISLNK(afile->stat.st_mode))
+	{
+		suffix_destination(afile, name, &text_len);
 	}
 	if (ft_fvec_enter_comp(afile, f_name, name, text_len + 1) == -1)
 	{

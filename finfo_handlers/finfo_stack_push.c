@@ -6,15 +6,16 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 20:54:16 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/18 20:56:38 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/01 02:33:51 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/finfo.h"
 
-int		finfo_stack_push(t_finfo *restrict *const restrict afinfo_stack,\
-			const char *const restrict s_name,\
-			const struct stat *const restrict astat_finfo)
+int			finfo_stack_push(\
+				t_finfo *restrict *const restrict afinfo_stack,\
+				const char *const restrict s_name,\
+				const struct stat *const restrict astat_finfo)
 {
 	t_finfo	*new;
 
@@ -25,7 +26,8 @@ int		finfo_stack_push(t_finfo *restrict *const restrict afinfo_stack,\
 	}
 	else
 	{
-		finfo_lstadd(afinfo_stack, new);
+		new->next = *afinfo_stack;
+		*afinfo_stack = new;
 		return (1);
 	}
 }

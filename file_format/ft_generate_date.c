@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 05:59:42 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/20 04:58:26 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/27 14:38:21 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 #include "../ft_ls.h"
 
 static void	relevant_date(\
-				const time_t *restrict *const restrict arec_time,\
+				const time_t *restrict *const restrict afile_time,\
 				const struct stat *const restrict astat,\
 				const t_flags aflags)
 {
 	const struct timespec	*holder;
 
 	ft_relevant_time(&holder, astat, aflags);
-	*arec_time = &(holder->tv_sec);
+	*afile_time = &(holder->tv_sec);
 }
 
 /*
@@ -38,24 +38,24 @@ static void	relevant_date(\
 */
 
 static int	small_time(char buf[MDATELEN + 1],\
-				const time_t *const restrict arec_time,\
-				const char *const restrict date)
+				const time_t *const restrict af_time,\
+				const char *const restrict date_str)
 {
-	time_t					cur_time;
+	time_t					c_time;
 
-	if (time(&cur_time) == -1)
+	if (time(&c_time) == -1)
 	{
 		return (-1);
 	}
 	else
 	{
-		if (*arec_time + EPOCH_SIXMONTH >= cur_time)
+		if (*af_time + E_SIXMONTH > c_time || c_time + E_SIXMONTH < *af_time)
 		{
-			snprintf(buf, MDATELEN + 1, "%.12s", date + 4);
+			sprintf(buf, "%.12s", date_str + 4);
 		}
 		else
 		{
-			snprintf(buf, MDATELEN + 1, "%.7s %.4s", date + 4, date + 20);
+			sprintf(buf, "%.7s %.4s", date_str + 4, date_str + 20);
 		}
 		return (1);
 	}
@@ -65,13 +65,13 @@ int			ft_generate_date(const t_finfo *const restrict afile,\
 				t_compcaps *const restrict acaps,\
 				const t_flags aflags)
 {
-	const time_t *restrict	arec_time;
-	const char *restrict	date;
+	const time_t *restrict	afile_time;
+	const char *restrict	date_str;
 	char					buf[MDATELEN + 1];
 
-	relevant_date(&arec_time, &(afile->stat), aflags);
-	date = ctime(arec_time);
-	if (date == NULL)
+	relevant_date(&afile_time, &(afile->stat), aflags);
+	date_str = ctime(afile_time);
+	if (date_str == NULL)
 	{
 		return (-1);
 	}
@@ -79,11 +79,10 @@ int			ft_generate_date(const t_finfo *const restrict afile,\
 	{
 		if ((aflags & flg_T) > 0)
 		{
-			snprintf(buf, sizeof(buf), "%.20s", date + 4);
-			return (ft_fvec_enter_comp(afile, f_date,\
-							buf, MDATELEN + 1));
+			snprintf(buf, sizeof(buf), "%.20s", date_str + 4);
+			return (ft_fvec_enter_comp(afile, f_date, buf, MDATELEN + 1));
 		}
-		else if (small_time(buf, arec_time, date) == -1)
+		else if (small_time(buf, afile_time, date_str) == -1)
 			return (-1);
 		return (ft_fvec_enter_comp(afile, f_date, buf, DATELEN + 1));
 	}

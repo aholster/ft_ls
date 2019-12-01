@@ -6,9 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/13 13:58:01 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 07:01:04 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/27 09:47:54 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 #include "../incl/ft_stack_sorters.h"
 

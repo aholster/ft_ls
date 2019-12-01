@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 05:29:03 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/26 15:28:37 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/01 00:15:05 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,22 @@ static int	ft_attach_fvec(t_finfo *const restrict afile)
 	}
 }
 
+static const t_comp_kvp	g_component_table[T_COMPCOUNT] = {
+	[f_inode] = {&ft_generate_inode, flg_i},
+	[f_perm] = {&ft_generate_permissions, flg_l},
+	[f_nlnk] = {&ft_generate_hardlinks, flg_l},
+	[f_uid] = {&ft_generate_uid, flg_l},
+	[f_gid] = {&ft_generate_gid, flg_l},
+	[f_size] = {&ft_generate_size, flg_l},
+	[f_date] = {&ft_generate_date, flg_l},
+	[f_name] = {&ft_generate_name, basic},
+};
+
 int			ft_create_components(t_finfo *restrict afinfo,\
 				t_compcaps *const restrict acaps,\
 				const t_flags aflags)
 {
 	t_component_names	index;
-	const t_comp_gen	component_table[T_COMPCOUNT] = {
-		[f_inode] = &ft_generate_inode,
-		[f_perm] = &ft_generate_permissions,
-		[f_nlnk] = &ft_generate_hardlinks,
-		[f_uid] = &ft_generate_uid,
-		[f_gid] = &ft_generate_gid,
-		[f_size] = &ft_generate_size,
-		[f_date] = &ft_generate_date,
-		[f_name] = &ft_generate_name,
-	};
 
 	while (afinfo != NULL)
 	{
@@ -68,9 +69,12 @@ int			ft_create_components(t_finfo *restrict afinfo,\
 		}
 		while (index < T_COMPCOUNT)
 		{
-			if (component_table[index](afinfo, acaps, aflags) == -1)
+			if ((g_component_table[index].prereq & aflags) != 0)
 			{
-				return (-1);
+				if (g_component_table[index].func(afinfo, acaps, aflags) == -1)
+				{
+					return (-1);
+				}
 			}
 			index++;
 		}

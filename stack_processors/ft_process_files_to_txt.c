@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/18 19:31:37 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/20 09:45:08 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/01 01:58:44 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	create_out_stack(t_finfo *restrict *const restrict afinfo_stack,\
 		{
 			longest = new->content_size;
 		}
-		ft_lstadd(aout_stack, new);
+		ft_lstaddend(aout_stack, new);
 	}
 	return (longest);
 }

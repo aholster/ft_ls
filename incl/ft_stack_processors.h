@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:27:27 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/22 14:13:41 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/27 15:26:25 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void			ft_process_ndir_stack(t_fstack *const restrict afstack,\
 					const t_flags aflags);
 
 void			ft_process_dir_stack(t_fstack *const restrict afstack,\
+					const int is_singledir,\
 					const t_flags aflags);
 
 int				ft_process_files_to_txt(\

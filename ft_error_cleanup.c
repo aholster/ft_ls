@@ -6,9 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/13 13:48:17 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/18 19:10:58 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/27 09:48:09 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 #include "ft_ls.h"
 

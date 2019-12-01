@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 02:14:33 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/26 13:15:18 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/30 23:46:43 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 typedef	enum	e_flags
 {
-	flg_B = 1LU << 0,
-	flg_C = 1LU << 1,
-	flg_F = 1LU << 2,
+	basic = 1,
+	flg_B = 1LU << 1,
+	flg_C = 1LU << 2,
+	flg_F = 1LU << 3,
 	// flg_G = 1LU << 3,
 	flg_L = 1LU << 4,
 	flg_R = 1LU << 5,

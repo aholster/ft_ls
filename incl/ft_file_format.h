@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 12:34:59 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/26 15:32:08 by aholster      ########   odam.nl         */
+/*   Updated: 2019/11/27 15:11:22 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 /*
 **	MAX_NAMELEN is the maximum length of a filename
 **	as with -B all non-rpint characters are printed as \xxx
-**	the maximum length name is the path_max, but entirely nonprintables
+**	thus the maximum length name is the path_max, but entirely nonprintables
 */
 
 # define PERM_LEN 12
@@ -29,7 +29,7 @@
 # define DATELEN 13
 # define MDATELEN 21
 
-# define EPOCH_SIXMONTH 15778476
+# define E_SIXMONTH 15778476
 
 typedef struct s_list	t_list;
 
@@ -58,6 +58,7 @@ typedef enum	e_component_names{
 
 typedef struct	s_fvec{
 	size_t		indices[T_COMPCOUNT];
+	int			err_id;
 	size_t		tail;
 	size_t		size;
 	char		*svec;
@@ -66,6 +67,11 @@ typedef struct	s_fvec{
 typedef	int		(*t_comp_gen)(const t_finfo *const restrict,\
 					t_compcaps *const restrict,\
 					const t_flags);
+
+typedef struct	s_comp_kvp{
+	t_comp_gen	func;
+	t_flags		prereq;
+}				t_comp_kvp;
 
 typedef	t_list	*(*t_unifier)(const t_fvec *const restrict,\
 					const t_compcaps *const restrict);
