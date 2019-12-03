@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 09:43:25 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/01 02:27:46 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/03 06:38:34 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 #include "ft_ls.h"
 
-static void	del_queues(t_fsort *const restrict afqueues)
+static void	del_queues(t_fstack *const restrict afqueues)
 {
 	perror("ft_ls");
-	finfo_lstdel(&(afqueues->ndir_queue.head));
-	finfo_lstdel(&(afqueues->dir_queue.head));
+	finfo_del(&(afqueues->ndir_queue));
+	finfo_del(&(afqueues->dir_queue));
 	ft_lstdel(&(afqueues->err_queue.head), &ft_del);
 	exit(-1);
 }
 
 static void	add_to_errqueue(const char *const restrict name,\
-				t_fsort *const restrict afqueues)
+				t_fstack *const restrict afqueues)
 {
 	t_list	*new;
 
@@ -41,7 +41,7 @@ static void	add_to_errqueue(const char *const restrict name,\
 
 static void	add_to_stack(const char *const restrict name,\
 				const struct stat *const restrict stat_info,\
-				t_fsort *const restrict afqueues,\
+				t_fstack *const restrict afqueues,\
 				const t_flags aflags)
 {
 	t_finfo	*restrict	new_node;
@@ -55,17 +55,17 @@ static void	add_to_stack(const char *const restrict name,\
 	{
 		if ((aflags & flg_d) > 0 || S_ISDIR(new_node->stat.st_mode) != 1)
 		{
-			finfo_lstadd(&(afqueues->ndir_queue), new_node);
+			finfo_queue_add(&(afqueues->ndir_queue), new_node);
 		}
 		else
 		{
-			finfo_lstadd(&(afqueues->dir_queue), new_node);
+			finfo_queue_add(&(afqueues->dir_queue), new_node);
 		}
 	}
 }
 
-static void	iterate_arguments(char **restrict argv,\
-				t_fsort *const restrict afqueues,\
+void		ft_sort_params(char **restrict argv,\
+				t_fstack *const restrict afqueues,\
 				const t_flags aflags)
 {
 	struct stat			stat_info;
@@ -91,17 +91,4 @@ static void	iterate_arguments(char **restrict argv,\
 		}
 		argv++;
 	}
-}
-
-void		ft_sort_params(char **restrict argv,\
-				t_fstack *const restrict afstack,\
-				const t_flags aflags)
-{
-	t_fsort		sort_holder;
-
-	ft_bzero(&sort_holder, sizeof(t_fsort));
-	iterate_arguments(argv, &sort_holder, aflags);
-	afstack->ndir_stack = sort_holder.ndir_queue.head;
-	afstack->dir_stack = sort_holder.dir_queue.head;
-	afstack->err_queue = sort_holder.err_queue.head;
 }

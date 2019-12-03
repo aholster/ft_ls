@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/12 15:12:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/01 02:27:27 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/03 06:26:18 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,17 @@ typedef	t_sortcode	(*t_decider)(const t_finfo *const restrict,\
 t_finfo				*finfo_lstnew(const char *const restrict s_name,\
 						const struct stat *const restrict astat_info);
 
-void				finfo_lstadd(t_finfo_queue *const restrict aqueue,\
+void				finfo_queue_add(t_finfo_queue *const restrict aqueue,\
 						t_finfo *const new);
 
-void				finfo_lstdel(t_finfo **const restrict alst);
+void				finfo_del(t_finfo_queue *const restrict aqueue);
 void				finfo_lstdelone(t_finfo *restrict *const restrict alst);
 
 t_finfo				*finfo_stack_pop(\
 						t_finfo *restrict *const restrict afinfo_stack);
 
-int					finfo_stack_push(\
-						t_finfo *restrict *const restrict afinfo_stack,\
+int					finfo_queue_push(\
+						t_finfo_queue *const restrict aqueue,\
 						const char *const restrict s_name,\
 						const struct stat *const restrict astat_finfo);
 

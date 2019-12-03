@@ -6,30 +6,31 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 10:40:04 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/22 08:33:22 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/02 22:38:22 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_stack_processors.h"
 
-void		ft_process_ndir_stack(t_fstack *const restrict afstack,\
+int		ft_process_ndir_stack(t_finfo **const restrict afinfo_lst,\
 				const t_flags aflags)
 {
-	t_list					*out_stack;
+	t_list					*product;
 	int						max_len;
+	int						status;
 
-	out_stack = NULL;
+	product = NULL;
 	max_len = 0;
-	if (ft_process_files_to_txt(&(afstack->ndir_stack),\
-		&out_stack, &max_len, aflags) == -1)
+	if (ft_process_files_to_txt(afinfo_lst, &product, &max_len, aflags) == -1)
 	{
-		ft_lstdel(&out_stack, &ft_del);
-		ft_error_cleanup(afstack);
+		ft_lstdel(&product, &ft_del);
+		return (-1);
 	}
-	if (ft_printer(out_stack, max_len, aflags) == -1)
+	status = ft_printer(product, max_len, aflags);
+	ft_lstdel(&product, &ft_del);
+	if (status == -1)
 	{
-		ft_lstdel(&out_stack, &ft_del);
-		ft_error_cleanup(afstack);
+		return (-1);
 	}
-	ft_lstdel(&out_stack, &ft_del);
+	return (1);
 }

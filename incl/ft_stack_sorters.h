@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/13 13:59:38 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 07:00:51 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/03 06:44:37 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 void		ft_sortnprocess_err_queue(t_fstack *const restrict afstack,\
 				const t_flags aflags);
 
-void		ft_sort_finfo_stack(\
-				t_finfo *restrict *const restrict afinfo_stack,\
+void		ft_sort_finfo_stack(t_finfo_queue *const restrict afinfo_stack,\
 				const t_flags aflags);
 
 t_decider	ft_sorter_method(const t_flags aflags);

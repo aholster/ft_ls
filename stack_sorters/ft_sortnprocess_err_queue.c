@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/13 13:58:01 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/27 09:47:54 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/03 09:01:14 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ void			ft_sortnprocess_err_queue(t_fstack *const restrict afstack,
 
 	if ((aflags & flg_f) == 0)
 	{
-		merge_sort(&(afstack->err_queue));
+		merge_sort(&(afstack->err_queue.head));
 	}
-	iterator = afstack->err_queue;
+	iterator = afstack->err_queue.head;
 	while (iterator != NULL)
 	{
 		if ((aflags & flg_L) > 0)
@@ -96,5 +96,5 @@ void			ft_sortnprocess_err_queue(t_fstack *const restrict afstack,
 		perror(NULL);
 		iterator = iterator->next;
 	}
-	ft_lstdel(&(afstack->err_queue), &ft_del);
+	ft_lstdel(&(afstack->err_queue.head), &ft_del);
 }

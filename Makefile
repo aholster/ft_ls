@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/12/01 01:40:59 by aholster      ########   odam.nl          #
+#    Updated: 2019/12/03 13:47:24 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LONSRC := create_components fvec_enter_comp init_permissions_table\
 
 PRODIR := ./stack_processors/
 PROSRC := process_ndir_stack process_dir_stack process_files_to_txt\
- unifier_method printer multi_column_print
+ unifier_method printer multi_column_print dirp_to_finfo
 
 SORTDIR := ./stack_sorters/
 SORTSRC := sortnprocess_err_queue sort_finfo_stack\
@@ -29,11 +29,10 @@ PARDIR := ./flag_parser/
 PARSRC := ft_flag_parser
 
 FINFODIR := ./finfo_handlers/
-FINFOSRC := finfo_lstadd finfo_lstdel finfo_lstdelone finfo_lstnew\
- finfo_stack_pop finfo_stack_push
+FINFOSRC := finfo_queue_add finfo_del finfo_lstdelone finfo_lstnew\
+ finfo_stack_pop finfo_queue_push
 
-SOURCE := main sort_params run_stacks\
- fstack_del error_cleanup relevant_time
+SOURCE := main sort_params run_stacks relevant_time
 
 FILEC := $(SOURCE:%=./ft_%.c) $(PARSRC:%=$(PARDIR)%.c)\
  $(SORTSRC:%=$(SORTDIR)ft_%.c) $(FINFOSRC:%=$(FINFODIR)%.c)\
@@ -50,7 +49,7 @@ NAME := ft_ls
 NORM := norminette $(FILEC) $(HEAD) | grep -e "Error"  -e "Warning" -B 1
 
 GCCC = ${CC} -c
-CC = gcc -g -Wall -Werror -Wextra -fsanitize=address
+CC = gcc -g -Wall -Werror -Wextra
 AR = ar rcs
 
 all: $(NAME)

@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_fstack_del.c                                    :+:    :+:            */
+/*   finfo_del.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/13 12:11:31 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/14 10:26:16 by aholster      ########   odam.nl         */
+/*   Created: 2019/01/22 17:40:24 by aholster       #+#    #+#                */
+/*   Updated: 2019/12/03 09:04:33 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "../incl/finfo.h"
+#include "../libft/libft.h"
 
-void	ft_fstack_del(t_fstack *const restrict afstack)
+void	finfo_del(t_finfo_queue *const restrict aqueue)
 {
-	finfo_lstdel(&(afstack->ndir_stack));
-	finfo_lstdel(&(afstack->dir_stack));
-	ft_lstdel(&(afstack->err_queue), &ft_del);
-	ft_bzero(afstack, sizeof(t_fstack));
+	t_finfo *holder;
+	t_finfo *iter;
+
+	iter = aqueue->head;
+	while (iter != NULL)
+	{
+		holder = iter->next;
+		finfo_lstdelone(&iter);
+		iter = holder;
+	}
+	ft_bzero(aqueue, sizeof(t_finfo_queue));
 }

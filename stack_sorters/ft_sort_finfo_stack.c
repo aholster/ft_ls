@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 13:03:36 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/01 02:47:52 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/03 13:02:05 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ static void		finfo_merge_sort(t_finfo **const restrict alst,\
 }
 
 void			ft_sort_finfo_stack(\
-					t_finfo *restrict *const restrict afinfo_stack,\
+					t_finfo_queue *const restrict afinfo_queue,\
 					const t_flags aflags)
 {
 	t_decider			method;
+	t_finfo				*iter;
 
 	if ((aflags & flg_r) == 0)
 	{
@@ -89,5 +90,11 @@ void			ft_sort_finfo_stack(\
 	{
 		method = ft_sorter_method(aflags);
 	}
-	finfo_merge_sort((t_finfo **const restrict)afinfo_stack, method, aflags);
+	finfo_merge_sort(&(afinfo_queue->head), method, aflags);
+	iter = afinfo_queue->head;
+	while (iter->next != NULL)
+	{
+		iter = iter->next;
+	}
+	afinfo_queue->tail = iter;
 }

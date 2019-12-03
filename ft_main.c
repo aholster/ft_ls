@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 01:15:48 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/30 23:45:34 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/03 05:53:17 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static void	stack_minimum_assert(t_fstack *const restrict afstack,\
 {
 	char	*fake_argv[2];
 
-	if (afstack->ndir_stack == NULL &&\
-		afstack->dir_stack == NULL &&\
-		afstack->err_queue == NULL)
+	if (afstack->ndir_queue.head == NULL &&\
+		afstack->dir_queue.head == NULL &&\
+		afstack->err_queue.head == NULL)
 	{
 		fake_argv[0] = ".";
 		fake_argv[1] = NULL;
@@ -62,7 +62,7 @@ static void	stack_minimum_assert(t_fstack *const restrict afstack,\
 int			main(int argc, char **argv)
 {
 	t_flags				flag_stock;
-	t_fstack			fil_stack;
+	t_fstack			file_queues;
 
 	if (argc == 0)
 	{
@@ -71,18 +71,19 @@ int			main(int argc, char **argv)
 	}
 	else
 	{
+		ft_bzero(&file_queues, sizeof(t_fstack));
 		flag_stock = basic;
 		if (argc != 1)
 		{
 			ft_flag_parser(&argc, &argv, &flag_stock);
 			if (argc != 0)
 			{
-				ft_sort_params(argv, &fil_stack, flag_stock);
+				ft_sort_params(argv, &file_queues, flag_stock);
 			}
 		}
 		set_default_flags(&flag_stock);
-		stack_minimum_assert(&fil_stack, flag_stock);
-		ft_run_stacks(&fil_stack, flag_stock);
+		stack_minimum_assert(&file_queues, flag_stock);
+		ft_run_stacks(&file_queues, flag_stock);
 	}
 	return (0);
 }

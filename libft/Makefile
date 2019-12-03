@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/11/25 06:37:16 by aholster      ########   odam.nl          #
+#    Updated: 2019/12/03 13:46:06 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ NAME = libft.a
 NORM = norminette $(FILEC) $(HEAD) | grep -e "Error"  -e "Warning" -B 1
 
 GCCC = ${CC} -c
-CC = gcc -Wall -Werror -Wextra -fsanitize=address
+CC = gcc -Wall -Werror -Wextra
 AR = ar rcs
 
 all: $(NAME)
