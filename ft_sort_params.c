@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 09:43:25 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/03 06:38:34 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/04 12:49:53 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	add_to_stack(const char *const restrict name,\
 {
 	t_finfo	*restrict	new_node;
 
-	new_node = finfo_lstnew(name, stat_info);
+	new_node = finfo_lstnew("", name, stat_info);
 	if (new_node == NULL)
 	{
 		del_queues(afqueues);

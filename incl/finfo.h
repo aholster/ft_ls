@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/12 15:12:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/03 06:26:18 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/04 13:08:27 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 
 typedef struct		s_finfo
 {
-	char			s_name[NAME_MAX + 1];
+	char			s_path[PATH_MAX + 1];
+	size_t			s_pathlen;
+	char			*s_name;
 	size_t			s_namelen;
 	struct stat		stat;
 	struct s_fvec	*fvect;
@@ -44,7 +46,8 @@ typedef	t_sortcode	(*t_decider)(const t_finfo *const restrict,\
 						const t_finfo *const restrict,\
 						const t_flags);
 
-t_finfo				*finfo_lstnew(const char *const restrict s_name,\
+t_finfo				*finfo_lstnew(const char *const restrict s_path,\
+						const char *const restrict s_name,\
 						const struct stat *const restrict astat_info);
 
 void				finfo_queue_add(t_finfo_queue *const restrict aqueue,\
@@ -58,6 +61,7 @@ t_finfo				*finfo_stack_pop(\
 
 int					finfo_queue_push(\
 						t_finfo_queue *const restrict aqueue,\
+						const char *const restrict s_path,\
 						const char *const restrict s_name,\
 						const struct stat *const restrict astat_finfo);
 

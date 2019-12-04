@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/12/03 13:47:24 by aholster      ########   odam.nl          #
+#    Updated: 2019/12/04 15:20:40 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ DATE := $(shell date)
 LONDIR := ./file_format/
 LONSRC := create_components fvec_enter_comp init_permissions_table\
  generate_inode generate_permissions generate_hardlinks generate_uid\
- generate_gid generate_size generate_date generate_name
+ generate_gid generate_size generate_date generate_name format_name
 
 PRODIR := ./stack_processors/
 PROSRC := process_ndir_stack process_dir_stack process_files_to_txt\

@@ -6,11 +6,13 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/02 04:52:42 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/03 13:02:51 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/04 19:03:07 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+
+#include <errno.h>
 
 #include <sys/types.h>
 #include <sys/dir.h>
@@ -29,6 +31,7 @@ int			process_dirp(const struct dirent *const restrict record,\
 	if ((aflags & flg_a) == flg_a || record->d_name[0] != '.')
 	{
 		snprintf(full_path, sizeof(full_path), "%s/%s", path, record->d_name);
+		errno = 0;
 		if ((aflags & flg_L) == flg_L)
 		{
 			status = stat(full_path, &f_stat);
@@ -37,9 +40,14 @@ int			process_dirp(const struct dirent *const restrict record,\
 		{
 			status = lstat(full_path, &f_stat);
 		}
-		if (status != -1)
+		if (status == -1)
 		{
-			if (finfo_queue_push(aqueue, record->d_name, &f_stat) == -1)
+			fprintf(stderr, "ft_ls: %s: ", record->d_name);
+			perror(NULL);
+		}
+		else
+		{
+			if (finfo_queue_push(aqueue, path, record->d_name, &f_stat) == -1)
 			{
 				return (-1);
 			}

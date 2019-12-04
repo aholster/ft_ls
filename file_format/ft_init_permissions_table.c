@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 10:14:50 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 15:41:06 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/04 15:20:25 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	generate_permissions_line(char *const restrict abuf,\
 	}
 }
 
-void		init_permissions_table(char permissions_table[4096][10])
+void		ft_init_permissions_table(char permissions_table[4096][10])
 {
 	mode_t aiter;
 

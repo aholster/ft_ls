@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 05:36:07 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/20 05:15:47 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/04 15:46:20 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int			ft_generate_permissions(const t_finfo *const restrict afile,\
 
 	if (perm_table[0][0] == 'N')
 	{
-		init_permissions_table(perm_table);
+		ft_init_permissions_table(perm_table);
 	}
 	identify_filetype(file_mode & S_IFMT, buf);
 	ft_memcpy(buf + 1, perm_table[file_mode & ALLPERMS], 9);

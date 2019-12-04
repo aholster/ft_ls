@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/07 12:34:59 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/27 15:11:22 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/04 15:20:30 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "finfo.h"
 # include <limits.h>
 
-# define MAX_NAMELEN (PATH_MAX * 4) + 2
+# define MAX_NAMELEN (((PATH_MAX * 4) + 2) * 2)
 
 /*
 **	MAX_NAMELEN is the maximum length of a filename
@@ -58,7 +58,6 @@ typedef enum	e_component_names{
 
 typedef struct	s_fvec{
 	size_t		indices[T_COMPCOUNT];
-	int			err_id;
 	size_t		tail;
 	size_t		size;
 	char		*svec;
@@ -106,7 +105,7 @@ int				ft_generate_date(const t_finfo *const restrict afile,\
 int				ft_generate_permissions(const t_finfo *const restrict afile,\
 					t_compcaps *const restrict acaps,\
 					const t_flags aflags);
-void			init_permissions_table(char permissions_table[4096][10]);
+void			ft_init_permissions_table(char permissions_table[4096][10]);
 
 int				ft_generate_uid(const t_finfo *const restrict afile,\
 					t_compcaps *const restrict acaps,\
@@ -119,5 +118,8 @@ int				ft_generate_gid(const t_finfo *const restrict afile,\
 int				ft_generate_name(const t_finfo *const restrict afile,\
 					t_compcaps *const restrict acaps,\
 					const t_flags aflags);
-
+size_t			ft_format_name(const char *const restrict source,\
+					const size_t source_size,\
+					char name_buf[MAX_NAMELEN],\
+					const t_flags aflags);
 #endif

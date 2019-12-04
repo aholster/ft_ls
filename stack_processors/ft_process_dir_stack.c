@@ -6,12 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:34:08 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/03 13:13:23 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/04 19:06:36 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <errno.h>
 
 #include <unistd.h>
 
@@ -44,15 +43,11 @@ static int	create_dir_lst(const t_finfo *restrict file_lst,\
 				const char *const restrict path,\
 				t_finfo_queue *const restrict adir_queue)
 {
-	char	full_path[PATH_MAX + 1];
-
 	while (file_lst != NULL)
 	{
 		if (S_ISDIR(file_lst->stat.st_mode) == 1)
 		{
-			snprintf(full_path, sizeof(full_path), "%s/%s",\
-					path, file_lst->s_name);
-			if (finfo_queue_push(adir_queue, full_path, &(file_lst->stat)) == -1)
+			if (finfo_queue_push(adir_queue, path, file_lst->s_name, &(file_lst->stat)) == -1)
 			{
 				return (-1);
 			}
@@ -96,7 +91,7 @@ static int	recursive_trav(DIR *const restrict dirp,\
 		}
 		if (dir_queue.head != NULL)
 		{
-			write(1, "\n", 1);
+			printf("\n");
 			if (ft_process_dir_stack(&dir_queue, 0, aflags) == -1)
 			{
 				finfo_del(&dir_queue);
@@ -147,31 +142,34 @@ static int	iter_dirfinfo(const t_finfo *restrict dir_lst,\
 	{
 		if (is_singledir == 0)
 		{
-			printf("%s:\n", dir_lst->s_name);
+			printf("%s:\n", dir_lst->s_path);
 		}
-		current_dir = opendir(dir_lst->s_name);
+		current_dir = opendir(dir_lst->s_path);
 		if (current_dir == NULL)
 		{
-			dprintf(2, "ft_ls: %s: %s\n", dir_lst->s_name, strerror(errno));
+			dprintf(2, "ft_ls: %s: ", dir_lst->s_name);
+			perror(NULL);
 		}
 		else
 		{
 			if ((aflags & flg_R) == flg_R)
 			{
-				ret = recursive_trav(current_dir, dir_lst->s_name, aflags);
+				ret = recursive_trav(current_dir, dir_lst->s_path, aflags);
 			}
 			else
 			{
-				ret = non_recursive_trav(current_dir, dir_lst->s_name, aflags);
+				ret = non_recursive_trav(current_dir, dir_lst->s_path, aflags);
 			}
 			closedir(current_dir);
 			if (ret == -1)
+			{
 				return (-1);
+			}
 		}
 		dir_lst = dir_lst->next;
 		if (dir_lst != NULL)
 		{
-			write(1, "\n", 1);
+			printf("\n");
 		}
 	}
 	return (1);
