@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:34:08 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/07 09:26:06 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 13:59:53 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ static int	access_directory(const char *const restrict name,\
 	}
 }
 
-int		ft_process_dir_stack(t_finfo_queue *const restrict dir_queue,\
+int			ft_process_dir_stack(t_finfo_queue *const restrict dir_queue,\
 				const int is_singledir,\
 				const t_flags aflags)
 {
