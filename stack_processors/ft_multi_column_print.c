@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/22 14:11:57 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/26 12:50:07 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 05:45:31 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "../ft_printf/ft_printf.h"
 #include <stdlib.h>
 #include <stdint.h>
 
@@ -80,11 +80,11 @@ static int		print_out_list_arr(const t_list **const restrict list_arr,\
 		{
 			if (list_arr[i + 1] == NULL)
 			{
-				status = dprintf(1, "%s\n", list_arr[i]->content);
+				status = ft_printf("%s\n", list_arr[i]->content);
 			}
 			else
 			{
-				status = dprintf(1, "%-*s", max_len, list_arr[i]->content);
+				status = ft_printf("%-*s", max_len, list_arr[i]->content);
 			}
 			if (status == -1)
 				return (-1);

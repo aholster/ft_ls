@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/07 04:32:23 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/07 04:34:00 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 05:31:36 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,11 @@ static void	run_ndir_queue(t_fstack *const restrict afqueues,\
 	{
 		ft_sort_finfo_stack(&(afqueues->ndir_queue), aflags);
 	}
-	if (ft_process_ndir_stack(&(afqueues->ndir_queue.head), aflags) == -1)
+	if (ft_process_ndir_stack(afqueues->ndir_queue.head, aflags) == -1)
 	{
 		ft_error_cleanup(afqueues);
 	}
+	finfo_del(&(afqueues->ndir_queue));
 	if (afqueues->dir_queue.head != NULL)
 	{
 		write(1, "\n", 1);

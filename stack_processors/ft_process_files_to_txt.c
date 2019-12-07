@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/18 19:31:37 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/07 05:16:05 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 05:35:43 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,19 @@
 #include "../incl/ft_file_format.h"
 #include "../libft/libft.h"
 
-static int	create_out_stack(t_finfo *restrict *const restrict afinfo_stack,\
+static int	create_out_stack(const t_finfo *restrict finfo_iter,\
 					const t_compcaps *const restrict acaps,\
 					t_list **const restrict aout_stack,\
-					const t_unifier method)
+					const t_flags aflags)
 {
-	t_list		*new;
-	t_finfo		*current;
-	int			longest;
+	const t_unifier	method = ft_unifier_method(aflags);
+	t_list			*new;
+	int				longest;
 
 	longest = 0;
-	while (*afinfo_stack != NULL)
+	while (finfo_iter != NULL)
 	{
-		current = finfo_stack_pop(afinfo_stack);
-		new = method(current->fvect, acaps);
-		// finfo_lstdelone(&current);
+		new = method(finfo_iter->fvect, acaps);
 		if (new == NULL)
 		{
 			return (-1);
@@ -39,29 +37,28 @@ static int	create_out_stack(t_finfo *restrict *const restrict afinfo_stack,\
 			longest = new->content_size;
 		}
 		ft_lstaddend(aout_stack, new);
+		finfo_iter = finfo_iter->next;
 	}
 	return (longest);
 }
 
 int			ft_process_files_to_txt(\
-				t_finfo *restrict *const restrict afinfo_stack,\
+				t_finfo *const restrict afinfo_lst,\
 				t_list **const restrict aout_stack,\
 				int *const restrict amax_len,\
 				const t_flags aflags)
 {
 	t_compcaps	caps;
-	t_unifier	method;
 	int			holder;
 
 	ft_bzero(&caps, sizeof(t_compcaps));
-	if (ft_create_components(*afinfo_stack, &caps, aflags) == -1)
+	if (ft_create_components(afinfo_lst, &caps, aflags) == -1)
 	{
 		return (-1);
 	}
 	else
 	{
-		method = ft_unifier_method(aflags);
-		holder = create_out_stack(afinfo_stack, &caps, aout_stack, method);
+		holder = create_out_stack(afinfo_lst, &caps, aout_stack, aflags);
 		if (holder == -1)
 		{
 			return (-1);

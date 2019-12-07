@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:27:27 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/03 10:20:21 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 05:28:55 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 
 # include "../ft_ls.h"
 
-int				ft_process_ndir_stack(t_finfo **const restrict afinfo_lst,\
+int				ft_process_ndir_stack(t_finfo *const restrict afinfo_lst,\
 					const t_flags aflags);
 
 int				ft_process_files_to_txt(\
-					t_finfo *restrict *const restrict afinfo_stack,\
+					t_finfo *const restrict afinfo_stack,\
 					t_list **const restrict aout_stack,\
 					int *const restrict amax_len,\
 					const t_flags aflags);

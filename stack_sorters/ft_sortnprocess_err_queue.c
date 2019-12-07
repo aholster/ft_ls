@@ -6,10 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/13 13:58:01 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/03 09:01:14 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 05:43:10 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../ft_printf/ft_printf.h"
 #include <stdio.h>
 
 #include "../incl/ft_stack_sorters.h"
@@ -92,7 +93,7 @@ void			ft_sortnprocess_err_queue(t_fstack *const restrict afstack,
 		{
 			ret = lstat(iterator->content, &dummy);
 		}
-		dprintf(2, "ft_ls : %s: ", iterator->content);
+		ft_dprintf(2, "ft_ls : %s: ", iterator->content);
 		perror(NULL);
 		iterator = iterator->next;
 	}

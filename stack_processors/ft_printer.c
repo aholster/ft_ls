@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/20 11:31:08 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/26 13:13:23 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 05:46:19 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "../ft_printf/ft_printf.h"
 #include <sys/ioctl.h>
 #include <unistd.h>
 
@@ -39,7 +39,7 @@ static int		stream_format_print(const t_list *restrict iterator,\
 	current_line = 0;
 	while (iterator->next != NULL)
 	{
-		if (dprintf(1, "%s, ", iterator->content) == -1)
+		if (ft_printf("%s, ", iterator->content) == -1)
 		{
 			return (-1);
 		}
@@ -54,7 +54,7 @@ static int		stream_format_print(const t_list *restrict iterator,\
 		}
 		iterator = iterator->next;
 	}
-	if (dprintf(1, "%s\n", iterator->content) == -1)
+	if (ft_printf("%s\n", iterator->content) == -1)
 	{
 		return (-1);
 	}
@@ -73,7 +73,7 @@ static int		multi_column_alt(const t_list *restrict iterator,\
 		current_line += max_len;
 		if (current_line + max_len >= term_width || iterator->next == NULL)
 		{
-			if (dprintf(1, "%s\n", iterator->content) == -1)
+			if (ft_printf("%s\n", iterator->content) == -1)
 			{
 				return (-1);
 			}
@@ -81,7 +81,7 @@ static int		multi_column_alt(const t_list *restrict iterator,\
 		}
 		else
 		{
-			if (dprintf(1, "%-*s", max_len, iterator->content) == -1)
+			if (ft_printf("%-*s", max_len, iterator->content) == -1)
 			{
 				return (-1);
 			}
@@ -95,7 +95,7 @@ static int		per_line_print(const t_list *restrict iterator)
 {
 	while (iterator != NULL)
 	{
-		if (printf("%s\n", iterator->content) == -1)
+		if (ft_printf("%s\n", iterator->content) == -1)
 		{
 			return (-1);
 		}

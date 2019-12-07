@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:34:08 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/07 05:10:35 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 05:31:57 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	recursive_trav(DIR *const restrict dirp,\
 			finfo_del(&dir_queue);
 			return (-1);
 		}
-		status = ft_process_ndir_stack(&file_queue.head, aflags);
+		status = ft_process_ndir_stack(file_queue.head, aflags);
 		finfo_del(&file_queue);
 		if (status == -1)
 		{
@@ -118,7 +118,7 @@ static int	non_recursive_trav(DIR *const restrict dirp,\
 		{
 			print_status(file_queue.head);
 		}
-		status = ft_process_ndir_stack(&file_queue.head, aflags);
+		status = ft_process_ndir_stack(file_queue.head, aflags);
 		finfo_del(&file_queue);
 		if (status == -1)
 		{

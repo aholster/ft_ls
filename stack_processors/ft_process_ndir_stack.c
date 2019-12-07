@@ -6,13 +6,13 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 10:40:04 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/02 22:38:22 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 05:28:16 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_stack_processors.h"
 
-int		ft_process_ndir_stack(t_finfo **const restrict afinfo_lst,\
+int		ft_process_ndir_stack(t_finfo *const restrict afinfo_lst,\
 				const t_flags aflags)
 {
 	t_list					*product;
