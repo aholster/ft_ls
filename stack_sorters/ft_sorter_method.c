@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/14 15:00:18 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/07 13:14:58 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 13:18:11 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_sortcode	chrono_sort(const t_finfo *const restrict pri_node,\
 	ft_relevant_time(&sec_time, &(sec_node->stat), aflags);
 	if (pri_time->tv_sec == sec_time->tv_sec)
 	{
-		if (pri_time->tv_sec == sec_time->tv_sec)
+		if (pri_time->tv_nsec == sec_time->tv_nsec)
 		{
 			return (lexical_sort(pri_node, sec_node, aflags));
 		}
