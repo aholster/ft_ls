@@ -6,10 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/10 02:11:26 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/27 09:47:17 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 04:34:33 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../ft_printf/ft_printf.h"
 #include <stdio.h>
 
 #include "../ft_ls.h"
@@ -17,7 +18,7 @@
 
 static void	bad_flag(const unsigned char flag_chr)
 {
-	dprintf(2, "ft_ls: illegal option -- %c\n%s", flag_chr, USAGE);
+	ft_dprintf(2, "ft_ls: illegal option -- %c\n%s", flag_chr, USAGE);
 	exit(-1);
 }
 
@@ -25,7 +26,6 @@ static const t_flg_tbl	g_trans_tabl[128] = {
 	['B'] = {flg_B, flg_q + flg_w + flg_b},
 	['C'] = {flg_C, flg_x + flg_l + flg_1},
 	['F'] = {flg_F + flg_p, 0},
-	// ['G'] = {flg_G, 0},
 	['L'] = {flg_L, 0},
 	['R'] = {flg_R, 0},
 	['T'] = {flg_T, 0},

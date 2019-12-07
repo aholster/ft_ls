@@ -1,16 +1,17 @@
-/* *************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
 /*   ft_run_stacks.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/12 13:20:09 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/13 16:30:48 by aholster      ########   odam.nl         */
+/*   Created: 2019/12/07 04:32:23 by aholster       #+#    #+#                */
+/*   Updated: 2019/12/07 04:34:00 by aholster      ########   odam.nl         */
 /*                                                                            */
-/* *************************************************************************/
+/* ************************************************************************** */
 
 #include <stdio.h>
+#include <unistd.h>
 
 #include "ft_ls.h"
 #include "./incl/ft_stack_sorters.h"
@@ -34,13 +35,30 @@ void		ft_error_cleanup(t_fstack *const restrict afqueues)
 static int	is_only_one_dir(const t_fstack *const restrict afqueues)
 {
 	if (afqueues->err_queue.head == NULL && afqueues->ndir_queue.head == NULL &&
-	(afqueues->dir_queue.head == NULL || afqueues->dir_queue.head->next == NULL))
+(afqueues->dir_queue.head == NULL || afqueues->dir_queue.head->next == NULL))
 	{
 		return (1);
 	}
 	else
 	{
 		return (0);
+	}
+}
+
+static void	run_ndir_queue(t_fstack *const restrict afqueues,\
+				const t_flags aflags)
+{
+	if ((aflags & flg_f) == 0)
+	{
+		ft_sort_finfo_stack(&(afqueues->ndir_queue), aflags);
+	}
+	if (ft_process_ndir_stack(&(afqueues->ndir_queue.head), aflags) == -1)
+	{
+		ft_error_cleanup(afqueues);
+	}
+	if (afqueues->dir_queue.head != NULL)
+	{
+		write(1, "\n", 1);
 	}
 }
 
@@ -55,14 +73,7 @@ void		ft_run_stacks(t_fstack *const restrict afqueues,\
 	}
 	if (afqueues->ndir_queue.head != NULL)
 	{
-		if ((aflags & flg_f) == 0)
-		{
-			ft_sort_finfo_stack(&(afqueues->ndir_queue), aflags);
-		}
-		if (ft_process_ndir_stack(&(afqueues->ndir_queue.head), aflags) == -1)
-		{
-			ft_error_cleanup(afqueues);
-		}
+		run_ndir_queue(afqueues, aflags);
 	}
 	if (afqueues->dir_queue.head != NULL)
 	{

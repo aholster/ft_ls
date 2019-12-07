@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_flg_verif.c                                     :+:    :+:            */
+/*   ft_flagverif.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/03 19:43:50 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/03 19:47:41 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/ft_internals.h"
+#include "./../incl/ft_internals.h"
 
 int		flg_verif(const unsigned char c, const t_flag *const restrict flags)
 {

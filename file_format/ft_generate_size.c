@@ -6,11 +6,9 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 08:25:41 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/20 06:50:33 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 03:45:45 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include "../ft_printf/ft_printf.h"
 
@@ -31,7 +29,7 @@ static int	put_device_modes(const struct stat *const restrict astat,\
 	}
 	else
 	{
-		len = snprintf(buffer, 64, "%3u, %3u", maj_dev, min_dev);
+		len = ft_snprintf(buffer, 64, "%3u, %3u", maj_dev, min_dev);
 		if (len > acaps->fsize_len)
 		{
 			acaps->fsize_len = len;
@@ -50,7 +48,7 @@ static int	put_size(const struct stat *const restrict astat,\
 {
 	int		len;
 
-	len = snprintf(buffer, 64, "%llu", astat->st_size);
+	len = ft_snprintf(buffer, 64, "%llu", astat->st_size);
 	if (len == -1)
 	{
 		return (-1);

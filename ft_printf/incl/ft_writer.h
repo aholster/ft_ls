@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/18 19:29:47 by aholster       #+#    #+#                */
-/*   Updated: 2019/10/08 21:59:12 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 04:29:26 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 
-# define BUFFSIZE	8
+# define BUFFSIZE	1024
 
 struct s_writer;
 
@@ -32,8 +32,8 @@ typedef struct		s_d_write
 
 typedef struct		s_as_write
 {
-	char			buffer[BUFFSIZE];
-	t_list			**alst;
+	char			*str_vect;
+	size_t			current_size;
 }					t_as_write;
 
 typedef struct		s_sn_write

@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 07:22:37 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/20 04:58:26 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 03:44:24 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "../ft_printf/ft_printf.h"
 
 #include <grp.h>
 #include <uuid/uuid.h>
@@ -28,7 +28,7 @@ static char	*fillin_gid(const gid_t st_gid,\
 	gname = getgrgid(st_gid);
 	if (gname == NULL || (aflags & flg_n) > 0)
 	{
-		*asize = snprintf(numbuf, 16, "%u", st_gid);
+		*asize = ft_snprintf(numbuf, 16, "%u", st_gid);
 		return (numbuf);
 	}
 	else

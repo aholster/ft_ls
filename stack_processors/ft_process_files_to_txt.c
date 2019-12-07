@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/18 19:31:37 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/01 01:58:44 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 05:16:05 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	create_out_stack(t_finfo *restrict *const restrict afinfo_stack,\
 	{
 		current = finfo_stack_pop(afinfo_stack);
 		new = method(current->fvect, acaps);
-		finfo_lstdelone(&current);
+		// finfo_lstdelone(&current);
 		if (new == NULL)
 		{
 			return (-1);

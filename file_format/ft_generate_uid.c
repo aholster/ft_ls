@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 06:56:56 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/20 04:58:26 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 03:46:14 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "../ft_printf/ft_printf.h"
 
 #include <pwd.h>
 #include <uuid/uuid.h>
@@ -28,7 +28,7 @@ static char	*fillin_uid(const uid_t st_uid,\
 	uname = getpwuid(st_uid);
 	if (uname == NULL || (aflags & flg_n) > 0)
 	{
-		*asize = snprintf(numbuf, 16, "%u", st_uid);
+		*asize = ft_snprintf(numbuf, 16, "%u", st_uid);
 		return (numbuf);
 	}
 	else

@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 05:59:42 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/27 14:38:21 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 03:44:07 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "../ft_printf/ft_printf.h"
 
 #include <time.h>
 
@@ -51,11 +51,11 @@ static int	small_time(char buf[MDATELEN + 1],\
 	{
 		if (*af_time + E_SIXMONTH > c_time || c_time + E_SIXMONTH < *af_time)
 		{
-			sprintf(buf, "%.12s", date_str + 4);
+			ft_sprintf(buf, "%.12s", date_str + 4);
 		}
 		else
 		{
-			sprintf(buf, "%.7s %.4s", date_str + 4, date_str + 20);
+			ft_sprintf(buf, "%.7s %.4s", date_str + 4, date_str + 20);
 		}
 		return (1);
 	}
@@ -79,11 +79,13 @@ int			ft_generate_date(const t_finfo *const restrict afile,\
 	{
 		if ((aflags & flg_T) > 0)
 		{
-			snprintf(buf, sizeof(buf), "%.20s", date_str + 4);
+			ft_snprintf(buf, sizeof(buf), "%.20s", date_str + 4);
 			return (ft_fvec_enter_comp(afile, f_date, buf, MDATELEN + 1));
 		}
 		else if (small_time(buf, afile_time, date_str) == -1)
+		{
 			return (-1);
+		}
 		return (ft_fvec_enter_comp(afile, f_date, buf, DATELEN + 1));
 	}
 	(void)acaps;

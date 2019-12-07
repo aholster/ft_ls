@@ -6,10 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 01:15:48 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/03 05:53:17 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 03:48:05 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf/ft_printf.h"
 #include <stdio.h>
 
 #include <unistd.h>
@@ -66,7 +67,7 @@ int			main(int argc, char **argv)
 
 	if (argc == 0)
 	{
-		dprintf(2, USAGE);
+		ft_dprintf(2, USAGE);
 		exit(-1);
 	}
 	else

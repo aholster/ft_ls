@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/03 21:32:51 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/04 14:53:09 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/ft_flag_parser.h"
+#include "./../incl/ft_flag_parser.h"
 #include <limits.h>
 
 void	ft_flag_arg_extract(const char *const restrict format,\

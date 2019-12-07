@@ -6,10 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:34:08 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/04 19:06:36 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 05:10:35 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../ft_printf/ft_printf.h"
 #include <stdio.h>
 
 #include <unistd.h>
@@ -19,7 +20,7 @@
 
 #include "../incl/ft_stack_processors.h"
 
-static int	print_status(const t_finfo *restrict iter)
+static void	print_status(const t_finfo *restrict iter)
 {
 	unsigned long long	total_blocks;
 
@@ -31,18 +32,15 @@ static int	print_status(const t_finfo *restrict iter)
 			total_blocks += iter->stat.st_blocks;
 			iter = iter->next;
 		}
-		if (printf("total %llu\n", total_blocks) == -1)
-		{
-			return (-1);
-		}
+		ft_printf("total %llu\n", total_blocks);
 	}
-	return (1);
 }
 
 static int	create_dir_lst(const t_finfo *restrict file_lst,\
 				const char *const restrict path,\
 				t_finfo_queue *const restrict adir_queue)
 {
+	ft_bzero(adir_queue, sizeof(t_finfo_queue));
 	while (file_lst != NULL)
 	{
 		if (S_ISDIR(file_lst->stat.st_mode) == 1)
@@ -76,7 +74,6 @@ static int	recursive_trav(DIR *const restrict dirp,\
 		{
 			print_status(file_queue.head);
 		}
-		ft_bzero(&dir_queue, sizeof(t_finfo_queue));
 		if (create_dir_lst(file_queue.head, path, &dir_queue) == -1)
 		{
 			finfo_del(&dir_queue);
@@ -91,7 +88,7 @@ static int	recursive_trav(DIR *const restrict dirp,\
 		}
 		if (dir_queue.head != NULL)
 		{
-			printf("\n");
+			write(1, "\n", 1);
 			if (ft_process_dir_stack(&dir_queue, 0, aflags) == -1)
 			{
 				finfo_del(&dir_queue);
@@ -142,12 +139,12 @@ static int	iter_dirfinfo(const t_finfo *restrict dir_lst,\
 	{
 		if (is_singledir == 0)
 		{
-			printf("%s:\n", dir_lst->s_path);
+			ft_printf("%s:\n", dir_lst->s_path);
 		}
 		current_dir = opendir(dir_lst->s_path);
 		if (current_dir == NULL)
 		{
-			dprintf(2, "ft_ls: %s: ", dir_lst->s_name);
+			ft_dprintf(2, "ft_ls: %s: ", dir_lst->s_name);
 			perror(NULL);
 		}
 		else
@@ -169,7 +166,7 @@ static int	iter_dirfinfo(const t_finfo *restrict dir_lst,\
 		dir_lst = dir_lst->next;
 		if (dir_lst != NULL)
 		{
-			printf("\n");
+			ft_printf("\n");
 		}
 	}
 	return (1);

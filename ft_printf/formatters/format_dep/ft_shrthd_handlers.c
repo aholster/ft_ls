@@ -6,11 +6,11 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/25 12:01:20 by jesmith        #+#    #+#                */
-/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/04 17:58:48 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/ft_formatters.h"
+#include "./../../incl/ft_formatters.h"
 
 static int		ft_buffer_print(char *buffer,\
 					t_writer *const clipb,\

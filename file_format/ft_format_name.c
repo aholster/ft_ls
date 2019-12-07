@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/04 14:48:59 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/04 15:52:30 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 03:43:05 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "../ft_printf/ft_printf.h"
 
 #include "../incl/ft_file_format.h"
 #include "../libft/libft.h"
@@ -67,7 +67,7 @@ static size_t	replace_advanced(const char *const restrict str,\
 		}
 		else
 		{
-			sprintf(name_buf + ti, "\\%.3hho", str[si]);
+			ft_sprintf(name_buf + ti, "\\%.3hho", str[si]);
 			ti += 4;
 		}
 		si++;

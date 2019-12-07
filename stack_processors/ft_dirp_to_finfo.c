@@ -6,48 +6,51 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/02 04:52:42 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/04 19:03:07 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 05:17:22 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../ft_printf/ft_printf.h"
 #include <stdio.h>
-
-#include <errno.h>
 
 #include <sys/types.h>
 #include <sys/dir.h>
 
 #include "../incl/ft_stack_sorters.h"
 
-int			process_dirp(const struct dirent *const restrict record,\
+static int	rec_stat(const char *const restrict full_path,\
+				struct stat *const restrict astat,\
+				const t_flags aflags)
+{
+	if ((aflags & flg_L) == flg_L)
+	{
+		return (stat(full_path, astat));
+	}
+	else
+	{
+		return (lstat(full_path, astat));
+	}
+}
+
+static int	process_dirp(const struct dirent *const restrict rec,\
 				const char *const restrict path,\
 				t_finfo_queue *const restrict aqueue,\
 				const t_flags aflags)
 {
 	char			full_path[PATH_MAX + 1];
 	struct stat		f_stat;
-	int				status;
 
-	if ((aflags & flg_a) == flg_a || record->d_name[0] != '.')
+	if ((aflags & flg_a) == flg_a || rec->d_name[0] != '.')
 	{
-		snprintf(full_path, sizeof(full_path), "%s/%s", path, record->d_name);
-		errno = 0;
-		if ((aflags & flg_L) == flg_L)
+		ft_snprintf(full_path, sizeof(full_path), "%s/%s", path, rec->d_name);
+		if (rec_stat(full_path, &f_stat, aflags) == -1)
 		{
-			status = stat(full_path, &f_stat);
-		}
-		else
-		{
-			status = lstat(full_path, &f_stat);
-		}
-		if (status == -1)
-		{
-			fprintf(stderr, "ft_ls: %s: ", record->d_name);
+			ft_dprintf(2, "ft_ls: %s: ", rec->d_name);
 			perror(NULL);
 		}
 		else
 		{
-			if (finfo_queue_push(aqueue, path, record->d_name, &f_stat) == -1)
+			if (finfo_queue_push(aqueue, path, rec->d_name, &f_stat) == -1)
 			{
 				return (-1);
 			}

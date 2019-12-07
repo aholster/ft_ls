@@ -6,14 +6,14 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/23 14:47:32 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/11 22:02:49 by aholster      ########   odam.nl         */
+/*   Updated: 2019/10/04 21:38:04 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FLOAT_TECH_H
 # define FLOAT_TECH_H
 
-# include "../incl/ft_utilities.h"
+# include "./../incl/ft_utilities.h"
 
 # define LSTBUF_SIZE 8
 

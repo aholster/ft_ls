@@ -6,11 +6,11 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 21:53:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/25 09:12:42 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 03:54:41 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "../ft_printf/ft_printf.h"
 
 #include "../incl/ft_file_format.h"
 #include "../libft/libft.h"
@@ -22,7 +22,7 @@ static t_list	*unify_l_i(const t_fvec *const restrict components,\
 	char	*str;
 	t_list	*new;
 
-	status = asprintf(&str, "%*s %s%*s %-*s %-*s %*s %s %s",\
+	status = ft_asprintf(&str, "%*s %s%*s %-*s %-*s %*s %s %s",\
 			acaps->inode_len, components->svec + components->indices[f_inode],\
 			components->svec + components->indices[f_perm],\
 			acaps->hlink_len, components->svec + components->indices[f_nlnk],\
@@ -50,7 +50,7 @@ static t_list	*unify_l(const t_fvec *const restrict components,\
 	char	*str;
 	t_list	*new;
 
-	status = asprintf(&str, "%s%*s %-*s %-*s %*s %s %s",\
+	status = ft_asprintf(&str, "%s%*s %-*s %-*s %*s %s %s",\
 			components->svec + components->indices[f_perm],\
 			acaps->hlink_len, components->svec + components->indices[f_nlnk],\
 			acaps->uname_len, components->svec + components->indices[f_uid],\
@@ -77,7 +77,7 @@ static t_list	*unify_i(const t_fvec *const restrict components,\
 	char	str[MAX_NAMELEN + 25 + 1];
 	t_list	*new;
 
-	status = snprintf(str, sizeof(str), "%*s %s", acaps->inode_len,\
+	status = ft_snprintf(str, sizeof(str), "%*s %s", acaps->inode_len,\
 			components->svec + components->indices[f_inode],\
 			components->svec + components->indices[f_name]);
 	if (status <= 0)
@@ -98,7 +98,7 @@ static t_list	*unify_basic(const t_fvec *const restrict components,\
 	char	str[MAX_NAMELEN + 1];
 	t_list	*new;
 
-	status = snprintf(str, sizeof(str), "%s",\
+	status = ft_snprintf(str, sizeof(str), "%s",\
 			components->svec + components->indices[f_name]);
 	if (status <= 0)
 	{

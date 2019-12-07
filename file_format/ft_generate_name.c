@@ -6,12 +6,13 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 08:10:29 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/04 18:00:50 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 04:38:15 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
+#include "../ft_printf/ft_printf.h"
 #include <stdio.h>
 
 #include "../incl/ft_file_format.h"
@@ -49,7 +50,7 @@ static void	suffix_name(const t_finfo *const restrict afile,\
 
 static void	suffix_destination(const t_finfo *const restrict afile,\
 				char name_buf[MAX_NAMELEN],\
-				size_t *const restrict atext_len,\
+				size_t *const restrict alen,\
 				const t_flags aflags)
 {
 	ssize_t	ret;
@@ -59,13 +60,13 @@ static void	suffix_destination(const t_finfo *const restrict afile,\
 	ret = readlink(afile->s_path, dest + 4, sizeof(dest) - 4);
 	if (ret == -1)
 	{
-		dprintf(2, "ft_ls: %s: ", afile->s_name);
+		ft_dprintf(2, "ft_ls: %s: ", afile->s_name);
 		perror(NULL);
 	}
 	else
 	{
 		dest[ret + 4] = '\0';
-		*atext_len += ft_format_name(dest, ret + 5, name_buf + *atext_len, aflags);
+		*alen += ft_format_name(dest, ret + 5, name_buf + *alen, aflags);
 	}
 }
 
