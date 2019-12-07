@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 05:36:07 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/04 15:46:20 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 13:28:14 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ static void	identify_filetype(const mode_t file_type, char *const restrict abuf)
 */
 
 static void	find_xattr(char *const restrict abuf,\
-				const char *const restrict file_name)
+				const char *const restrict file_path)
 {
 	ssize_t	status;
 	acl_t	acl;
 
-	status = listxattr(file_name, NULL, 0, XATTR_NOFOLLOW);
+	status = listxattr(file_path, NULL, 0, XATTR_NOFOLLOW);
 	if (status <= 0)
 	{
-		acl = acl_get_file(file_name, ACL_TYPE_EXTENDED);
+		acl = acl_get_file(file_path, ACL_TYPE_EXTENDED);
 		if (acl != NULL)
 		{
 			*abuf = '+';
@@ -83,7 +83,7 @@ int			ft_generate_permissions(const t_finfo *const restrict afile,\
 	}
 	identify_filetype(file_mode & S_IFMT, buf);
 	ft_memcpy(buf + 1, perm_table[file_mode & ALLPERMS], 9);
-	find_xattr(buf + 10, afile->s_name);
+	find_xattr(buf + 10, afile->s_path);
 	buf[11] = '\0';
 	if (ft_fvec_enter_comp(afile, f_perm, buf, PERM_LEN) == -1)
 	{
