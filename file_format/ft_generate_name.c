@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/13 08:10:29 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/07 04:38:15 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/07 09:49:13 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ static void	suffix_name(const t_finfo *const restrict afile,\
 	{
 		*atext_len += 1;
 		if (S_ISLNK(afile->stat.st_mode))
-			name_buf[*atext_len] = '@';
+			name_buf[*atext_len - 1] = '@';
 		else if (S_ISFIFO(afile->stat.st_mode))
-			name_buf[*atext_len] = '|';
+			name_buf[*atext_len - 1] = '|';
 		else if (S_ISSOCK(afile->stat.st_mode))
-			name_buf[*atext_len] = '=';
+			name_buf[*atext_len - 1] = '=';
 		else if (S_ISWHT(afile->stat.st_mode))
-			name_buf[*atext_len] = '%';
+			name_buf[*atext_len - 1] = '%';
 		else if ((afile->stat.st_mode & (S_IXUSR | S_IXGRP | S_IXOTH)) != 0)
-			name_buf[*atext_len] = '*';
+			name_buf[*atext_len - 1] = '*';
 		else
 		{
 			*atext_len -= 1;
