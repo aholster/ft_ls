@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/05 05:36:07 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/07 13:28:14 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/10 06:39:38 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,23 @@ static void	find_xattr(char *const restrict abuf,\
 	}
 }
 
+static char		g_perm_table[4096][10] = {
+	[0][0] = 'N',
+};
+
 int			ft_generate_permissions(const t_finfo *const restrict afile,\
 				t_compcaps *const restrict acaps,\
 				const t_flags aflags)
 {
-	static char		perm_table[4096][10] = {[0][0] = 'N'};
 	char			buf[PERM_LEN];
 	const mode_t	file_mode = afile->stat.st_mode;
 
-	if (perm_table[0][0] == 'N')
+	if (g_perm_table[0][0] == 'N')
 	{
-		ft_init_permissions_table(perm_table);
+		ft_init_permissions_table(g_perm_table);
 	}
 	identify_filetype(file_mode & S_IFMT, buf);
-	ft_memcpy(buf + 1, perm_table[file_mode & ALLPERMS], 9);
+	ft_memcpy(buf + 1, g_perm_table[file_mode & ALLPERMS], 9);
 	find_xattr(buf + 10, afile->s_path);
 	buf[11] = '\0';
 	if (ft_fvec_enter_comp(afile, f_perm, buf, PERM_LEN) == -1)
