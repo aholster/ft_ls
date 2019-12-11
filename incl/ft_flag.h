@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 02:14:33 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/07 04:37:43 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/11 07:44:31 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,35 @@
 
 typedef	enum	e_flags
 {
-	basic = 1,
-	flg_B = 1LU << 1,
-	flg_C = 1LU << 2,
-	flg_F = 1LU << 3,
+	basic = 0,
+	flg_B = 1LU << 0,
+	flg_C = 1LU << 1,
+	flg_F = 1LU << 2,
+	flg_H = 1LU << 3,
 	flg_L = 1LU << 4,
-	flg_R = 1LU << 5,
-	flg_T = 1LU << 6,
-	flg_U = 1LU << 7,
-	flg_a = 1LU << 8,
-	flg_b = 1LU << 9,
-	flg_c = 1LU << 10,
-	flg_d = 1LU << 11,
-	flg_f = 1LU << 12,
-	flg_g = 1LU << 13,
-	flg_i = 1LU << 14,
-	flg_l = 1LU << 15,
-	flg_m = 1LU << 16,
-	flg_n = 1LU << 17,
-	flg_o = 1LU << 18,
-	flg_p = 1LU << 19,
-	flg_q = 1LU << 20,
-	flg_r = 1LU << 21,
-	flg_t = 1LU << 22,
-	flg_u = 1LU << 23,
-	flg_w = 1LU << 24,
-	flg_x = 1LU << 25,
-	flg_1 = 1LU << 26,
+	flg_P = 1LU << 5,
+	flg_R = 1LU << 6,
+	flg_T = 1LU << 7,
+	flg_U = 1LU << 8,
+	flg_a = 1LU << 9,
+	flg_b = 1LU << 10,
+	flg_c = 1LU << 11,
+	flg_d = 1LU << 12,
+	flg_f = 1LU << 13,
+	flg_g = 1LU << 14,
+	flg_i = 1LU << 15,
+	flg_l = 1LU << 16,
+	flg_m = 1LU << 17,
+	flg_n = 1LU << 18,
+	flg_o = 1LU << 19,
+	flg_p = 1LU << 20,
+	flg_q = 1LU << 21,
+	flg_r = 1LU << 22,
+	flg_t = 1LU << 23,
+	flg_u = 1LU << 24,
+	flg_w = 1LU << 25,
+	flg_x = 1LU << 26,
+	flg_1 = 1LU << 27,
 }				t_flags;
 
 typedef	struct	s_flg_tbl

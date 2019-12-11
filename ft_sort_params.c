@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 09:43:25 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/04 12:49:53 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/11 08:55:21 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		ft_sort_params(char **restrict argv,\
 
 	while (argv[0] != NULL)
 	{
-		if ((aflags & flg_L) > 0)
+		if ((aflags & (flg_L | flg_H)) > 0)
 		{
 			ret = stat(argv[0], &stat_info);
 		}

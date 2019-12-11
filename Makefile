@@ -6,7 +6,7 @@
 #    By: aholster <aholster@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/16 15:46:43 by aholster       #+#    #+#                 #
-#    Updated: 2019/12/07 09:29:05 by aholster      ########   odam.nl          #
+#    Updated: 2019/12/10 13:13:00 by aholster      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ NAME := ft_ls
 NORM := norminette $(FILEC) $(HEAD) | grep -e "Error"  -e "Warning" -B 1
 
 GCCC = ${CC} -c
-CC = gcc -g -Wall -Werror -Wextra
+CC = gcc -Wall -Werror -Wextra
 AR = ar rcs
 
 all: $(NAME)

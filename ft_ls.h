@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/09/12 19:44:46 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/03 05:59:18 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/11 07:42:01 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "./libft/libft.h"
 # include "./incl/finfo.h"
 
-# define USAGE "usage: ft_ls [-BCFGLRTUabcdfgilmnopqrtuwx1] [file ...]\n"
+# define USAGE "usage: ft_ls [-BCFHLRTUabcdfgilmnopqrtuwx1] [file ...]\n"
 
 /*
 ** #     	   "usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]"

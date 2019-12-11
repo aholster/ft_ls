@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/11 01:15:48 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/07 09:44:39 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/11 09:05:38 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,20 @@ static void	set_default_flags(t_flags *const restrict aflags)
 	if ((*aflags & (flg_m | flg_1 | flg_l | flg_C | flg_x)) == 0)
 	{
 		if (atty == 1)
-		{
 			*aflags |= flg_C;
-		}
 		else
-		{
 			*aflags |= flg_1;
-		}
 	}
 	if ((*aflags & (flg_q | flg_w | flg_B | flg_b)) == 0)
 	{
 		if (atty == 1)
-		{
 			*aflags |= flg_q;
-		}
 		else
-		{
 			*aflags |= flg_w;
-		}
+	}
+	if ((*aflags & (flg_l | flg_d | flg_F)) == 0)
+	{
+		*aflags |= flg_H;
 	}
 }
 
@@ -73,15 +69,14 @@ int			main(int argc, char **argv)
 	{
 		ft_bzero(&file_queues, sizeof(t_fstack));
 		flag_stock = basic;
-		if (argc != 1)
-		{
-			ft_flag_parser(&argc, &argv, &flag_stock);
-			if (argc != 0)
-			{
-				ft_sort_params(argv, &file_queues, flag_stock);
-			}
-		}
+		argv++;
+		argc--;
+		ft_flag_parser(&argc, &argv, &flag_stock);
 		set_default_flags(&flag_stock);
+		if (argc != 0)
+		{
+			ft_sort_params(argv, &file_queues, flag_stock);
+		}
 		stack_minimum_assert(&file_queues, flag_stock);
 		ft_run_stacks(&file_queues, flag_stock);
 	}

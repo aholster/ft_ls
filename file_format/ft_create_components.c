@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 05:29:03 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/01 00:15:05 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/11 07:46:31 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int			ft_create_components(t_finfo *restrict afinfo,\
 				const t_flags aflags)
 {
 	t_component_names	index;
+	t_flags				prereq;
 
 	while (afinfo != NULL)
 	{
@@ -69,7 +70,8 @@ int			ft_create_components(t_finfo *restrict afinfo,\
 		}
 		while (index < T_COMPCOUNT)
 		{
-			if ((g_component_table[index].prereq & aflags) != 0)
+			prereq = g_component_table[index].prereq;
+			if ((prereq & aflags) == prereq)
 			{
 				if (g_component_table[index].func(afinfo, acaps, aflags) == -1)
 				{
