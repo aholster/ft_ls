@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/24 13:11:45 by aholster       #+#    #+#                */
-/*   Updated: 2019/11/25 06:51:02 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/13 07:24:06 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,5 @@
 void	ft_del(void *data, size_t size)
 {
 	free(data);
-	data = NULL;
-	size = 0;
+	(void)size;
 }

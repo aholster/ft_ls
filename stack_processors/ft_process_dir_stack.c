@@ -6,7 +6,7 @@
 /*   By: aholster <aholster@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/16 16:34:08 by aholster       #+#    #+#                */
-/*   Updated: 2019/12/07 13:59:53 by aholster      ########   odam.nl         */
+/*   Updated: 2019/12/18 15:08:17 by aholster      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ static int	trim_down_to_dirs(t_finfo_queue *const restrict record_queue,\
 {
 	t_finfo		*trail;
 	t_finfo		**manipulator;
+	char const	*name;
 
 	manipulator = &(record_queue->head);
 	while (*manipulator != NULL)
 	{
-		if (S_ISDIR((*manipulator)->stat.st_mode) == 1)
-		{
+		name = (*manipulator)->s_name;
+		if (S_ISDIR((*manipulator)->stat.st_mode) == 1 &&\
+				ft_strequ(name, ".") == 0 && ft_strequ(name, "..") == 0)
 			manipulator = &((*manipulator)->next);
-		}
 		else
 		{
 			trail = *manipulator;
@@ -60,10 +61,8 @@ static int	trim_down_to_dirs(t_finfo_queue *const restrict record_queue,\
 	if (record_queue->head != NULL)
 	{
 		write(1, "\n", 1);
-		if (ft_process_dir_stack(record_queue, 0, aflags) == -1)
-			return (-1);
 	}
-	return (1);
+	return (ft_process_dir_stack(record_queue, 0, aflags));
 }
 
 static int	record_handler(DIR *const restrict dirp,\
